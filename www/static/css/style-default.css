@@ -1,0 +1,493 @@
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+/* 	line-height: 1; */
+}
+ol, ul {
+/* 	list-style: none; */
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+/* END OF RESET */
+
+
+
+
+
+body{
+	font-family:"Open Sans","Verdana",sans-serif;
+	background-color:#eee;
+	font-size:11pt;
+}
+
+h1{font-size:1.4em;font-weight:bold;margin:20px 0 30px 0;}
+h2{font-size:1.2em;font-weight:bold;margin:15px 0 10px 0;}
+h3{font-size:1.1em;font-weight:bold;margin:10px 0 5px 0;}
+h4{}
+
+strong{font-weight:bold;}
+
+code{white-space:pre;}
+
+dl dt{font-weight:bold;margin-top:10px;}
+dl dd{margin-left:10px;}
+
+.clear{display:block;clear:both;}
+.template{display:none;}
+.clickable{cursor:pointer;}
+
+
+.loader{display:none;position:absolute;top:0;left:0;width:100%;height:100%;z-index:1000;}
+.loader span{display:block;width:31px;height:31px;position:absolute;top:50%;left:50%;margin:-15px 0 0 -15px;background:url("../img/ajax-loader.gif") center center no-repeat transparent;}
+.loading .loader{display:block;overflow:hidden;}
+
+#main {
+	margin: 80px auto;
+	max-width:1140px;
+}
+
+@media (max-height: 1000px) {
+	#main{margin: 60px auto;}
+}
+
+
+#left{width: 300px;position: relative;float:left;}
+#right{margin-left:330px;}
+
+
+#bubliny{
+/*  	border:2px dashed #09f;  */
+	position:absolute;
+	top:0;
+	left:0;
+	display:block;
+}
+
+#widget.open{background-color:#fff;height:800px;width:100%;box-shadow:0 0 5px rgba(0,0,0,.1);overflow:hidden;}
+#widget div.polozky{position:absolute;top:348px;left:0;margin:0px;padding: 0 0px 0px 3px;height:452px;overflow:auto;}
+#widget div.polozka{border-left:5px solid #999;padding:10px;margin-bottom:3px;cursor: pointer;transition-duration:.5s;}
+#widget div.polozka:hover{background-color: rgba(45, 185, 255, 0.1);}
+#widget div.polozka.selected{background-color: rgba(45, 185, 255, 0.1);}
+#widget div.polozka h3{font-size:1em;margin-top: 0em;}
+#widget div.polozka p{font-size:.8em;color:#666;margin:0;}
+
+#widget .back {display:none;}
+#widget.open .back {
+	position: absolute;
+	top: 6px;
+	left: 6px;
+	border-radius: 50px;
+	display: block;
+	height: 50px;
+	width: 50px;
+	line-height: 50px;
+	text-align: center;
+	font-size: 80%;
+	color: white;
+	font-weight: bold;
+	background-color: rgba(0, 0, 0, 0.16);
+	z-index: 35;
+	cursor: pointer;
+}
+
+#widget.open .back:hover {
+	transition-duration: .5s;
+	background-color: rgba(0, 0, 0, 0.36);	
+}
+
+#seznam{}
+
+
+#seznam{height:800px;display:none;overflow:visible;}
+
+#seznam .filtr{margin-bottom:20px;box-shadow:0 0 5px rgba(0,0,0,.1);background-color:#fff;position:relative;}
+#seznam .filtr a{font-size:1.2em;}
+#seznam .filtr a.link_filtr{
+	background-color: rgb(51, 122, 183);
+	color: white;
+/* 	margin-left: -15px;
+	margin-right: -15px; */
+	padding: 0px 15px;
+	line-height: 40px;
+	height: 40px;
+	display:block;
+	z-index: 31;
+	cursor: pointer;
+}
+#seznam .filtr a.link_struktura{}
+#seznam .filtr a.link_filtr span.status{
+	opacity:.5;
+	    font-size: .8em;
+    margin-left: 10px;
+}
+#seznam .filtr a.link_filtr span.caret {
+	position: absolute;
+	right: 28px;
+	top: 18px;
+	transition-duration:.5s;
+}
+#seznam .filtr a.link_filtr span.caret-up {
+	transform: rotate(180deg);
+}
+#seznam .filtr_form {
+	padding: 0px;
+	position: absolute;
+	width: 100%;
+    max-height: 0px;
+    transition: max-height 0.5s ease-out;
+	z-index: 30;
+	background-color: white;
+	overflow: hidden;
+	left:0px;
+	transition-duration: .5s;
+	box-shadow:0 0 5px rgba(0,0,0,.1);
+	border-bottom: 3px solid rgb(51, 122, 183);
+}
+#seznam .filtr_form.open {
+	min-height:1px;
+    max-height: 500px;
+    transition: max-height 0.5s ease-in;
+}
+#seznam .filtr_form .polozky {
+	margin-bottom: 15px;
+}
+#seznam .filtr_form .polozky .polozka {
+	display: block;
+	margin-left: 15px;
+	clear: both;
+}
+#seznam .filtr_form .polozky .polozka label {
+	margin-left: 25px;
+	font-size: 95%;
+	display:block;
+}
+#seznam .filtr_form .polozky .polozka input {
+	float:left;
+}
+.template {
+	display: none!important;
+}
+#seznam .filtr_form fieldset legend {
+	color: rgb(45, 185, 255);
+	border-bottom: 1px solid rgb(45, 185, 255);
+	margin: 10px 0px;
+}
+
+#seznam .filtr_form .dateSlider {
+	top: 35px;
+	margin-bottom:15px;
+}
+
+#seznam .filtr .submit{text-align:right;padding:10px;}
+#seznam .filtr .submit button{background-color:rgb(51, 122, 183);border:none;border-radius:2px;color:#fff;}
+
+
+#seznam p{margin:0;}
+#seznam a.fksp{display:inline-block;width:16px;background-image:url("../img/question-mark.svg");background-size:12px 12px;background-position:50% 50%;background-repeat:no-repeat;color:transparent;cursor:help;}
+#seznam a.fksp:hover{background-size:14px 14px;}
+#seznam p.info{font-size:.8em;opacity:.8;padding:0;margin:0;}
+
+#seznam .dodavatele{height:740px; padding-left:0px;}
+#seznam .dodavatele .seznam{height:700px;background-color: #fff;box-shadow:0 0 5px rgba(0,0,0,.1);
+	overflow:visible;}
+
+#seznam .dodavatele .dodavatel{position:relative;border-bottom: 1px solid rgba(0,0,0,0.1);}
+#seznam .dodavatele .dodavatel .radek{height:69px;padding-right:20px;overflow:hidden;}
+#seznam .dodavatele .dodavatel .castka{position:absolute;bottom:5px;right:25px;}
+#seznam .dodavatele .dodavatel h3{font-weight:bold;margin:0;font-size:1em;}
+#seznam .dodavatele .dodavatel .detail{display:none;}
+
+#seznam .dodavatele .strankovac{height: 40px;padding: 5px;background-color: rgb(51, 122, 183);user-select: none;-webkit-user-select: none;}
+#seznam .dodavatele .strankovac .stranka{color: #fff;min-width:24px;text-align:center;font-size: 1.1em;border-radius: 2px;padding: 1px 3px;margin: 4px 2px;display: inline-block;text-decoration: none;}
+#seznam .dodavatele .strankovac .stranka.current,#seznam .strankovac .stranka:hover{background-color: #fff;color: rgb(51, 122, 183);}
+#seznam .dodavatele .strankovac .tecky{display:inline-block;min-width:24px;padding: 1px 3px;margin: 4px 2px;color:#fff;text-align:center;}
+#seznam .dodavatele .strankovac .next, #seznam .dodavatele .strankovac .prev{float:right;font-weight:bold;}
+
+#seznam .detail{ padding-right:0px;}
+#seznam .detail > div{height:740px;overflow:hidden;}
+
+#seznam .detail .click_to_load{position:absolute;top:0;left:0;padding:20px;width:100%;opacity:.6;z-index:-1;text-align:center;font-size: 90%;}
+
+#seznam .detail .faktury{
+	background-color: #fff;box-shadow:0 0 5px rgba(0,0,0,.1);
+	
+	max-height: 608px;
+	overflow: auto;
+}
+
+#seznam .detail .faktura:hover{
+	background-color: rgba(45, 185, 255, 0.1);
+}
+#seznam .detail .dodavatel{
+	background-color: rgb(51, 122, 183);
+    overflow: hidden;
+	color:#fff;
+	box-shadow:0 0 5px rgba(0,0,0,.1);
+	margin-bottom: 15px;
+}
+
+#seznam .detail .dodavatel > div{
+	padding:10px;
+}
+
+#seznam .detail .dodavatel h3{
+	margin: 0;
+	height: 24px;
+	overflow: hidden;
+	white-space: nowrap;
+}
+
+#seznam .detail .dodavatel a{
+	font-size: .8em;
+	color:#fff;
+	opacity:.5;
+	text-decoration:underline;
+}
+
+#seznam .detail .dodavatel a:hover{
+	opacity:1;
+}
+	
+#seznam .faktura{
+	position:relative;
+	
+	margin-top: 0px;
+	min-height:50px;
+	overflow:hidden;
+	padding:5px;
+	border-bottom: 1px solid rgba(0,0,0,.1);/*rgba(48,185,255,0.5);*/
+}
+
+#seznam .faktura .castka_detail{float:right;font-weight:600;text-align:right;}
+
+#seznam .radek:hover, #seznam .dodavatel.open > .radek, #seznam .faktura.open > .radek{
+	/*background-color: rgba(144, 41, 41, 0.91);color:#fff;/*rgba(48,185,255,0.1);*/
+	background-color: rgba(45, 185, 255,0.1);
+}
+#seznam .radek:hover a, #seznam .dodavatel.open > .radek a, #seznam .faktura.open > .radek a{
+	color:#fff;/*rgba(48,185,255,0.1);*/
+}
+
+#seznam .dodavatel .radek{
+	display: block;
+	padding:10px;
+	font-weight:400;
+	clear:both;
+	transition-duration: 0.2s;
+	cursor: pointer;
+}
+
+#seznam .dodavatel .dodavatel_castka{float:right;}
+
+
+/*
+#seznam .dodavatel .radek svg {
+	display:none;
+}
+#seznam .dodavatel .radek svg polyline {
+	stroke: rgb(65, 205, 255);
+}
+
+#seznam .dodavatel .radek:hover svg,
+#seznam .dodavatel.open > .radek svg{
+	display: block;
+	position: absolute;right: 2px; height: 50px; top: 10px; opacity: 0.3; width: 20px;
+}*/
+
+#seznam .dodavatel .radek:hover:after,
+#seznam .dodavatel.open .radek:after{
+	transition-duration: .2s;
+	left: 100%;
+	top: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-color: rgba(45, 185, 255,0);
+	border-left-color: rgba(45, 185, 255,0.1);
+	border-width: 35px 12px;
+	margin-top: -35px;
+}
+
+#seznam .faktura .radek {
+	display: block;
+	padding:10px;
+	font-weight:400;
+	clear:both;
+	transition-duration: 0.2s;
+	cursor: pointer;
+}
+
+#seznam .faktura .radek h3{position:relative;padding-right:130px;}
+#seznam .faktura .radek h3 .dodavatel_nazev{float:left;white-space: nowrap;overflow: hidden;width: 100%;}
+
+#seznam .sliders .filtr .castka{margin-top:40px;}
+#seznam .sliders .filtr .datum{margin-top:40px;}			
+
+/*
+#seznam .detail {
+	position: absolute;
+	left: 102%;
+	top: 50%;
+	margin-top:-25px;
+	width: 98%;
+}
+#seznam .detail > div {
+	padding: 10px;
+	margin: 0 0 0 20px;
+	background-color: white;
+}
+#seznam .detail > div::after {
+	left: -30px;
+	top: 25px;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+	border-right-color: white;
+	border-width: 25px;
+	margin-top: -25px;
+
+}
+
+#seznam .detail h3 {
+	line-height: 50px;
+	margin: 0px;
+}
+
+#seznam .detail h4 {
+	margin: 0 0 5px 0;
+}
+#seznam .detail h3, #seznam .detail h4 {
+	font-weight: 600;
+}
+
+#seznam .detail .dodavatel_box{margin-right:50%;}
+#seznam .detail .dodavatel_box > div > span{display:block;}
+#seznam .detail .dodavatel_box > div{padding-right:5px;}
+
+#seznam .detail .odberatel_box{float:right;width:50%;}
+#seznam .detail .odberatel_box > div > span{display:block;}
+#seznam .detail .odberatel_box > div{padding-left:5px;}
+
+#seznam .detail .ucel {font-size: .9em;color: #888;}
+
+#seznam .detail .share{position:absolute;top:0;left:100%;background-color:#fff;padding:5px;}
+*/
+#seznam .rozpad{
+	border-collapse:collapse;
+	width:100%;
+	font-size: .9em;
+}
+#seznam .rozpad tr {
+	height: 1em;
+}
+#seznam .rozpad tbody th{vertical-align:top; padding: 3px;font-weight:normal;}
+#seznam .rozpad td{vertical-align:top; padding: 3px;text-align:right;}
+#seznam .rozpad tr.ve_vyberu{background-color:#acf;}
+#seznam .rozpad .polozka_castka{text-align:right;}
+
+#footer{position:fixed;bottom:0;left:0;width:100%;background-color:#fff;box-shadow:0 1px 5px rgba(0,0,0,.075);background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%);color:#999;font-size:.8em;margin-top:0;padding:5px 0 10px 0;}
+#footer > div{margin:0 auto;max-width:1170px;padding:0 20px;}
+#footer #soutez{float:right;}
+#footer #soutez img{float:right;height:39px;margin-left:10px;}
+#footer #soutez p{max-width:300px;}
+
+#footer a{color:#999;}
+#footer a:hover{color:rgb(51, 122, 183);}
+
+.navbar-brand svg {width: auto; float: left; margin: -7px 10px;width:40px;}
+
+/* CROSS JQUERY UI */
+div.ui-rangeSlider-innerBar {
+
+}
+.ui-rangeSlider .ui-rangeSlider-innerBar {
+height: 1px;
+margin: 10px 6px;
+background: #aaa;
+}
+.ui-rangeSlider .ui-rangeSlider-bar {
+	margin: 2px 0;
+	background: rgb(48,185,255);
+	height: 16px;
+	border-radius: 8px;
+	border: 3px solid white;
+}
+.ui-rangeSlider .ui-rangeSlider-handle {
+	width: 20px;
+	height: 20px;
+	background: none;
+	cursor: col-resize;
+}
+.ui-rangeSlider-arrow.ui-rangeSlider-leftArrow {
+	background: none;
+}
+.ui-rangeSlider-arrow.ui-rangeSlider-rightArrow {
+	background: none;
+}
+.ui-rangeSlider-label {
+	background: rgb(48,185,255);
+	color: white;
+	white-space: nowrap;
+	border-radius: 5px;
+	bottom: 30px;
+	padding: 3px 6px 5px;
+	cursor: col-resize;
+	font-size: .8em;
+}
+.ui-rangeSlider-label:after, .ui-rangeSlider-label:before {
+	top: 100%;
+	left: 50%;
+	border: solid transparent;
+	content: " ";
+	height: 0;
+	width: 0;
+	position: absolute;
+	pointer-events: none;
+}
+
+.ui-rangeSlider-label:after {
+	border-color: none;
+	border-top-color: rgb(48,185,255);
+	border-width: 10px;
+	margin-left: -10px;
+}
+.ui-rangeSlider-label:before {
+	border-color: none;
+	border-top-color: rgb(48,185,255);
+	border-width: 11px;
+	margin-left: -11px;
+}
