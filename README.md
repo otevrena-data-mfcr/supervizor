@@ -16,14 +16,13 @@ Vizualizace výdajů státní správy
 `//www/static` - statické veřejné soubory
 
 ## Nastavení
-- základní nastavení aplikace se provádí v souborech ve složce //www/config
-- nastavení napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
+- nastavení vizualizace se provádí v souborech ve složce //www/config
+- nastavení importu a napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
 
-### //www/config/constants.php
+### Základní nastavení - //www/config/constants.php
+- zde se nastavují základní parametry, jako jsou hesla a cesty k vizualizaci
 
-### //www/config/profiles.json
-
-### Profily
+### Profily - //www/config/profiles.json
 - Pro uložení více organizací a let jsou zvoleny identifikátory profil a dataset
 - Tyto údaje se nastavují v souboru `//www/config/profiles.json` ve formátu JSON
 - Soubor obsahuje JSON objekt kde jednotlivé názvy vlastností jsou identifikátory profilů a obsahem jsou objekty reprezentující profily
