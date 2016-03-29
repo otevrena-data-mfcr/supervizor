@@ -1,5 +1,5 @@
 # Supervizor
-Vizualizace výdajů státní správy
+Supervizor je vizualizace výdajů státní správy, kerou vytvořili pracovníci Ministerstva financí České republiky. Uvítáme další použití i úpravy/opravy zdrojového kódu, proto je vizualizace šířena pod licencí GNU GPL v3
 
 ## Obsah repozitáře
 
