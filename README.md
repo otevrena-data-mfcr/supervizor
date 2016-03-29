@@ -46,3 +46,12 @@ Vizualizace výdajů státní správy
   - metoda `getTimestamp()` - vrátí datum a čas poslední aktualizace dat na datovém zdroji ve formátu UNIX time
   - metoda `setSource( (string) $source )` - nastaví zdroj dat; jako parametr dostane údaj endpoint z [objektu datasetu v profiles.json](#profily)
   - metoda `import( FakturyImport $fi )` - provede import zápis do databáze provádí pomocí metod insertRow() a insertRows() dodaného objektu třídy `FakturyImport`
+- Třída `FakturyImport`:
+  - metoda `insertRow( (array) $row )`
+    - metoda kterou se vloží jedna faktura do databáze
+    - parametrem je pole, kde klíče jsou názvy položek databáze
+    - array( pole1 => hodnota1, pole2 => hodnota2, ...)   
+  -  metoda `insertRows( (array) $rows )`
+    - metoda kterou se vloží více faktur do databáze v rámci jedné žádosti
+    - parametrem je pole polí, kde klíče jsou názvy položek databáze
+    - array(0 => array( pole1 => hodnota1, pole2 => hodnota2, ...))    
