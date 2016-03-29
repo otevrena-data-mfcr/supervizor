@@ -3,9 +3,17 @@ Vizualizace výdajů státní správy
 
 ## Obsah repozitáře
 
-**//mysql** - soubory pro tvorbu databázové struktury
+`//mysql` - soubory pro tvorbu databázové struktury
 
-**//www** - zdrojové kódy aplikace určené ke spuštění bez instalace (nikoliv bez nastavení základních konfiguračních údajů
+`//www` - zdrojové kódy aplikace
+`//www/app` - jádro aplikace
+`//www/app/api` - jádro aplikace
+`//www/app/import` - 
+`//www/app/lib` - PHP knihovny
+`//www/app/tmp` - dočasné soubory
+`//www/config` - statická nastavení aplikace
+`//www/include` - šablony pro generování výstupu
+`//www/static` - statické veřejné soubory
 
 ## Nastavení
 
