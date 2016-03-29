@@ -16,11 +16,12 @@ Vizualizace výdajů státní správy
 `//www/static` - statické veřejné soubory
 
 ## Nastavení
+- základní nastavení aplikace se provádí v souborech ve složce //www/config
+- nastavení napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
 
-## Import
-- Součátní aplikace je automatický mechanismus na import faktur z CSV souborů.
-- Proces, jakým probíhá napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
-- Systém volby cílového profilu je popsán v sekci [Profily](#profily)
+### //www/config/constants.php
+
+### //www/config/profiles.json
 
 ### Profily
 - Pro uložení více organizací a let jsou zvoleny identifikátory profil a dataset
@@ -38,6 +39,9 @@ Vizualizace výdajů státní správy
   - `(string) source_url` - url datového zdroje jako odkaz pro uživatele 
 
 ##Import
+
+- Součátní aplikace je automatický mechanismus na import faktur z CSV souborů.
+- Proces, jakým probíhá napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
 
 ### Mapping
 - Vytvořením Mappingu pro váš formát faktur definujete napojení polí faktury v CSV zdroji na pole v databázi Supervizoru
@@ -57,3 +61,9 @@ Vizualizace výdajů státní správy
     - metoda kterou se vloží více faktur do databáze v rámci jedné žádosti
     - parametrem je pole polí, kde klíče jsou názvy položek databáze
     - array(0 => array( pole1 => hodnota1, pole2 => hodnota2, ...))    
+
+### Uživatelské rozhraní importu
+
+- uživatelské rozhraní se nachází na adrese /...cesta k supervizoru.../import
+- jako heslo se používá heslo jehož otisk je uložen v //www/config/constants.php v hodnotě IMPORT_PASSOWRD_MD5
+- zbytek je asi návodný
