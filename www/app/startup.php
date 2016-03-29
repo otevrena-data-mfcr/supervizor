@@ -91,7 +91,7 @@ function loader($what){
 $loader["db"] = function(){
   $db_config = require CONFIG_DIR."/db_config.php";
   require APP_DIR."/db_connect.php";
-  return db_connect($db_config["host"],$db_config["user"],$db_config["pass"]);
+  return db_connect(DB_HOST,DB_USER,DB_PASS);
 }; 
 
 ?>
