@@ -20,7 +20,7 @@ Vizualizace výdajů státní správy
 ## Import
 - Součátní aplikace je automatický mechanismus na import faktur z CSV souborů.
 - Proces, jakým probíhá napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
-- Systém volby cílového profilu je popsán v sekci Profily
+- Systém volby cílového profilu je popsán v sekci [Profily](#profily)
 
 ### Profily
 - Pro uložení více organizací a let jsou zvoleny identifikátory profil a dataset
@@ -36,6 +36,13 @@ Vizualizace výdajů státní správy
   - `(string) mapping` - identifikátor [Mappingu](#mapping)
   - `(string) source_name` - název datového zdroje k zobrazení
   - `(string) source_url` - url datového zdroje jako odkaz pro uživatele 
-  - 
+
+##Import
+
 ### Mapping
-Napojení CSV
+- Mapping je PHP soubor ve složce `//www/app/import` s názvem `FakturyMapping_XXXX.php`, kde XXXX je identifikátor Mappingu
+- Soubor obsahuje třídu `FakturyMapping_XXXX` (stejný identifikátor), která implementuje rozhraní `IFakturyMapping`
+- Třída `FakturyMapping_XXXX`:
+  - metoda `getTimestamp()` - vrátí datum a čas poslední aktualizace dat na datovém zdroji ve formátu UNIX time
+  - metoda `setSource( (string) $source )` - nastaví zdroj dat; jako parametr dostane údaj endpoint z [objektu datasetu v profiles.json](#profily)
+  - metoda `import( FakturyImport $fi )` - provede import zápis do databáze provádí pomocí metod insertRow() a insertRows() dodaného objektu třídy `FakturyImport`
