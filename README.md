@@ -5,7 +5,7 @@ Vizualizace výdajů státní správy
 
 **//mysql** - soubory pro tvorbu databázové struktury
 
-**//www - zdrojové kódy aplikace určené ke spuštění bez instalace (nikoliv bez nastavení základních konfiguračních údajů
+**//www** - zdrojové kódy aplikace určené ke spuštění bez instalace (nikoliv bez nastavení základních konfiguračních údajů
 
 ## Nastavení
 
