@@ -21,6 +21,7 @@ Vizualizace výdajů státní správy
 
 ### Základní nastavení - //www/config/constants.php
 - zde se nastavují základní parametry, jako jsou hesla a cesty k vizualizaci
+- v drtivé většině případů by mělo stačit nastavení hesla do databáze a hesla importu
 
 ### Profily - //www/config/profiles.json
 - Pro uložení více organizací a let jsou zvoleny identifikátory profil a dataset
