@@ -3,7 +3,7 @@ Vizualizace výdajů státní správy
 
 ## Obsah repozitáře
 
-**`//mysql` - soubory pro *manuální* tvorbu databázové struktury**
+**`//mysql` - soubory pro tvorbu databázové struktury**
 
 `//www` - zdrojové kódy aplikace  
 `//www/app` - jádro aplikace  
@@ -19,7 +19,6 @@ Vizualizace výdajů státní správy
 
 ## Import
 - Součátní aplikace je automatický mechanismus na import faktur z CSV souborů.
-- Soubory musí být v kódování UTF-8 (lze přepsat v [Mappingu](#mapping))
 - Proces, jakým probíhá napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
 - Systém volby cílového profilu je popsán v sekci Profily
 
