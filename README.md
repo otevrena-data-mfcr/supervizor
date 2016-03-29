@@ -65,5 +65,5 @@ Supervizor je aplikace na vizualizaci výdajů státní správy, kerou vytvořil
 ### Uživatelské rozhraní importu
 
 - uživatelské rozhraní se nachází na adrese /...cesta k supervizoru.../import
-- jako heslo se používá heslo jehož otisk je uložen v //www/config/constants.php v hodnotě IMPORT_PASSOWRD_MD5
-- zbytek je asi návodný
+- jako heslo se používá heslo jehož otisk je uložen v //www/config/constants.php v hodnotě IMPORT_PASSWORD_MD5
+- zbytek je návodný
