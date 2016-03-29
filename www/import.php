@@ -29,7 +29,7 @@ if($metadata_timestamp && ($metadata_timestamp === $database_timestamp)) $needs_
 
 if($import){
 
-  if(md5($password) !== IMPORT_PASSOWRD_MD5) throw new Exception("Chybné heslo.");
+  if(md5($password) !== IMPORT_PASSWORD_MD5) throw new Exception("Chybné heslo.");
 
   $start_time = microtime(true);
   
