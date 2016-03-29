@@ -40,6 +40,8 @@ Vizualizace výdajů státní správy
 ##Import
 
 ### Mapping
+- Vytvořením tohoto souboru pro váš formát faktur definujete napojení polí faktury v CSV zdroji na pole v databázi Supervizoru
+- Který Mapping se použije se nastaví v souboru [profiles.json](#profily)
 - Mapping je PHP soubor ve složce `//www/app/import` s názvem `FakturyMapping_XXXX.php`, kde XXXX je identifikátor Mappingu
 - Soubor obsahuje třídu `FakturyMapping_XXXX` (stejný identifikátor), která implementuje rozhraní `IFakturyMapping`
 - Třída `FakturyMapping_XXXX`:
