@@ -1,5 +1,3 @@
-ErrorDocument 404 /stranka.php
-
 RewriteEngine on
 
 RewriteRule ^api\/(.*)$      	                                        ./api.php?endpoint=$1      		                             [L,QSA]
