@@ -7,7 +7,7 @@ Aplikaze je poskytována zdarma, ale bez záruky. K jejímu spuštění je potř
 
 ## Obsah repozitáře
 
-**`//mysql` - soubory pro tvorbu databázové struktury**
+**`//sql` - soubory pro tvorbu databázové struktury**
 
 `//www` - zdrojové kódy aplikace  
 `//www/app` - jádro aplikace  
