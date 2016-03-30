@@ -3,11 +3,11 @@ Supervizor je aplikace na vizualizaci výdajů státní správy, kerou vytvořil
 
 Aplikaze je poskytována zdarma, ale bez záruky. K jejímu spuštění je potřeba znalostí programování. (V případě zájmu ukažte tuto stránku vašemu IT)
 
-![Header](http://temp.smallhill.cz/supervizor-heading-github.png)
-
+![Header](http://temp.smallhill.cz/supervizor-heading-github.png)
+
 ## Obsah repozitáře
 
-**`//sql` - soubory pro tvorbu databázové struktury**
+**`//mysql` - soubory pro tvorbu databázové struktury**
 
 `//www` - zdrojové kódy aplikace  
 `//www/app` - jádro aplikace  
