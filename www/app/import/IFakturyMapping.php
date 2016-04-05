@@ -3,7 +3,7 @@
 interface IFakturyMapping{
 
   /*
-   * Získá čas poslední aktualizace dat v databázi
+   * Získá čas poslední aktualizace dat v katalogu
    */ 
   public function getTimestamp();
   

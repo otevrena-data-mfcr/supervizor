@@ -74,11 +74,18 @@ class FakturyMapping_MFCR implements IFakturyMapping{
     
     $faktura_uid[2] = $row[1];
     
+    $typy_dokladu = array(
+      "faktura" => "Faktura",
+      "záloha" => "Zálohová faktura",
+      "ostatní" => "Ostatní platba"
+    );
+    $typ = @$typy_dokladu[$row[6]] ?: "Ostatní platba";
+
 
     return array(
   		"faktura_id" => 		join("-",$faktura_uid),
   		"dodavatel_id" => 		$row[3] ?: null,
-  		"typ_dokladu_st" => 	$row[6] ?: null,
+  		"typ_dokladu_st" => 	$typ ?: null,
   		"rozliseni_st" => 		$row[0] ?: null,
   		"evidence_dph_in" => 	$row[7] ? (int) str_replace(array("Ano","Ne"),array("1","0"),$row[7]) : null,
   		"castka_am" => 			$row[9] ? floatval_cs($row[9]) : null,

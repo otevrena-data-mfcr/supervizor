@@ -17,6 +17,7 @@ if(!in_array($endpoint,$api_endpoints)){
 	exit;
 }
 
+
 $api_executable = API_DIR."/".$endpoint.".php";
 
 /* gzip */

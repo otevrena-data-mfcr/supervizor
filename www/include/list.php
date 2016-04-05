@@ -37,7 +37,7 @@
 						<div class="faktura template">
 							
 							<span class="castka_detail"></span>
-							<span class="datum_prijato" title="Datum přijetí faktury"></span>		
+							<span class="datum_uhrazeno" title="Datum přijetí faktury"></span>		
 							<p class="info"><span class="ucel"></span></p>
 						</div>
 					</div>
@@ -56,11 +56,11 @@
 				<div>
 					<h3 class="nazev pole"></h3>
 					<p class="info">
-						<strong>IČO:</strong> <span class="ico pole">-</span><!--, <span class="dph pole">-</span><br>
+						<strong>IČO:</strong> <span class="ico pole">-</span>, <span class="dph pole">-</span><br>
 						<strong>Sídlo:</strong>	<span class="adresa pole">-</span><br>
 						<strong>Země vlastníka:</strong>	<span class="zeme pole">-</span> 
 					</p>
-					<a class="or">Otevřít dodavatele v obchodním rejstříku</a>      -->
+					<a class="or">Otevřít dodavatele v obchodním rejstříku</a>      
 					
 				</div>
 			</div>

@@ -4,7 +4,8 @@
 
   function create_profile_url($profile,$dataset = null){
     $url = explode("?",$_SERVER["REQUEST_URI"]);
-    return $url[0]."?profil=$profile&dataset=$dataset";
+    //return $url[0]."?profil=$profile&dataset=$dataset";
+    return "?profil=$profile&dataset=$dataset";
   }  
 ?>
 <!DOCTYPE html>
@@ -154,6 +155,7 @@
 							<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">O projektu <span class="caret"></span></a>
 							<ul class="dropdown-menu">
 								<li><a href="<?=WEB_ROOT?>/o-projektu.php" id="about">O projektu</a></li>
+                <li><a href="https://github.com/SmallhillCZ/Supervizor">Supervizor na GitHubu</a></li>
 								<li><a href="http://data.mfcr.cz">Otevřená data MFČR</a></li>
 							</ul>
 						</li>

@@ -49,12 +49,14 @@ if(@$_SESSION["profile"] && @$profiles[$_SESSION["profile"]]){
     $dataset = current($profiles[$_SESSION["profile"]]["datasets"]);
     $dataset_id = key($profiles[$_SESSION["profile"]]["datasets"]);
   }
+  $profile = $profiles[$_SESSION["profile"]];
   $profile_id = $_SESSION["profile"];
   
 }
 elseif(@$profiles["mfcr"]["datasets"]){
-  $dataset = current($profiles["mfcr"]["datasets"]);
+  $profile = $profiles["mfcr"];
   $profile_id = "mfcr";
+  $dataset = current($profiles["mfcr"]["datasets"]);
   $dataset_id = key($profiles["mfcr"]["datasets"]);
   
 }
@@ -72,6 +74,8 @@ define("PROFILE_ID",$profile_id);
 define("PROFILE_DATASET",$dataset_id);
 define("PROFILE_SOURCE_NAME",@$dataset["source_name"]);
 define("PROFILE_SOURCE_URL",@$dataset["source_url"]);
+define("PROFILE_ENTITY",@$profile["entity"]);
+define("PROFILE_ENTITY_DESC",@$profile["entity_desc"]);
 
 unset($profile,$profile_id,$dataset_id);
 

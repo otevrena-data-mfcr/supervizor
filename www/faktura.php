@@ -35,9 +35,9 @@ $tpl = new LetheTemplate($popup ? "layout-popup.php" : "layout.php");
 
 $tpl["share_url"] = $share_url;
 $tpl["thumbnail"] = WEB_ROOT_FULL."/static/img/invoice.png";
-$tpl["description"] = "$typ č. $faktura[id] dodavatele ".htmlspecialchars($faktura->dodavatel["nazev_st"])." za ".nf_cs($faktura["uhrazeno_am"])." Kč. Účel faktury: ".htmlspecialchars($faktura["ucel_tx"]);
+$tpl["description"] = "$faktura[typ_dokladu_st] č. $faktura[id] dodavatele ".htmlspecialchars($faktura->dodavatel["nazev_st"])." za ".nf_cs($faktura["uhrazeno_am"])." Kč. Účel faktury: ".htmlspecialchars($faktura["ucel_tx"]);
 
-$tpl["title"] = "$typ č. $faktura[id]";
+$tpl["title"] = "$faktura[typ_dokladu_st] č. $faktura[id]";
 $tpl->fetchOutput("styles");
 ?>
 <style type="text/css">
@@ -162,10 +162,10 @@ $tpl->fetchOutput("styles");
 
 		<table>
 			<thead>
-				<tr><th colspan="2"><h1><?=$typ?> č. <?=end(explode("-",$faktura["id"]))?></h1></th></tr>
+				<tr><th colspan="2"><h1><?=$faktura["typ_dokladu_st"]?> č. <?=end(explode("-",$faktura["id"]))?></h1></th></tr>
 			</thead>
 			<tbody>
-				<?php if($faktura["typ_dokladu_st"] !== "ostatní"): ?>
+				<?php if($faktura["typ_dokladu_st"] !== "Ostatní platba"): ?>
         <tr>
 					<td id="dodavatel">
 						<h3>Dodavatel</h3>
@@ -177,32 +177,25 @@ $tpl->fetchOutput("styles");
 
 					<td id="odberatel">
 						<h3>Odběratel</h3>
-						<h4>Ministerstvo financí</h4>
-						<p>
-							Letenská 15<br>
-							Praha 1 - Malá strana<br>
-							118 00<br>
-							<br>
-							IČ: 00006947<br>
-							DIČ: CZ00006947
-						</p>
+						<h4><?=htmlspecialchars(PROFILE_ENTITY)?></h4>
+						<p><?=nl2br(htmlspecialchars(PROFILE_ENTITY_DESC))?></p>
 					</td>
 				</tr>
         <?php endif; ?>
 				<tr>
 					<td>
 						<table class="datumy">
-							<tr><th>Typ dokladu:</th><td><?=$faktura["typ_dokladu_st"]?></td></tr>
-							<tr><th>Rozlišení:</th><td><?=$faktura["rozliseni_st"]?></td></tr>
-							<tr><th>Evidence DPH:</th><td><?=$faktura["evidence_dph_in"] ? "ano" : "ne"?></td></tr>
+							<?php if($faktura["typ_dokladu_st"]): ?><tr><th>Typ dokladu:</th><td><?=$faktura["typ_dokladu_st"]?></td></tr><?php endif; ?>
+							<?php if($faktura["rozliseni_st"]): ?><tr><th>Rozlišení:</th><td><?=$faktura["rozliseni_st"]?></td></tr><?php endif; ?>
+							<?php if($faktura["evidence_dph_in"]): ?><tr><th>Evidence DPH:</th><td><?=$faktura["evidence_dph_in"] ? "ano" : "ne"?></td></tr><?php endif; ?>
 						</table>
 					</td>
 					<td>
 						<table class="datumy">
-							<tr><th>Vystaveno:</th><td><?=date("j. n. Y",strtotime($faktura["vystaveno_dt"]))?></td></tr>
-							<tr><th>Přijato:</th><td><?=date("j. n. Y",strtotime($faktura["prijato_dt"]))?></td></tr>
-							<tr><th>Splatnost:</th><td><?=date("j. n. Y",strtotime($faktura["splatnost_dt"]))?></td></tr>
-							<tr><th>Uhrazeno:</th><td><?=date("j. n. Y",strtotime($faktura["uhrazeno_dt"]))?></td></tr>
+							<?php if($faktura["vystaveno_dt"]): ?><tr><th>Vystaveno:</th><td><?=date("j. n. Y",strtotime($faktura["vystaveno_dt"]))?></td></tr><?php endif; ?>
+							<?php if($faktura["prijato_dt"]): ?><tr><th>Přijato:</th><td><?=date("j. n. Y",strtotime($faktura["prijato_dt"]))?></td></tr><?php endif; ?>
+							<?php if($faktura["splatnost_dt"]): ?><tr><th>Splatnost:</th><td><?=date("j. n. Y",strtotime($faktura["splatnost_dt"]))?></td></tr><?php endif; ?>
+							<?php if($faktura["uhrazeno_dt"]): ?><tr><th>Uhrazeno:</th><td><?=date("j. n. Y",strtotime($faktura["uhrazeno_dt"]))?></td></tr><?php endif; ?>
 						</table>
 					</td>
 				</tr>
@@ -251,8 +244,18 @@ $tpl->fetchOutput("styles");
 								</tr>
 							</thead>
 							<tbody>
-								<tr><th>Vystavená částka</th><td class="castka"><?=nf_cs($faktura["castka_orig_am"])?> <?=$faktura["mena_curr"]?></td><td class="castka"><?=nf_cs($faktura["castka_bez_dph_am"])?> CZK</td><td class="castka"><?=nf_cs($faktura["castka_am"])?> CZK</td></tr>
-								<tr><th>Uhrazená částka</th><td class="castka"><?=nf_cs($faktura["uhrazeno_orig_am"])?> <?=$faktura["mena_curr"]?></td><td></td><td class="castka"><?=nf_cs($faktura["uhrazeno_am"])?> CZK</td></tr>
+								<tr>
+                  <th>Vystavená částka</th>
+                  <td class="castka"><?php if(is_numeric(@$faktura["castka_orig_am"])): ?><?=nf_cs($faktura["castka_orig_am"])?> <?=$faktura["mena_curr"]?><?php else: ?>N/A<?php endif; ?></td>
+                  <td class="castka"><?php if(is_numeric(@$faktura["castka_bez_dph_am"])): ?><?=nf_cs($faktura["castka_bez_dph_am"])?> CZK<?php else: ?>N/A<?php endif; ?></td>
+                  <td class="castka"><?php if(is_numeric(@$faktura["castka_am"])): ?><?=nf_cs($faktura["castka_am"])?> CZK<?php else: ?>N/A<?php endif; ?></td>
+                </tr>
+								<tr>
+                  <th>Uhrazená částka</th>
+                  <td class="castka"><?php if(is_numeric(@$faktura["uhrazeno_orig_am"])): ?><?=nf_cs($faktura["uhrazeno_orig_am"])?> <?=$faktura["mena_curr"]?><?php else: ?>N/A<?php endif; ?></td>
+                  <td class="castka"><?php if(is_numeric(@$faktura["uhrazeno_bez_dph_am"])): ?><?=nf_cs($faktura["uhrazeno_bez_dph_am"])?> CZK<?php else: ?>N/A<?php endif; ?></td>
+                  <td class="castka"><?php if(is_numeric(@$faktura["uhrazeno_am"])): ?><?=nf_cs($faktura["uhrazeno_am"])?> CZK<?php else: ?>N/A<?php endif; ?></td>
+                </tr>
 							</tbody>
 						</table>
 					</td>

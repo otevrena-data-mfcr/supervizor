@@ -110,14 +110,14 @@ List.prototype.load = function(options,filter){
 				
 				faktura_dom.attr("title","ID faktury: " + faktura.id);
 				/* naplneni dat faktury */
-				var datum_prijato = new Date(faktura.vystaveno_udt*1000);
+				var datum_uhrazeno = new Date(faktura.uhrazeno_udt*1000);
 				
 				var fakturaData = {
 					"faktura_id": faktura.id,
 					"castka_celkem": (faktura.castka_am ? faktura.castka_am : 0).toLocaleString("cs-cz",{style:"currency",currency:"CZK",minimumFractionDigits:2}),
 					"castka_detail": (faktura.detail_castka_am ? faktura.detail_castka_am : 0).toLocaleString("cs-cz",{style:"currency",currency:"CZK",minimumFractionDigits:2}),
 					"ucel": faktura.ucel_tx,
-					"datum_prijato": datum_prijato.getDate() + ". " + (datum_prijato.getMonth()+1) + ". " + datum_prijato.getFullYear()
+					"datum_uhrazeno": datum_uhrazeno.getDate() + ". " + (datum_uhrazeno.getMonth()+1) + ". " + datum_uhrazeno.getFullYear()
 				};
 				
 				$.each(fakturaData,function(key,value){
@@ -262,9 +262,11 @@ List.prototype.loadFirm = function(dodavatel_id,callback){
 			target.find("." + key).text(value ? value : "-");
 		});
 		
+    
 		
 		if(ico && kamos && kamos.law_form_code !== 101 && kamos.law_form_code !== 107 && kamos.law_form_code !== 105){
-			target.find("a.or").show().attr("href",WEB_ROOT + "/or-vypis.php?ico=" + ico);
+			target.find(".or").attr("href","https://or.justice.cz/ias/ui/rejstrik-%24firma?jenPlatne=VSECHNY&ico=" + ico);
+      //target.find("a.or").show().attr("href",WEB_ROOT + "/or-vypis.php?ico=" + ico);
 		}
 		else{
 			target.find("a.or").hide();

@@ -1,5 +1,7 @@
 <?php
 
+require "app/startup.php";
+
 $ico = @$_GET["ico"];
 
 if(!$ico){
@@ -7,9 +9,14 @@ if(!$ico){
 	exit;
 }
 
-$hledani = file_get_contents("https://or.justice.cz/ias/ui/rejstrik-%24firma?jenPlatne=PLATNE&ico=".$ico);
-
-
+$context = stream_context_create(array(
+  'http' => array(
+      'proxy' => PROXY,
+      'request_fulluri' => true
+  )
+));
+  
+$hledani = file_get_contents("https://or.justice.cz/ias/ui/rejstrik-%24firma?jenPlatne=PLATNE&ico=".$ico,false,$context);
 
 if(!$hledani){
 	header("Content-type: text/plain; charset=utf-8");

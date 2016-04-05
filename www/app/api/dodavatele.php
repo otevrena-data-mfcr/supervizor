@@ -47,7 +47,7 @@ elseif(@$_GET["skupina"]) $faktury->where("faktura_polozka:polozka.skupina_poloz
 if(@$_GET["datum"]["min"]) $faktury->where("vystaveno_dt >= ?",date("Y-m-d",is_numeric($_GET["datum"]["min"]) ? $_GET["datum"]["min"] : strtotime($_GET["datum"]["min"])));
 if(@$_GET["datum"]["max"]) $faktury->where("vystaveno_dt <= ?",date("Y-m-d",is_numeric($_GET["datum"]["max"]) ? $_GET["datum"]["max"] : strtotime($_GET["datum"]["max"])));
 
-$faktury->select("faktura.*,UNIX_TIMESTAMP(faktura.vystaveno_dt) as vystaveno_udt, SUM(faktura_polozka:castka_am) as detail_castka_am");
+$faktury->select("faktura.*,UNIX_TIMESTAMP(faktura.uhrazeno_dt) as uhrazeno_udt, SUM(faktura_polozka:castka_am) as detail_castka_am");
 $faktury->group("faktura.id");	
 $faktury->order("vystaveno_dt ASC");
 

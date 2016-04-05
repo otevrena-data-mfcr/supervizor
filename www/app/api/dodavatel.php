@@ -21,7 +21,14 @@ if($result["db"]["ico_st"]){
 		)
 	));
 
-	//$kamos_data = file_get_contents("http://kamos.datlab.cz/company/CZ".$ico,false,$context);
+  $context = stream_context_create(array(
+    'http' => array(
+        'proxy' => PROXY,
+        'request_fulluri' => true
+    )
+  ));
+    
+	$kamos_data = @file_get_contents("http://kamos.datlab.cz/company/CZ".$ico,false,$context);
 		
 	if(@$kamos_data){
 		$result["kamos"] = json_decode($kamos_data,true);

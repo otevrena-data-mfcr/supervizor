@@ -17,7 +17,7 @@ interface IFakturyImport{
   public function insertRows($rows);
   
   /*
-   * Získá čas poslední aktualizace dat v katalogu
+   * Získá čas poslední aktualizace dat v databázi
    */ 
   public function getTimestamp();
 }
