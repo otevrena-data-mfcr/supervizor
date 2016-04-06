@@ -35,6 +35,8 @@ Aplikace je poskytována zdarma, ale bez záruky. K jejímu spuštění je potř
 - Objekt profilu má následující vlastnosti:
   - `(string) title` - název datasetu k zobrazení
   - `(object) datasets` - objekt kde jednotlivé názvy vlastností jsou identifikátory datasetů (unikátrní v rámci profilu) a obsahemn jsou objekty reprezentující datasety
+  - `(string) entity` - Název subjektu, který se zobrazuje jako odběratel
+  - `(string) entity_desc` - Kontaktní údaje subjektu které se zobrazují jako odběratel (lze použít \n pro nový řádek)
 - Objekt datasetu má následující vlastnosti
   - `(string) title` - název datasetu k zobrazení
   - `(string) endpoint` - url adresa odkazující na metadata datové sady katalogu (použito pro [Mapping](#mapping))
@@ -42,8 +44,6 @@ Aplikace je poskytována zdarma, ale bez záruky. K jejímu spuštění je potř
   - `(string) mapping` - identifikátor [Mappingu](#mapping)
   - `(string) source_name` - název datového zdroje k zobrazení
   - `(string) source_url` - url datového zdroje jako odkaz pro uživatele 
-  - `(string) entity` - Název subjektu, který se zobrazuje jako odběratel
-  - `(string) entity_desc` - Kontaktní údaje subjektu které se zobrazují jako odběratel (lze použít \n pro nový řádek) 
 
 ##Import
 
