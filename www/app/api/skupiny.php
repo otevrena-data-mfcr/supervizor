@@ -5,7 +5,7 @@ $result = array(
 );
 
 /* SKUPINY */
-$skupiny = $db->skupina()->select("skupina.id, skupina.nazev_st AS nazev, skupina.popis_tx AS popis, skupina.x,skupina.y,skupina.barva, SUM(COALESCE(skupina_polozka:polozka.faktura_polozka:castka_am,0)) as objem, COUNT(1) as pocet")->group("skupina_id");
+$skupiny = $db->skupina()->select("skupina.id, skupina.nazev_st AS nazev, skupina.popis_tx AS popis, skupina.x,skupina.y,skupina.barva, SUM(COALESCE(skupina_polozka:polozka.faktura_polozka:castka_am,0)) as objem, COUNT(1) as pocet,MAX(UNIX_TIMESTAMP(skupina_polozka:polozka.faktura_polozka:faktura.uhrazeno_udt)) AS max_uhrazeno_udt,MIN(UNIX_TIMESTAMP(skupina_polozka:polozka.faktura_polozka:faktura.uhrazeno_dt)) AS min_uhrazeno_udt")->group("skupina_id");
 if(@$_GET["skupina"]) $skupiny->where("skupina_id",@$_GET["skupina"]);
 $skupiny->order("objem DESC");
 

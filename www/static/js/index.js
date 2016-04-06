@@ -81,7 +81,8 @@ function updateState(){
 			list.show();
 
 			this.open(function(){
-				list.load({skupina:skupina.id,page: History.getState().data.page ? History.getState().data.page : 1},{polozky: skupina.polozky,datum: {min:new Date(2015,0,1),max:new Date(2015,11,31)}});
+        console.log(skupina);
+				list.load({skupina:skupina.id,page: History.getState().data.page ? History.getState().data.page : 1},{polozky: skupina.polozky,datum: {min:new Date(skupina.min_uhrazeno_udt*1000),max:new Date(skupina.max_uhrazeno_udt*1000)}});
 			});
 			$("#widget").addClass("open");
 			skupina.widget.show();

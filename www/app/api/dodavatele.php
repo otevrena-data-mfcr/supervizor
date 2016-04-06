@@ -13,8 +13,8 @@ $dodavatele = $db->dodavatel();
 if(@$_GET["dodavatel"]) $dodavatele->where("dodavatel.id",$_GET["dodavatel"]);
 if(@$_GET["polozka"]) $dodavatele->where("faktura:faktura_polozka:polozka_id",(array) $_GET["polozka"]);
 elseif(@$_GET["skupina"]) $dodavatele->where("faktura:faktura_polozka:polozka.skupina_polozka:skupina_id",$_GET["skupina"]);
-if(@$_GET["datum"]["min"]) $dodavatele->where("faktura:vystaveno_dt >= ?",date("Y-m-d",is_numeric($_GET["datum"]["min"]) ? $_GET["datum"]["min"] : strtotime($_GET["datum"]["min"])));
-if(@$_GET["datum"]["max"]) $dodavatele->where("faktura:vystaveno_dt <= ?",date("Y-m-d",is_numeric($_GET["datum"]["max"]) ? $_GET["datum"]["max"] : strtotime($_GET["datum"]["max"])));
+if(@$_GET["datum"]["min"]) $dodavatele->where("faktura:uhrazeno_dt >= ?",date("Y-m-d",is_numeric($_GET["datum"]["min"]) ? $_GET["datum"]["min"] : strtotime($_GET["datum"]["min"])));
+if(@$_GET["datum"]["max"]) $dodavatele->where("faktura:uhrazeno_dt <= ?",date("Y-m-d",is_numeric($_GET["datum"]["max"]) ? $_GET["datum"]["max"] : strtotime($_GET["datum"]["max"])));
 
 $dodavatele->select("dodavatel.*,SUM(faktura:faktura_polozka:castka_am) as castka_celkem_am,COUNT(1) as pocet_celkem_no");
 $dodavatele->group("dodavatel.id")->order("castka_celkem_am DESC");
