@@ -20,7 +20,8 @@ Aplikace je poskytována zdarma, ale bez záruky. K jejímu spuštění je potř
 `//www/static` - statické veřejné soubory
 
 ## Nastavení
-- nastavení vizualizace se provádí v souborech ve složce //www/config 
+- nastavení vizualizace se provádí v souborech ve složce //www/config
+- šablona nastavení je ve složce //www/config-vzor
 - nastavení importu a napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
 
 ### Základní nastavení - //www/config/constants.php
