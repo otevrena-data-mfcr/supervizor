@@ -32,7 +32,7 @@ Supervizor je aplikace na vizualizaci výdajů státní správy, kterou vytvoři
 - Soubor obsahuje JSON objekt kde jednotlivé názvy vlastností jsou identifikátory profilů a obsahem jsou objekty reprezentující profily
 - Objekt profilu má následující vlastnosti:
   - `(string) title` - název datasetu k zobrazení
-  - `(object) datasets` - objekt kde jednotlivé názvy vlastností jsou identifikátory datasetů (unikátrní v rámci profilu) a obsahemn jsou objekty reprezentující datasety
+  - `(object) datasets` - objekt kde jednotlivé názvy vlastností jsou identifikátory datasetů (unikátrní v rámci profilu) a obsahem jsou objekty reprezentující datasety
   - `(string) entity` - Název subjektu, který se zobrazuje jako odběratel
   - `(string) entity_desc` - Kontaktní údaje subjektu které se zobrazují jako odběratel (lze použít \n pro nový řádek)
 - Objekt datasetu má následující vlastnosti
