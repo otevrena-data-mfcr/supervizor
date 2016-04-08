@@ -9,6 +9,7 @@ services:
 
     # repository
     - App\Model\Repository\UserRepository
+    - App\Model\Repository\SupplierRepository
 
     # commands
     -
