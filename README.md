@@ -45,7 +45,7 @@ Supervizor je aplikace na vizualizaci výdajů státní správy, kterou vytvoři
 
 ##Import
 
-- Součátní aplikace je automatický mechanismus na import faktur z CSV souborů.
+- Součástí aplikace je automatický mechanismus na import faktur z CSV souborů.
 - Proces, jakým probíhá napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
 
 ### Mapping
