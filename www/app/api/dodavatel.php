@@ -17,20 +17,14 @@ if($result["db"]["ico_st"]){
 	$context = stream_context_create(array(
 		'http' => array(
 			'method' => 'GET',
-			'header' => "X-MFCR-Hello: Cau Jirko! :)\r\n"
-		)
-	));
-
-  $context = stream_context_create(array(
-    'http' => array(
-        'proxy' => PROXY,
-        'request_fulluri' => true
+      'proxy' => PROXY,
+      'request_fulluri' => true
     )
   ));
     
 	$kamos_data = @file_get_contents("http://kamos.datlab.cz/company/CZ".$ico,false,$context);
 		
-	if(@$kamos_data){
+	if($kamos_data){
 		$result["kamos"] = json_decode($kamos_data,true);
 
 		$entities_decode = array("company_name");

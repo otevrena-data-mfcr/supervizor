@@ -1,12 +1,5 @@
 <?php
 
-/*
-if($_SERVER["REMOTE_ADDR"] !== "90.180.72.190"){
-	header("Content-type:text/plain;charset=utf-8");
-	die("Na webu něco důležitého měním, opět spuštěn bude co nevidět.");
-}
-*/
-
 /* regional settings */
 date_default_timezone_set("Europe/Prague");
 setlocale(LC_ALL,"cs_CZ.utf-8");
