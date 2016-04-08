@@ -22,7 +22,6 @@
 namespace App\Model\Fixtures\DefaultData;
 
 use App\Model\Entities\User;
-use App\Model\Entities\Subject;
 use App\Model\Security\PasswordManager;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
@@ -55,14 +54,10 @@ class UsersFixtures extends AbstractFixture implements OrderedFixtureInterface
             'firstName' => 'Adam',
             'lastName' => 'Schubert'
         ];
-        $users['caryfuk@winternet.cz'] = [
-            'password' => 'kolotocka',
-            'firstName' => 'Cary',
-            'lastName' => 'Fuk'
-        ];
+
         foreach ($users AS $email => $data)
         {
-            $user = new User($email, $data['firstName'], $data['lastName'], $data['password'], 'Control', function($password)
+            $user = new User($email, $data['password'], function($password)
             {
                 return $this->passwordManager->hash($password);
             });
