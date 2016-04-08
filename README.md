@@ -1,5 +1,5 @@
 # Supervizor
-Supervizor je aplikace na vizualizaci výdajů státní správy, kerou vytvořili pracovníci Ministerstva financí České republiky. Uvítáme další použití i úpravy/opravy zdrojového kódu, proto ho dáváme k dispozici pod licencí GNU GPL v3
+Supervizor je aplikace na vizualizaci výdajů státní správy, kterou vytvořili pracovníci Ministerstva financí České republiky. Uvítáme další použití i úpravy/opravy zdrojového kódu, proto ho dáváme k dispozici pod licencí GNU GPL v3
 
 Aplikace je poskytována zdarma, ale bez záruky. K jejímu spuštění je potřeba znalostí programování. (V případě zájmu ukažte tuto stránku vašemu IT)
 
