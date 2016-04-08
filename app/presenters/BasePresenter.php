@@ -58,10 +58,17 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
             'bootstrap/dist/css/bootstrap-theme.min.css',
             $wwwDir.'/lib/jquery/jQRangeSlider/jQAllRangeSliders-classic-min.css',
             'fancybox/source/jquery.fancybox.css',
-            $wwwDir.'/css/style-default.css'
+            $wwwDir.'/scss/style-default.scss'
         ));
 
         $compiler = \WebLoader\Compiler::createCssCompiler($files, $wwwDir . '/webtemp');
+        
+        $compiler->addFileFilter(new \WebLoader\Filter\ScssFilter());
+
+        $root = $wwwDir . '/bower_components';
+        $base = $this->template->basePath.'/bower_components';
+        $compiler->addFileFilter(new \WebLoader\Filter\CssUrlsFilter($root, $base));
+        
         return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
     }
 

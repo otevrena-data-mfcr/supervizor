@@ -10,6 +10,7 @@
     "require": {
         "php": ">= 5.3.0",
         "janmarek/webloader": "dev-master",
+        "leafo/scssphp": "dev-master",
         "natxet/CssMin": "dev-master",
         "dg/adminer-custom": "dev-master",
         "salamek/raven-nette": "dev-master",
