@@ -1,0 +1,16 @@
+
+services:
+
+    - App\Model\Entities\SupervizorSettings
+
+    # security
+    - App\Model\Security\Authenticator
+    - App\Model\Security\PasswordManager
+
+    # repository
+    - App\Model\Repository\UserRepository
+
+    # commands
+    -
+        class: App\Model\Fixtures\DefaultData
+        tags: [kdyby.console.command]

@@ -1,0 +1,49 @@
+#
+# SECURITY WARNING: it is CRITICAL that this file & directory are NOT accessible directly via a web browser!
+#
+# If you don't protect this directory from direct web access, anybody will be able to see your passwords.
+# http://nette.org/security-warning
+#
+
+php:
+  date.timezone: Europe/Prague
+
+nette:
+  application:
+    errorPresenter: Error
+
+  session:
+    expiration: 14 days
+
+services:
+  routerFactory: RouterFactory
+
+  router: @routerFactory::createRouter
+ 
+extensions:
+  console: Kdyby\Console\DI\ConsoleExtension
+  events: Kdyby\Events\DI\EventsExtension
+  annotations: Kdyby\Annotations\DI\AnnotationsExtension
+  doctrine: Kdyby\Doctrine\DI\OrmExtension
+  doctrine2identity: Majkl578\NetteAddons\Doctrine2Identity\DI\IdentityExtension
+  sentryLogger: Salamek\RavenNette\DI\SentryLoggerExtension
+  recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
+
+recaptcha:
+    secretKey: 6LcbKvoSAAAAABfcIS7J3xftn0-NXJOsirB13Sj3
+    siteKey: 6LcbKvoSAAAAACZ_sBdoNPkqXxoewSa1TMD6nfHP
+
+doctrine:
+  host: %database.host%
+  user: %database.user%
+  password: %database.password%
+  dbname: %database.dbname%
+  metadata:
+    App: %appDir%
+
+sentryLogger:
+  dsn: 'https://5db59f68629d4750b5ef56caae332dfa:d251f29fec1e4bf79768823dffb8f069@sentry.salamek.cz/8'
+
+includes:
+  - components.neon
+  - services.neon

@@ -1,0 +1,16 @@
+<form class="form-signin" n:name="form">
+    <ul class="alert alert-warning" n:if="$form->hasErrors()">
+        <li n:foreach="$form->errors as $error">{$error}</li>
+    </ul>
+    <h2 class="form-signin-heading">Please sign in</h2>
+    <label n:name="username" class="sr-only">Email address</label>
+    <input type="email" class="form-control" n:name="username" autofocus="autofocus" placeholder="Jméno">
+    <label n:name="password" class="sr-only">Password</label>
+    <input n:name="password" class="form-control" placeholder="Password">
+    <div class="checkbox">
+        <label>
+            <input type="checkbox" n:name="remember"> Remember me
+        </label>
+    </div>
+    <button class="btn btn-lg btn-primary btn-block" n:name="sign">Sign in</button>
+</form>

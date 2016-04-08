@@ -1,0 +1,30 @@
+{* Latte template *}
+
+{block content}
+<div id="left">
+    <div id="bubliny"></div>
+    <div id="widget">
+        <div class="back"><span class="glyphicon glyphicon-chevron-left"></span>ZPĚT</div>
+        <div class="polozky template">
+            <div class="polozka template">
+                <h3 class="nazev"></h3>
+                <p>
+                    <strong>Objem:</strong> <span class="objem"></span><br>
+                    <strong>Počet faktur:</strong> <span class="pocet"></span>
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
+<div id="right">
+
+</div>
+{/block}
+
+
+{block js}
+<script src="{$basePath}/js/bubbles.js"></script>
+<script src="{$basePath}/js/starsigns.js"></script>
+<script src="{$basePath}/js/list.js"></script>
+<script src="{$basePath}/js/index.js"></script>
+{/block}

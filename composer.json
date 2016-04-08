@@ -1,0 +1,22 @@
+{
+    "name": "vendor/supervizor",
+    "description": "Description of project supervizor.",
+    "authors": [
+        {
+            "name": "Adam Schubert",
+            "email": "adam.schubert@sg1-game.net"
+        }
+    ],
+    "require": {
+        "php": ">= 5.3.0",
+        "janmarek/webloader": "dev-master",
+        "natxet/CssMin": "dev-master",
+        "dg/adminer-custom": "dev-master",
+        "salamek/raven-nette": "dev-master",
+        "kdyby/doctrine": "^3.0",
+        "majkl578/nette-identity-doctrine": "^2.2",
+        "doctrine/data-fixtures": "^1.1",
+        "nextras/forms": "^1.6",
+        "minetro/recaptcha": "~1.5.0"
+    }
+}
