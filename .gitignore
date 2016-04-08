@@ -1,3 +1,5 @@
-temp/
-app/config/config.local.neon
+/temp/
+/app/config/config.local.neon
+/vendor/
+/www/bower_components/
 /nbproject/private/
