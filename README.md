@@ -14,6 +14,8 @@ Supervizor je aplikace na vizualizaci výdajů státní správy, kerou vytvořil
   1. `composer install`
   2. `bower install`
   3. create `/app/config/config.local.neon` with own parameters, from `/app/config/config.local.neon.example` template
-  4. run `php www/index.php orm:s:c` for create default database schema
-  5. run `php www/index.php orm:default-data:load` for load default data. WARNING: this command DROP ALL DATA IN DATABASE!
+  4. run `php www/index.php orm:s:c` to create default database schema
+  5. run `php www/index.php orm:default-data:load` to load default data. WARNING: this command DROP ALL DATA IN DATABASE!
+  6. run `php www/index.php importer:import:all` to import mf2016 data configured in `app/config/importer.neon` (you can configure your imports there)
+
   
