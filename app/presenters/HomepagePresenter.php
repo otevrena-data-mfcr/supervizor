@@ -25,6 +25,7 @@ class HomepagePresenter extends BasePresenter
     {
         //$json = file_get_contents(CONFIG_DIR."/profiles.json");
         //$this->template->profiles = json_decode($json);
+        $this->template->title = 'Supervizor Ministerstva financí';
     }
     
     

@@ -9,7 +9,6 @@
     "fancybox": ">=v2.1.5",
     "nette-forms": ">=0.0.3",
     "history.js": "1.8.0",
-    "raphael": ">=v2.1.4",
-    "jQRangeSlider": ">=5.7.2"
+    "raphael": ">=v2.1.4"
   }
 }

@@ -32,20 +32,6 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         return $this->getUser()->getIdentity();
     }
 
-    public function createComponentMenu()
-    {
-        $menu = new \Components\Menu\Menu();
-        return $menu;
-    }
-    
-    
-    public function startup()
-    {
-        parent::startup();
-        $this->template->title = 'Supervizor Ministerstva financí';
-    }
-
-
     public function createComponentCss()
     {
         $wwwDir = $this->getContext()->parameters['wwwDir'];
@@ -56,7 +42,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
             'jquery-ui/themes/smoothness/jquery-ui.min.css',
             'bootstrap/dist/css/bootstrap.min.css',
             'bootstrap/dist/css/bootstrap-theme.min.css',
-            $wwwDir.'/lib/jquery/jQRangeSlider/jQAllRangeSliders-classic-min.css',
+            $wwwDir.'/js/jquery/jQRangeSlider/jQAllRangeSliders-classic-min.css',
             'fancybox/source/jquery.fancybox.css',
             $wwwDir.'/scss/style-default.scss'
         ));
@@ -87,9 +73,9 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
             'bootstrap/dist/js/bootstrap.min.js',
             'history.js/scripts/bundled/html4+html5/native.history.js',
             
-            $wwwDir.'/lib/jquery/jQRangeSlider/jQAllRangeSliders-min.js',
-            $wwwDir.'/lib/raphael-min.js',
-            $wwwDir.'/lib/raphael-style.js'
+            $wwwDir.'/js/jquery/jQRangeSlider/jQAllRangeSliders-min.js',
+            'raphael/raphael-min.js',
+            $wwwDir.'/js/raphael-style.js'
         ));
 
         $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
