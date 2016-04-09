@@ -24,6 +24,7 @@ namespace App\Model\Entities;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Nette;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class BudgetItem
@@ -67,6 +68,12 @@ class BudgetItem extends Nette\Object
      * @ORM\Column(type="datetime",nullable=false)
      */
     private $updated;
+    
+     /**
+     * @var ArrayCollection|InvoiceItem[]
+     * @ORM\OneToMany(targetEntity="InvoiceItem", mappedBy="budgetItem",cascade={"persist"})
+     */
+    private $invoiceItems;
 
     /**
      * 
@@ -79,6 +86,8 @@ class BudgetItem extends Nette\Object
         $this->budgetGroup = $budgetGroup;
         $this->setIdentifier($identifier);
         $this->setName($name);
+        
+        $this->invoiceItems = new ArrayCollection();
     }
     
 
@@ -129,5 +138,22 @@ class BudgetItem extends Nette\Object
     public function setBudgetGroup(BudgetGroup $budgetGroup)
     {
         $this->budgetGroup = $budgetGroup;
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+     /**
+     * @return InvoiceItems[]|ArrayCollection
+     */
+    public function getinvoiceItems()
+    {
+        return $this->invoiceItems;
     }
 }

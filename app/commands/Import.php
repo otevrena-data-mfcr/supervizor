@@ -53,6 +53,7 @@ class Import extends Command
             $budgetGroups = [];
             $budgetGroups[] = [
                 'name' => 'Poradenské služby',
+                'key' => 'consulting',
                 'description' => 'Konzultační služby a školení',
                 'x' => 250,
                 'y' => 150,
@@ -66,6 +67,7 @@ class Import extends Command
 
             $budgetGroups[] = [
                 'name' => 'Doprava',
+                'key' => 'doprava',
                 'description' => 'Výdaje na cestování a nákup a provoz vozidel',
                 'x' => 550,
                 'y' => 300,
@@ -79,6 +81,7 @@ class Import extends Command
 
             $budgetGroups[] = [
                 'name' => 'Informační technologie',
+                'key' => 'it',
                 'description' => 'Hardware, software a telekomunikace',
                 'x' => 700,
                 'y' => 120,
@@ -97,6 +100,7 @@ class Import extends Command
 
             $budgetGroups[] = [
                 'name' => 'Nákup majetku',
+                'key' => 'nakup',
                 'description' => '',
                 'x' => 300,
                 'y' => 700,
@@ -115,6 +119,7 @@ class Import extends Command
 
             $budgetGroups[] = [
                 'name' => 'Ostatní',
+                'key' => 'ostatni',
                 'description' => 'Vše nezahrnuté v ostatních kategoriích',
                 'x' => 1000,
                 'y' => 700,
@@ -140,6 +145,7 @@ class Import extends Command
 
             $budgetGroups[] = [
                 'name' => 'Výdaje na zaměstnance',
+                'key' => 'platy',
                 'description' => 'Platy, odměny, závodní stravování a další výdaje na zaměstnance',
                 'x' => 200,
                 'y' => 450,
@@ -164,6 +170,7 @@ class Import extends Command
 
             $budgetGroups[] = [
                 'name' => 'Provozní náklady',
+                'key' => 'provoz',
                 'description' => 'Náklady na provoz ministerstva financí',
                 'x' => 800,
                 'y' => 500,
@@ -194,12 +201,21 @@ class Import extends Command
             ];
 
             $budgetItemEntityManager = $this->entityManager->getRepository(BudgetItem::class);
+            $budgetGroupEntityManager = $this->entityManager->getRepository(BudgetGroup::class);
             foreach ($budgetGroups AS $budgetGroupSrc)
             {
-                $budgetGroup = new BudgetGroup($budgetGroupSrc['name'], $budgetGroupSrc['description'], $budgetGroupSrc['x'], $budgetGroupSrc['y'], $budgetGroupSrc['color']);
+                $foundGroup = $budgetGroupEntityManager->findBy(['name' => $budgetGroupSrc['name']]);
+                if ($foundGroup)
+                {
+                    $budgetGroup = $foundGroup;
+                }
+                else
+                {
+                    $budgetGroup = new BudgetGroup($budgetGroupSrc['name'], $budgetGroupSrc['key'], $budgetGroupSrc['description'], $budgetGroupSrc['x'], $budgetGroupSrc['y'], $budgetGroupSrc['color']);
 
-                $this->entityManager->persist($budgetGroup);
-
+                    $this->entityManager->persist($budgetGroup);
+                }
+                
                 foreach($budgetItemEntityManager->findBy(['identifier' => $budgetGroupSrc['items']]) AS $budgetItem)
                 {
                     $budgetItem->setBudgetGroup($budgetGroup);

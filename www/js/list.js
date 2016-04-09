@@ -241,7 +241,7 @@ List.prototype.loadFirm = function(dodavatel_id,callback){
 	var target = this.dom.find(".detail .dodavatel").addClass("loading");
 	var list = this;
 	
-	$.getJSON("/api.php?endpoint=dodavatel",{"dodavatel":dodavatel_id},function(data){
+	$.getJSON("/ajax/supplier",{supplierIdentifier:dodavatel_id},function(data){
 		
 		var target = list.dom.find(".detail .dodavatel");
 		

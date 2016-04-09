@@ -32,6 +32,12 @@ class BudgetGroup extends Nette\Object
     
     /**
      * @var string
+     * @ORM\Column(type="string",length=255,nullable=false)
+     */
+    private $slug;
+    
+    /**
+     * @var string
      * @ORM\Column(type="string",length=6000,nullable=false)
      */
     private $description;
@@ -80,9 +86,10 @@ class BudgetGroup extends Nette\Object
      * @param int $y
      * @param string $color
      */
-    public function __construct($name, $description, $x, $y, $color)
+    public function __construct($name, $slug, $description, $x, $y, $color)
     {
         $this->name = $name;
+        $this->slug = $slug;
         $this->description = $description;
         $this->setX($x);
         $this->setY($y);
@@ -150,5 +157,59 @@ class BudgetGroup extends Nette\Object
     public function getBudgetItems()
     {
         return $this->budgetItems;
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+    
+    /**
+     * 
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+    
+    /**
+     * 
+     * @return int
+     */
+    public function getX()
+    {
+        return $this->x;
+    }
+    
+    /**
+     * 
+     * @return int
+     */
+    public function getY()
+    {
+        return $this->y;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getColor()
+    {
+        return $this->color;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getSlug()
+    {
+        return $this->slug;
     }
 }

@@ -99,5 +99,23 @@ class InvoiceItem extends Nette\Object
     {
         $this->updated = new \DateTime();
     }
+    
+    /**
+     * 
+     * @return Invoice
+     */
+    public function getInvoice()
+    {
+        return $this->invoice;
+    }
+
+    /**
+     * 
+     * @return int
+     */
+    public function getAmount()
+    {
+        return $this->amount;
+    }
 
 }

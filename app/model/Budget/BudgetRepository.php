@@ -37,6 +37,15 @@ class BudgetRepository
         $this->budgetItemRepository = $entityManager->getRepository(BudgetItem::class);
     }
     
+    /**
+     * @return \Kdyby\Doctrine\EntityRepository
+     */
+    public function getBudgetGroupRepository()
+    {
+        return $this->budgetGroupRepository;
+    }
+    
+    
     public function findByIdentifier($identifier)
     {
         return $this->budgetItemRepository->findOneBy(['identifier' => $identifier]);

@@ -45,7 +45,7 @@ class Supplier extends Nette\Object
      * @var string
      * @ORM\Column(type="string",length=10,nullable=false)
      */
-    private $supplierCompanyIdentifier;
+    private $companyIdentifier;
     
     /**
      * @var string
@@ -68,13 +68,13 @@ class Supplier extends Nette\Object
     /**
      * Supplier constructor.
      * @param string $identifier
-     * @param string $supplierCompanyIdentifier
+     * @param string $companyIdentifier
      * @param string $name
      */
-    public function __construct($identifier, $supplierCompanyIdentifier, $name)
+    public function __construct($identifier, $companyIdentifier, $name)
     {
         $this->setIdentifier($identifier);
-        $this->setCompanyIdentifier($supplierCompanyIdentifier);
+        $this->setCompanyIdentifier($companyIdentifier);
         $this->setName($name);
     }
     
@@ -112,14 +112,14 @@ class Supplier extends Nette\Object
     /**
      * @param string $supplierCompanyIdentifier
      */
-    protected function setCompanyIdentifier($supplierCompanyIdentifier)
+    protected function setCompanyIdentifier($companyIdentifier)
     {
-        $supplierCompanyIdentifier = Nette\Utils\Strings::trim($supplierCompanyIdentifier);
+        $companyIdentifier = Nette\Utils\Strings::trim($companyIdentifier);
         /*if (Nette\Utils\Strings::length($supplierCompanyIdentifier) === 0) 
         {
             throw new Nette\InvalidArgumentException('Invalid $supplierCompanyIdentifier value'.$supplierCompanyIdentifier);
         }*/
-        $this->supplierCompanyIdentifier = $supplierCompanyIdentifier;
+        $this->companyIdentifier = $companyIdentifier;
     }
     
     /**
@@ -157,6 +157,11 @@ class Supplier extends Nette\Object
     public function getVatIdentifier()
     {
         return $this->vatIdentifier;
+    }
+    
+    public function getCompanyIdentifier()
+    {
+        return $this->companyIdentifier;
     }
     
 }

@@ -219,4 +219,22 @@ class Invoice extends Nette\Object
     {
         return $this->invoiceItems;
     }
+    
+    /**
+     * 
+     * @return DateTime
+     */
+    public function getPaid()
+    {
+        return $this->paid;
+    }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
 }

@@ -81,7 +81,6 @@ function updateState(){
 			list.show();
 
 			this.open(function(){
-        console.log(skupina);
 				list.load({skupina:skupina.id,page: History.getState().data.page ? History.getState().data.page : 1},{polozky: skupina.polozky,datum: {min:new Date(skupina.min_uhrazeno_udt*1000),max:new Date(skupina.max_uhrazeno_udt*1000)}});
 			});
 			$("#widget").addClass("open");
@@ -139,7 +138,7 @@ $(document).ready(function(){
 	createStarIcons(paper);
 
 	/* LOAD DATA */
-	$.getJSON("api.php?endpoint=skupiny",{},function(data){
+	$.getJSON("/ajax/budgetgroups",{},function(data){
 
 		souhvezdi.show();
 		
@@ -152,7 +151,7 @@ $(document).ready(function(){
 
 			/* CREATE BUBBLES AND WIDGETS */
 			/* create bubble */
-			var bublina = new Bubble(paper,paperX/2,paperY/2,0,skupina.barva);
+			var bublina = new Bubble(paper,paperX/2,paperY/2,0,'#' + skupina.barva);
 			skupina.bubble = bublina;
 
 			/* set bubble */
