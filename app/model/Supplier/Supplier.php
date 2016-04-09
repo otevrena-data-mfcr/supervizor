@@ -102,7 +102,7 @@ class Supplier extends Nette\Object
     protected function setIdentifier($identifier)
     {
         $identifier = Nette\Utils\Strings::trim($identifier);
-        if (Nette\Utils\Validators::length($identifier) === 0) 
+        if (Nette\Utils\Strings::length($identifier) === 0) 
         {
             throw new Nette\InvalidArgumentException('Invalid $identifier value');
         }
@@ -115,7 +115,7 @@ class Supplier extends Nette\Object
     protected function setVatIdentifier($vatIdentifier)
     {
         $vatIdentifier = Nette\Utils\Strings::trim($vatIdentifier);
-        if (Nette\Utils\Validators::length($vatIdentifier) === 0) 
+        if (Nette\Utils\Strings::length($vatIdentifier) === 0) 
         {
             throw new Nette\InvalidArgumentException('Invalid $vatIdentifier value');
         }
