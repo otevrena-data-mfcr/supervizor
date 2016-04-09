@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    $("#about, #about2").fancybox({
+    $(".about").fancybox({
       type:"iframe",
       href: $(this).attr('href'),
       width:600,
