@@ -277,7 +277,6 @@ List.prototype.loadFirm = function(dodavatel_id,callback){
 		
 		if(ico && kamos && kamos.law_form_code !== 101 && kamos.law_form_code !== 107 && kamos.law_form_code !== 105){
 			target.find(".or").attr("href","https://or.justice.cz/ias/ui/rejstrik-%24firma?jenPlatne=VSECHNY&ico=" + ico);
-      //target.find("a.or").show().attr("href",WEB_ROOT + "/or-vypis.php?ico=" + ico);
 		}
 		else{
 			target.find("a.or").hide();
