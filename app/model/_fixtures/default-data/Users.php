@@ -75,7 +75,7 @@ class UsersFixtures extends AbstractFixture implements OrderedFixtureInterface
      */
     public function getOrder()
     {
-        return 1000;
+        return 2;
     }
 
 }
