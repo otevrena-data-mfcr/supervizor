@@ -3,6 +3,7 @@
 	<head>
 		<meta charset="utf-8">
 		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="{$basePath}/img/favicon.ico">
 		<meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="{$description}" n:ifset="$description">
     <meta name="robots" content="{$robots}" n:ifset="$robots">
@@ -13,9 +14,9 @@
     <link rel="license" hreflang="en" href="http://www.gnu.org/licenses/gpl-3.0.txt">
     <link rel="author" href="https://cz.linkedin.com/in/martinkopecek">
     
-		<meta property="og:image" content="">
+		<meta property="og:image" content="{$basePath}/img/otevrenadataicon.svg">
 		<meta property="og:title" content="{$title}">
-		<meta property="og:description" content="">
+		<meta property="og:description" content="{$description}" n:ifset="$description">
 
 		<title>{block title|striptags|upper}{$title}{/block}</title>
 
@@ -124,10 +125,14 @@
   
   </script>
     {control js}
-    {*<?=json_encode(array("view" => @$_GET["view"] ?: "index","skupina" => @$_GET["skupina"], "page" => @$_GET["page"] ?: 1, "dodavatel" => @$_GET["dodavatel"]))?>*}
     <script type="text/javascript">
 			
-			var data = {};
+			var data = {
+          view: 'index',
+          skupina: null,
+          page: 1,
+          dodavatel: null
+      };
 			
 			History.replaceState(data,"");
 			
