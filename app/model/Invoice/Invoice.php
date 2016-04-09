@@ -237,4 +237,78 @@ class Invoice extends Nette\Object
     {
         return $this->updated;
     }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
+    
+    public function getType()
+    {
+        return $this->type;
+    }
+    
+    public function getDistinction()
+    {
+        return $this->distinction;
+    }
+    
+    public function getVatRecord()
+    {
+        return $this->vatRecord;
+    }
+    
+    public function getAmount()
+    {
+        return $this->amount;
+    }
+    
+    public function getAmountWithoutVat()
+    {
+        return $this->amountWithoutVat;
+    }
+    
+    public function getAmountOriginal()
+    {
+        return $this->amountOriginal;
+    }
+    
+    public function getAmountPaidOriginal()
+    {
+        return $this->amountPaidOriginal;
+    }
+    
+    public function getCurrency()
+    {
+        return $this->currency;
+    }
+    
+    public function getIssued()
+    {
+        return $this->issued;
+    }
+    
+    public function getReceived()
+    {
+        return $this->received;
+    }
+    
+    public function getMaturity()
+    {
+        return $this->maturity;
+    }
+    
+    public function getAmountPaid()
+    {
+        return $this->amountPaid;
+    }
+    
+    public function getDescription()
+    {
+        return $this->description;
+    }
 }

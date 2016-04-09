@@ -117,5 +117,14 @@ class InvoiceItem extends Nette\Object
     {
         return $this->amount;
     }
+    
+    /**
+     * 
+     * @return type
+     */
+    public function getBudgetItem()
+    {
+        return $this->budgetItem;
+    }
 
 }

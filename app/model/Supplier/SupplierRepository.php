@@ -36,4 +36,12 @@ class SupplierRepository
     {
         return $this->supplierRepository->findOneBy(['identifier' => $identifier]);
     }
+    
+    /**
+     * @return \Kdyby\Doctrine\EntityRepository
+     */
+    public function getSupplierRepository()
+    {
+        return $this->supplierRepository;
+    }
 }

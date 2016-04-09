@@ -156,4 +156,9 @@ class BudgetItem extends Nette\Object
     {
         return $this->invoiceItems;
     }
+    
+    public function getIdentifier()
+    {
+        return $this->identifier;
+    }
 }

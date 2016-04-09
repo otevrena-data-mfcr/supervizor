@@ -37,5 +37,5 @@ class HomepagePresenter extends BasePresenter
         }
         $this->template->popup = $popup;
         $this->template->title = 'O projektu';
-    }
+    }    
 }

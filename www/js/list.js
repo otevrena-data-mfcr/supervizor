@@ -28,7 +28,6 @@ var List = function(selector) {
 		e.preventDefault();
 		
 		var options = {};
-		
 		options.polozka = [];
 		$(this).closest(".filtr").find(".polozky .polozka input:checked").each(function(){
 			options.polozka.push($(this).attr("value"));
@@ -88,7 +87,19 @@ List.prototype.load = function(options,filter){
 	
 	if(filter) this.setFilter(filter);
 	
-	$.getJSON("/api.php?endpoint=dodavatele",options,function(data){
+  var newOptions = {
+      page: options.page,
+      budgetGroupSlug: options.skupina,
+      budgetItems: options.polozka
+  };
+  
+  if (options.datum)
+  {
+      newOptions['dateFrom'] = options.datum.min;
+      newOptions['dateTo'] = options.datum.max;
+  }
+  
+	$.getJSON("/ajax/suppliers",newOptions,function(data){
 		
 		var list_dom = list.dom;
 		var detail_dom = list.dom.children(".detail");

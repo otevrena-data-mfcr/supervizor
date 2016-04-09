@@ -23,6 +23,7 @@ namespace App\Model\Entities;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Nette;
+use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Supplier
@@ -64,6 +65,12 @@ class Supplier extends Nette\Object
      * @ORM\Column(type="datetime",nullable=false)
      */
     private $updated;
+    
+    /**
+     * @var ArrayCollection|Invoices[]
+     * @ORM\OneToMany(targetEntity="Invoice", mappedBy="supplier",cascade={"persist"})
+     */
+    private $invoices;
 
     /**
      * Supplier constructor.
@@ -76,6 +83,7 @@ class Supplier extends Nette\Object
         $this->setIdentifier($identifier);
         $this->setCompanyIdentifier($companyIdentifier);
         $this->setName($name);
+        $this->invoices = new ArrayCollection;
     }
     
     /**
@@ -164,4 +172,8 @@ class Supplier extends Nette\Object
         return $this->companyIdentifier;
     }
     
+    public function getInvoices()
+    {
+        return $this->invoices;
+    }
 }
