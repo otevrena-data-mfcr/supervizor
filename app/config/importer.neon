@@ -1,0 +1,13 @@
+importer:
+  target: App\Model\ImportTarget
+  imports:
+    mf:
+        title: "Ministerstvo financí"
+        datasets:
+            mf2016:
+                title: "Rok 2016"
+                description: "Přehled faktur Ministerstva financí"
+                source: "http://data.mfcr.cz/cs/api/3/action/resource_show?id=aec18a6a-0d8f-49a4-a8e7-ae0fbd32125f"
+                homepage: "http://data.mfcr.cz/cs/dataset/prehled-faktur-ministerstva-financi-cr"
+                parser: Extensions\Importer\Parsers\Mfcr
+                default: true

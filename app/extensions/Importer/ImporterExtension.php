@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -17,23 +18,40 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-namespace App\Model\Repository;
 
-use App\Model\Entities\Supplier;
-use Kdyby\Doctrine\EntityManager;
+namespace Extensions\Importer;
 
-class SupplierRepository
+use Nette\DI\CompilerExtension;
+use Nette\PhpGenerator\ClassType;
+
+/**
+ * Description of EncryptorExtension
+ *
+ * @author Adam Schubert <adam.schubert@sg1-game.net>
+ */
+final class ImporterExtension extends CompilerExtension
 {
-    /** @var \Kdyby\Doctrine\EntityRepository */
-    private $supplierRepository;
-    
-    public function __construct(EntityManager $entityManager)
+
+    /** @var array */
+    private $defaults = [
+        'target' => null,
+        'imports' => []
+    ];
+
+    public function loadConfiguration()
     {
-        $this->supplierRepository = $entityManager->getRepository(Supplier::class);
+        $config = $this->validateConfig($this->defaults);
+        $builder = $this->getContainerBuilder();
+
+        $builder->addDefinition($this->prefix('importer'))
+            ->setClass('Extensions\Importer\Importer', ['@cacheStorage', $config['imports'], '@'.$config['target']]);
     }
-    
-    public function findByIdentifier($identifier)
+
+    /**
+     * @param ClassType $class
+     */
+    public function afterCompile(ClassType $class)
     {
-        return $this->supplierRepository->findOneBy(['identifier' => $identifier]);
     }
+
 }

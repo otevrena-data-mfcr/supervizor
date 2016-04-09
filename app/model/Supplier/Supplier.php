@@ -45,7 +45,7 @@ class Supplier extends Nette\Object
      * @var string
      * @ORM\Column(type="string",length=10,nullable=false)
      */
-    private $vatIdentifier;
+    private $supplierCompanyIdentifier;
     
     /**
      * @var string
@@ -68,13 +68,13 @@ class Supplier extends Nette\Object
     /**
      * Supplier constructor.
      * @param string $identifier
-     * @param string $vatIdentifier
+     * @param string $supplierCompanyIdentifier
      * @param string $name
      */
-    public function __construct($identifier, $vatIdentifier, $name)
+    public function __construct($identifier, $supplierCompanyIdentifier, $name)
     {
         $this->setIdentifier($identifier);
-        $this->setVatIdentifier($vatIdentifier);
+        $this->setCompanyIdentifier($supplierCompanyIdentifier);
         $this->setName($name);
     }
     
@@ -104,22 +104,22 @@ class Supplier extends Nette\Object
         $identifier = Nette\Utils\Strings::trim($identifier);
         if (Nette\Utils\Strings::length($identifier) === 0) 
         {
-            throw new Nette\InvalidArgumentException('Invalid $identifier value');
+            throw new Nette\InvalidArgumentException('Invalid $identifier value: '.$identifier);
         }
         $this->identifier = $identifier;
     }
     
     /**
-     * @param string $vatIdentifier
+     * @param string $supplierCompanyIdentifier
      */
-    protected function setVatIdentifier($vatIdentifier)
+    protected function setCompanyIdentifier($supplierCompanyIdentifier)
     {
-        $vatIdentifier = Nette\Utils\Strings::trim($vatIdentifier);
-        if (Nette\Utils\Strings::length($vatIdentifier) === 0) 
+        $supplierCompanyIdentifier = Nette\Utils\Strings::trim($supplierCompanyIdentifier);
+        /*if (Nette\Utils\Strings::length($supplierCompanyIdentifier) === 0) 
         {
-            throw new Nette\InvalidArgumentException('Invalid $vatIdentifier value');
-        }
-        $this->vatIdentifier = $vatIdentifier;
+            throw new Nette\InvalidArgumentException('Invalid $supplierCompanyIdentifier value'.$supplierCompanyIdentifier);
+        }*/
+        $this->supplierCompanyIdentifier = $supplierCompanyIdentifier;
     }
     
     /**

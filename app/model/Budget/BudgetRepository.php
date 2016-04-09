@@ -19,21 +19,26 @@
  */
 namespace App\Model\Repository;
 
-use App\Model\Entities\Supplier;
+use App\Model\Entities\BudgetGroup;
+use App\Model\Entities\BudgetItem;
 use Kdyby\Doctrine\EntityManager;
 
-class SupplierRepository
+class BudgetRepository
 {
     /** @var \Kdyby\Doctrine\EntityRepository */
-    private $supplierRepository;
+    private $budgetGroupRepository;
+    
+    /** @var \Kdyby\Doctrine\BudgetItem */
+    private $budgetItemRepository;
     
     public function __construct(EntityManager $entityManager)
     {
-        $this->supplierRepository = $entityManager->getRepository(Supplier::class);
+        $this->budgetGroupRepository = $entityManager->getRepository(BudgetGroup::class);
+        $this->budgetItemRepository = $entityManager->getRepository(BudgetItem::class);
     }
     
     public function findByIdentifier($identifier)
     {
-        return $this->supplierRepository->findOneBy(['identifier' => $identifier]);
+        return $this->budgetItemRepository->findOneBy(['identifier' => $identifier]);
     }
 }

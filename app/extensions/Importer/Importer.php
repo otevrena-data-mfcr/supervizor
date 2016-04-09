@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -17,23 +18,40 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-namespace App\Model\Repository;
 
-use App\Model\Entities\Supplier;
-use Kdyby\Doctrine\EntityManager;
+namespace Extensions\Importer;
 
-class SupplierRepository
-{
-    /** @var \Kdyby\Doctrine\EntityRepository */
-    private $supplierRepository;
+use Nette;
+
+class Importer extends Nette\Object
+{   
+    /** @var string */
+    public static $namespace = 'Importer-Importer';
     
-    public function __construct(EntityManager $entityManager)
+    /** @var Nette\Caching\Cache */
+    public $cache;
+    
+    private $imports = [];
+    
+    private $target;
+    
+    public function __construct(Nette\Caching\IStorage $cacheStorage, array $imports, $target)
     {
-        $this->supplierRepository = $entityManager->getRepository(Supplier::class);
+        $this->cache = new Nette\Caching\Cache($cacheStorage, self::$namespace);
+        $this->imports = $imports;
+        $this->target = $target;
     }
     
-    public function findByIdentifier($identifier)
+    public function doImport()
     {
-        return $this->supplierRepository->findOneBy(['identifier' => $identifier]);
+        foreach ($this->imports as $import)
+        {
+            foreach($import['datasets'] AS $dataset)
+            {
+                //Parse
+                new $dataset['parser']($this->cache, $dataset['source'], $this->target);
+            }
+            
+        }
     }
 }

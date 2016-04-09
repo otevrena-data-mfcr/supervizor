@@ -147,7 +147,7 @@ class BudgetGroup extends Nette\Object
     /**
      * @return BudgetItems[]|ArrayCollection
      */
-    public function getPlanets()
+    public function getBudgetItems()
     {
         return $this->budgetItems;
     }

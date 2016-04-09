@@ -10,8 +10,19 @@ services:
     # repository
     - App\Model\Repository\UserRepository
     - App\Model\Repository\SupplierRepository
+    - App\Model\Repository\InvoiceRepository
+    - App\Model\Repository\BudgetRepository
+
+    # import
+    - 
+        class: App\Model\ImportTarget
+        inject: true
 
     # commands
     -
         class: App\Model\Fixtures\DefaultData
+        tags: [kdyby.console.command]
+    
+    -
+        class: App\Commands\Import
         tags: [kdyby.console.command]

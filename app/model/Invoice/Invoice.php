@@ -23,6 +23,7 @@ namespace App\Model\Entities;
 
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
+use Doctrine\Common\Collections\ArrayCollection;
 use Nette;
 
 /**
@@ -37,6 +38,12 @@ class Invoice extends Nette\Object
 
     use Identifier;
 
+    /**
+     * @var string
+     * @ORM\Column(type="string",length=255,nullable=false)
+     */
+    private $identifier;
+    
     /**
      * @var Supplier
      * @ORM\ManyToOne(targetEntity="Supplier", inversedBy="Invoice")
@@ -139,10 +146,16 @@ class Invoice extends Nette\Object
      * @ORM\Column(type="datetime",nullable=false)
      */
     private $updated;
+    
+    /**
+     * @var ArrayCollection|InvoiceItem[]
+     * @ORM\OneToMany(targetEntity="InvoiceItem", mappedBy="invoice",cascade={"persist"})
+     */
+    private $invoiceItems;
 
     /**
      * Invoice constructor.
-     * @param \App\Model\Entities\Supplier $supplier
+     * @param string $identifier
      * @param string $type
      * @param string $distinction
      * @param bool $vatRecord
@@ -157,10 +170,12 @@ class Invoice extends Nette\Object
      * @param DateTime $maturity
      * @param DateTime $paid
      * @param string $description
+     * @param \App\Model\Entities\Supplier $supplier
      */
-    public function __construct(Supplier $supplier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat, $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, $issued, $received, $maturity, $paid, $description)
+    public function __construct($identifier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat, $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, $issued, $received, $maturity, $paid, $description, Supplier $supplier = null)
     {
         $this->supplier = $supplier;
+        $this->identifier = $identifier;
         $this->type = $type;
         $this->distinction = $distinction;
         $this->vatRecord = $vatRecord;
@@ -175,6 +190,8 @@ class Invoice extends Nette\Object
         $this->maturity = $maturity;
         $this->paid = $paid;
         $this->description = $description;
+        
+        $this->invoiceItems = new ArrayCollection();
     }
 
     /**
@@ -195,4 +212,11 @@ class Invoice extends Nette\Object
         $this->updated = new \DateTime();
     }
 
+    /**
+     * @return InvoiceItems[]|ArrayCollection
+     */
+    public function getinvoiceItems()
+    {
+        return $this->invoiceItems;
+    }
 }

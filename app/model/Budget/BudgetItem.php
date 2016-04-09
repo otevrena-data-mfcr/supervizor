@@ -69,16 +69,18 @@ class BudgetItem extends Nette\Object
     private $updated;
 
     /**
-     * Invoice constructor.
-     * @param string $identifier
-     * @param string $name
+     * 
+     * @param type $identifier
+     * @param type $name
+     * @param \App\Model\Entities\BudgetGroup $budgetGroup
      */
-    public function __construct(BudgetGroup $budgetGroup, $identifier, $name)
+    public function __construct($identifier, $name, BudgetGroup $budgetGroup = null)
     {
         $this->budgetGroup = $budgetGroup;
-        $this->identifier = $identifier;
-        $this->name = $name;
+        $this->setIdentifier($identifier);
+        $this->setName($name);
     }
+    
 
     /**
      * Gets triggered only on insert
@@ -98,4 +100,34 @@ class BudgetItem extends Nette\Object
         $this->updated = new \DateTime();
     }
 
+     /**
+    * @param string $identifier
+    */
+    protected function setIdentifier($identifier)
+    {
+        $identifier = Nette\Utils\Strings::trim($identifier);
+        if (Nette\Utils\Strings::length($identifier) === 0) 
+        {
+            throw new Nette\InvalidArgumentException('Identifier cannot be empty');
+        }
+        $this->identifier = $identifier;
+    }
+    
+    /**
+    * @param string $name
+    */
+    protected function setName($name)
+    {
+        $name = Nette\Utils\Strings::trim($name);
+        if (Nette\Utils\Strings::length($name) === 0) 
+        {
+            throw new Nette\InvalidArgumentException('Name cannot be empty');
+        }
+        $this->name = $name;
+    }
+    
+    public function setBudgetGroup(BudgetGroup $budgetGroup)
+    {
+        $this->budgetGroup = $budgetGroup;
+    }
 }

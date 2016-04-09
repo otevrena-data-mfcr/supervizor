@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -17,23 +18,24 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
-namespace App\Model\Repository;
 
-use App\Model\Entities\Supplier;
-use Kdyby\Doctrine\EntityManager;
-
-class SupplierRepository
+class HomepagePresenter extends BasePresenter
 {
-    /** @var \Kdyby\Doctrine\EntityRepository */
-    private $supplierRepository;
-    
-    public function __construct(EntityManager $entityManager)
+    public function renderDefault()
     {
-        $this->supplierRepository = $entityManager->getRepository(Supplier::class);
+        //$json = file_get_contents(CONFIG_DIR."/profiles.json");
+        //$this->template->profiles = json_decode($json);
+        $this->template->title = 'Supervizor Ministerstva financí';
     }
     
-    public function findByIdentifier($identifier)
+    
+    public function renderAbout($popup = false)
     {
-        return $this->supplierRepository->findOneBy(['identifier' => $identifier]);
+        if ($popup)
+        {
+            $this->setLayout(false);
+        }
+        $this->template->popup = $popup;
+        $this->template->title = 'O projektu';
     }
 }
