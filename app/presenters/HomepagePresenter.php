@@ -21,10 +21,12 @@
 
 class HomepagePresenter extends BasePresenter
 {
-    public function renderDefault()
+    public function renderDefault($budgetGroupIdentifier = null, $page = 1, $supplierIdentifier = null)
     {
-        //$json = file_get_contents(CONFIG_DIR."/profiles.json");
-        //$this->template->profiles = json_decode($json);
+        $this->template->budgetGroupIdentifier = $budgetGroupIdentifier;
+        $this->template->page = $page;
+        $this->template->supplierIdentifier = $supplierIdentifier;
+        $this->template->view = ($budgetGroupIdentifier ? 'skupina' : 'index');
         $this->template->title = 'Supervizor Ministerstva financí';
     }
     

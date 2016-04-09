@@ -75,7 +75,8 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
             
             $wwwDir.'/js/jquery/jQRangeSlider/jQAllRangeSliders-min.js',
             'raphael/raphael-min.js',
-            $wwwDir.'/js/raphael-style.js'
+            $wwwDir.'/js/raphael-style.js',
+            $wwwDir.'/js/global.js'
         ));
 
         $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');

@@ -93,8 +93,24 @@
 
 
 {block js}
+
 <script src="{$basePath}/js/bubbles.js"></script>
 <script src="{$basePath}/js/starsigns.js"></script>
 <script src="{$basePath}/js/list.js"></script>
 <script src="{$basePath}/js/index.js"></script>
+
+<script>		
+			var data = {
+          view: {$view},
+          skupina: {$budgetGroupIdentifier},
+          page: {$page},
+          dodavatel: {$supplierIdentifier}
+      };
+      
+      var WEB_ROOT = {$basePath} + '/';
+			var TITLE = {$title};
+			
+			History.replaceState(data,"");
+</script>
+
 {/block}

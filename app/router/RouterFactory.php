@@ -37,9 +37,11 @@ class RouterFactory
             ? true : false);
 
     $router = new RouteList();
-
-    //Default
+ 
     $router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
+    $router[] = new Route('faktura/<id>', 'Invoice:default',($useSsl ? Route::SECURED : null));
+    $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]', 'Homepage:default',($useSsl ? Route::SECURED : null));
+    $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]<supplierIdentifier>', 'Homepage:default',($useSsl ? Route::SECURED : null));
     $router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default',($useSsl ? Route::SECURED : null));
 
     return $router;
