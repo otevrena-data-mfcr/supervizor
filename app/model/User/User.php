@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -33,6 +34,7 @@ use Nette;
  */
 class User extends Nette\Object implements Nette\Security\IIdentity
 {
+
     use Identifier;
 
     /**
@@ -70,7 +72,7 @@ class User extends Nette\Object implements Nette\Security\IIdentity
         $this->setEmail($email);
         $this->setPassword($password, $passwordHashCallable);
     }
-    
+
     /**
      * Gets triggered only on insert
      * @ORM\PrePersist
@@ -95,13 +97,13 @@ class User extends Nette\Object implements Nette\Security\IIdentity
     protected function setEmail($email)
     {
         $email = Nette\Utils\Strings::trim(Nette\Utils\Strings::lower($email));
-        if (!Nette\Utils\Validators::isEmail($email)) 
+        if (!Nette\Utils\Validators::isEmail($email))
         {
             throw new Nette\InvalidArgumentException('Invalid $email value');
         }
         $this->email = $email;
     }
-    
+
     /**
      * @param string $password
      * @param callable $hash
@@ -109,7 +111,7 @@ class User extends Nette\Object implements Nette\Security\IIdentity
     protected function setPassword($password, callable $hash)
     {
         $password = Nette\Utils\Strings::trim($password);
-        if (Nette\Utils\Strings::length($password) === 0) 
+        if (Nette\Utils\Strings::length($password) === 0)
         {
             throw new Nette\InvalidArgumentException('Password cannot be empty');
         }
@@ -134,7 +136,7 @@ class User extends Nette\Object implements Nette\Security\IIdentity
     {
         return $verifyPassword($password, $this->password);
     }
-    
+
     /**
      * @return string
      */
@@ -142,7 +144,7 @@ class User extends Nette\Object implements Nette\Security\IIdentity
     {
         return $this->email;
     }
-    
+
     /**
      * Returns a list of roles that the user is a member of.
      * @return array
@@ -151,4 +153,5 @@ class User extends Nette\Object implements Nette\Security\IIdentity
     {
         return [];
     }
+
 }

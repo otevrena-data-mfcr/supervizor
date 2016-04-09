@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -25,42 +26,44 @@ use Nette\Diagnostics\Debugger;
  */
 class ErrorPresenter extends \Nette\Application\UI\Presenter
 {
-  public function startup()
-  {
-    parent::startup();
-  }
 
-  /**
-   * @param  Exception
-   * @return void
-   */
-  public function renderDefault($exception)
-  {
-    if ($exception instanceof \Nette\Application\BadRequestException)
+    public function startup()
     {
-      $code = $exception->getCode();
-    }
-    else
-    {
-      $code = 500;
+        parent::startup();
     }
 
-    if ($this->isAjax())
-    { // AJAX request? Just note this error in payload.
-      $this->payload->error = TRUE;
-      $this->terminate();
-    }
-    else
+    /**
+     * @param  Exception
+     * @return void
+     */
+    public function renderDefault($exception)
     {
-      if (in_array($code, array(403, 404, 405, 410)))
-      {
-        Debugger::log("HTTP code $code: {$exception->getMessage()} in {$exception->getFile()}:{$exception->getLine()}", 'read');
-      }
-      else
-      {
-        Debugger::log($exception, Debugger::ERROR);
-      }
-      $this->setView($code);
+        if ($exception instanceof \Nette\Application\BadRequestException)
+        {
+            $code = $exception->getCode();
+        }
+        else
+        {
+            $code = 500;
+        }
+
+        if ($this->isAjax())
+        { // AJAX request? Just note this error in payload.
+            $this->payload->error = TRUE;
+            $this->terminate();
+        }
+        else
+        {
+            if (in_array($code, array(403, 404, 405, 410)))
+            {
+                Debugger::log("HTTP code $code: {$exception->getMessage()} in {$exception->getFile()}:{$exception->getLine()}", 'read');
+            }
+            else
+            {
+                Debugger::log($exception, Debugger::ERROR);
+            }
+            $this->setView($code);
+        }
     }
-  }
+
 }

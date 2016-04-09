@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -24,6 +25,7 @@ use Nette;
 
 class PasswordManager extends Nette\Object
 {
+
     public function hash($password)
     {
         return Nette\Security\Passwords::hash($password);

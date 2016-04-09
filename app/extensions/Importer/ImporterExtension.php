@@ -44,7 +44,7 @@ final class ImporterExtension extends CompilerExtension
         $builder = $this->getContainerBuilder();
 
         $builder->addDefinition($this->prefix('importer'))
-            ->setClass('Extensions\Importer\Importer', ['@cacheStorage', $config['imports'], '@'.$config['target']]);
+                ->setClass('Extensions\Importer\Importer', ['@cacheStorage', $config['imports'], '@' . $config['target']]);
     }
 
     /**
@@ -52,6 +52,7 @@ final class ImporterExtension extends CompilerExtension
      */
     public function afterCompile(ClassType $class)
     {
+        
     }
 
 }

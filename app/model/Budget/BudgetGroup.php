@@ -22,50 +22,51 @@ use Nette;
  */
 class BudgetGroup extends Nette\Object
 {
+
     use Identifier;
-    
+
     /**
      * @var string
      * @ORM\Column(type="string",length=255,nullable=false)
      */
     private $name;
-    
+
     /**
      * @var string
      * @ORM\Column(type="string",length=255,nullable=false)
      */
     private $slug;
-    
+
     /**
      * @var string
      * @ORM\Column(type="string",length=6000,nullable=false)
      */
     private $description;
-    
+
     /**
      * @var int
      * @ORM\Column(type="integer",nullable=false)
      */
     private $x;
-    
+
     /**
      * @var int
      * @ORM\Column(type="integer",nullable=false)
      */
     private $y;
-    
+
     /**
      * @var string
      * @ORM\Column(type="string",length=6,nullable=false)
      */
     private $color;
-    
+
     /**
      * @var ArrayCollection|BudgetItem[]
      * @ORM\OneToMany(targetEntity="BudgetItem", mappedBy="budgetGroup",cascade={"persist"})
      */
     private $budgetItems;
-    
+
     /**
      * @var \DateTimeInterface
      * @ORM\Column(type="datetime",nullable=false)
@@ -96,43 +97,43 @@ class BudgetGroup extends Nette\Object
         $this->setColor($color);
         $this->budgetItems = new ArrayCollection();
     }
-    
+
     /**
      * @param int $x
      */
     protected function setX($x)
     {
-        if (!is_numeric($x) || !$x) 
+        if (!is_numeric($x) || !$x)
         {
             throw new Nette\InvalidArgumentException('Invalid $x value');
         }
         $this->x = $x;
     }
-    
+
     /**
      * @param int $y
      */
     protected function setY($y)
     {
-        if (!is_numeric($y) || !$y) 
+        if (!is_numeric($y) || !$y)
         {
             throw new Nette\InvalidArgumentException('Invalid $y value');
         }
         $this->y = $y;
     }
-    
+
     /**
      * @param string $color
      */
     protected function setColor($color)
     {
-        if (Nette\Utils\Strings::length($color) !== 6)  
+        if (Nette\Utils\Strings::length($color) !== 6)
         {
             throw new Nette\InvalidArgumentException('Invalid $color value');
         }
         $this->color = $color;
     }
-    
+
     /**
      * Gets triggered only on insert
      * @ORM\PrePersist
@@ -150,7 +151,7 @@ class BudgetGroup extends Nette\Object
     {
         $this->updated = new \DateTime();
     }
-    
+
     /**
      * @return BudgetItems[]|ArrayCollection
      */
@@ -158,7 +159,7 @@ class BudgetGroup extends Nette\Object
     {
         return $this->budgetItems;
     }
-    
+
     /**
      * 
      * @return string
@@ -167,7 +168,7 @@ class BudgetGroup extends Nette\Object
     {
         return $this->name;
     }
-    
+
     /**
      * 
      * @return string
@@ -176,7 +177,7 @@ class BudgetGroup extends Nette\Object
     {
         return $this->description;
     }
-    
+
     /**
      * 
      * @return int
@@ -185,7 +186,7 @@ class BudgetGroup extends Nette\Object
     {
         return $this->x;
     }
-    
+
     /**
      * 
      * @return int
@@ -194,7 +195,7 @@ class BudgetGroup extends Nette\Object
     {
         return $this->y;
     }
-    
+
     /**
      * 
      * @return type
@@ -203,7 +204,7 @@ class BudgetGroup extends Nette\Object
     {
         return $this->color;
     }
-    
+
     /**
      * 
      * @return type
@@ -212,4 +213,5 @@ class BudgetGroup extends Nette\Object
     {
         return $this->slug;
     }
+
 }

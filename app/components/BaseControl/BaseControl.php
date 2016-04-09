@@ -18,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+
 namespace App\Components;
 
 /**
@@ -25,9 +26,9 @@ namespace App\Components;
  *
  * @author Adam Schubert <adam.schubert@sg1-game.net>
  */
-
 use Nette\Application\UI\Control;
 
 class BaseControl extends Control
 {
+    
 }

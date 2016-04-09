@@ -19,7 +19,6 @@
  * MA 02110-1301  USA
  */
 
-
 use App\Model\DefaultDataCreator;
 use App\Model\Entities\User;
 use Kdyby\Doctrine\EntityManager;
@@ -32,16 +31,16 @@ use thomaswelton\GravatarLib\Gravatar;
  */
 abstract class SecuredPresenter extends BasePresenter
 {
+
     /** @var EntityManager @inject */
     public $entityManager;
 
     /** @var DefaultDataCreator @inject */
     public $defaultDataCreator;
 
-
     /** @var bool */
     private $assigned = false;
-    
+
     /**
      * Checks authorization.
      * @return void
@@ -88,4 +87,5 @@ abstract class SecuredPresenter extends BasePresenter
 
         $this->assigned = true;
     }
+
 }

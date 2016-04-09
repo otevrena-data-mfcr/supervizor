@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -25,6 +26,7 @@ use Nette;
 
 class SignInForm extends Nette\Application\UI\Control
 {
+
     /** @var BaseFormFactory */
     private $baseFormFactory;
 
@@ -43,12 +45,12 @@ class SignInForm extends Nette\Application\UI\Control
         $form = $this->baseFormFactory->create();
 
         $form->addText('username')
-            ->setType('email')
-            ->setRequired('Please enter email.')
-            ->addRule(Nette\Application\UI\Form::EMAIL, 'Please enter a vaild email');
+                ->setType('email')
+                ->setRequired('Please enter email.')
+                ->addRule(Nette\Application\UI\Form::EMAIL, 'Please enter a vaild email');
 
         $form->addPassword('password')
-            ->setRequired('Please enter password.');
+                ->setRequired('Please enter password.');
 
         $form->addCheckbox('remember');
 
@@ -63,4 +65,5 @@ class SignInForm extends Nette\Application\UI\Control
         $template->setFile(__DIR__ . '/SignInForm.latte');
         $template->render();
     }
+
 }

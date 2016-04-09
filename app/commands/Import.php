@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -30,26 +31,28 @@ use App\Model\Entities\BudgetItem;
 
 class Import extends Command
 {
+
     /** @var Importer @inject */
     public $importer;
-    
+
     /** @var EntityManager @inject */
     public $entityManager;
 
     protected function configure()
     {
         $this
-            ->setName('importer:import:all')
-            ->setDescription('Imports all configured sources.');
+                ->setName('importer:import:all')
+                ->setDescription('Imports all configured sources.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        try {
+        try
+        {
             $this->importer->doImport();
-           
+
             $output->writeln(sprintf('  <comment>></comment> <info>%s</info>', 'Import was successful'));
-            
+
             $budgetGroups = [];
             $budgetGroups[] = [
                 'name' => 'Poradenské služby',
@@ -58,7 +61,7 @@ class Import extends Command
                 'x' => 250,
                 'y' => 150,
                 'color' => '2db9ff',
-                'items' => 
+                'items' =>
                 [
                     5166,
                     5167
@@ -72,7 +75,7 @@ class Import extends Command
                 'x' => 550,
                 'y' => 300,
                 'color' => 'fe8f3c',
-                'items' => 
+                'items' =>
                 [
                     5156,
                     5173
@@ -86,7 +89,7 @@ class Import extends Command
                 'x' => 700,
                 'y' => 120,
                 'color' => '66a22a',
-                'items' => 
+                'items' =>
                 [
                     5041,
                     5042,
@@ -105,7 +108,7 @@ class Import extends Command
                 'x' => 300,
                 'y' => 700,
                 'color' => '093d93',
-                'items' => 
+                'items' =>
                 [
                     5137,
                     5139,
@@ -124,7 +127,7 @@ class Import extends Command
                 'x' => 1000,
                 'y' => 700,
                 'color' => '5a5a5a',
-                'items' => 
+                'items' =>
                 [
                     1014,
                     2132,
@@ -150,7 +153,7 @@ class Import extends Command
                 'x' => 200,
                 'y' => 450,
                 'color' => 'eedc00',
-                'items' => 
+                'items' =>
                 [
                     1012,
                     1013,
@@ -215,21 +218,24 @@ class Import extends Command
 
                     $this->entityManager->persist($budgetGroup);
                 }
-                
-                foreach($budgetItemEntityManager->findBy(['identifier' => $budgetGroupSrc['items']]) AS $budgetItem)
+
+                foreach ($budgetItemEntityManager->findBy(['identifier' => $budgetGroupSrc['items']]) AS $budgetItem)
                 {
                     $budgetItem->setBudgetGroup($budgetGroup);
                 }
             }
 
             $this->entityManager->flush();
-            
+
             $output->writeln(sprintf('  <comment>></comment> <info>%s</info>', 'Grouping imported data went ok!'));
-            
+
             return 0; // zero return code means everything is ok
-        } catch (\Exception $exc) {
+        }
+        catch (\Exception $exc)
+        {
             $output->writeLn("<error>{$exc->getMessage()}</error>");
             return 1; // non-zero return code means error
         }
     }
+
 }

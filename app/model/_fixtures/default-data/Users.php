@@ -47,7 +47,7 @@ class UsersFixtures extends AbstractFixture implements OrderedFixtureInterface
      * @param ObjectManager $manager
      */
     public function load(ObjectManager $manager)
-    {        
+    {
         $users = [];
         $users['adam.schubert@sg1-game.net'] = [
             'password' => '123456',
@@ -61,7 +61,7 @@ class UsersFixtures extends AbstractFixture implements OrderedFixtureInterface
             {
                 return $this->passwordManager->hash($password);
             });
-                        
+
             $manager->persist($user);
         }
 

@@ -43,7 +43,7 @@ class Invoice extends Nette\Object
      * @ORM\Column(type="string",length=255,nullable=false)
      */
     private $identifier;
-    
+
     /**
      * @var Supplier
      * @ORM\ManyToOne(targetEntity="Supplier", inversedBy="Invoice")
@@ -146,7 +146,7 @@ class Invoice extends Nette\Object
      * @ORM\Column(type="datetime",nullable=false)
      */
     private $updated;
-    
+
     /**
      * @var ArrayCollection|InvoiceItem[]
      * @ORM\OneToMany(targetEntity="InvoiceItem", mappedBy="invoice",cascade={"persist"})
@@ -190,7 +190,7 @@ class Invoice extends Nette\Object
         $this->maturity = $maturity;
         $this->paid = $paid;
         $this->description = $description;
-        
+
         $this->invoiceItems = new ArrayCollection();
     }
 
@@ -219,7 +219,7 @@ class Invoice extends Nette\Object
     {
         return $this->invoiceItems;
     }
-    
+
     /**
      * 
      * @return DateTime
@@ -228,7 +228,7 @@ class Invoice extends Nette\Object
     {
         return $this->paid;
     }
-    
+
     /**
      * 
      * @return type
@@ -237,7 +237,7 @@ class Invoice extends Nette\Object
     {
         return $this->updated;
     }
-    
+
     /**
      * 
      * @return type
@@ -246,69 +246,70 @@ class Invoice extends Nette\Object
     {
         return $this->identifier;
     }
-    
+
     public function getType()
     {
         return $this->type;
     }
-    
+
     public function getDistinction()
     {
         return $this->distinction;
     }
-    
+
     public function getVatRecord()
     {
         return $this->vatRecord;
     }
-    
+
     public function getAmount()
     {
         return $this->amount;
     }
-    
+
     public function getAmountWithoutVat()
     {
         return $this->amountWithoutVat;
     }
-    
+
     public function getAmountOriginal()
     {
         return $this->amountOriginal;
     }
-    
+
     public function getAmountPaidOriginal()
     {
         return $this->amountPaidOriginal;
     }
-    
+
     public function getCurrency()
     {
         return $this->currency;
     }
-    
+
     public function getIssued()
     {
         return $this->issued;
     }
-    
+
     public function getReceived()
     {
         return $this->received;
     }
-    
+
     public function getMaturity()
     {
         return $this->maturity;
     }
-    
+
     public function getAmountPaid()
     {
         return $this->amountPaid;
     }
-    
+
     public function getDescription()
     {
         return $this->description;
     }
+
 }

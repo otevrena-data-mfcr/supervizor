@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -17,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+
 namespace App\Model\Repository;
 
 use App\Model\Entities\User;
@@ -24,9 +26,10 @@ use Kdyby\Doctrine\EntityManager;
 
 class UserRepository
 {
+
     /** @var \Kdyby\Doctrine\EntityRepository */
     private $userRepository;
-    
+
     public function __construct(EntityManager $entityManager)
     {
         $this->userRepository = $entityManager->getRepository(User::class);
@@ -39,4 +42,5 @@ class UserRepository
     {
         return $this->userRepository;
     }
+
 }

@@ -28,8 +28,7 @@ use Nette;
  *
  * @author Adam Schubert <adam.schubert@sg1-game.net>
  */
-
 class SupervizorSettings extends Nette\Object
 {
-
+    
 }

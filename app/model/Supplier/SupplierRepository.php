@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -17,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+
 namespace App\Model\Repository;
 
 use App\Model\Entities\Supplier;
@@ -24,19 +26,20 @@ use Kdyby\Doctrine\EntityManager;
 
 class SupplierRepository
 {
+
     /** @var \Kdyby\Doctrine\EntityRepository */
     private $supplierRepository;
-    
+
     public function __construct(EntityManager $entityManager)
     {
         $this->supplierRepository = $entityManager->getRepository(Supplier::class);
     }
-    
+
     public function findByIdentifier($identifier)
     {
         return $this->supplierRepository->findOneBy(['identifier' => $identifier]);
     }
-    
+
     /**
      * @return \Kdyby\Doctrine\EntityRepository
      */
@@ -44,4 +47,5 @@ class SupplierRepository
     {
         return $this->supplierRepository;
     }
+
 }

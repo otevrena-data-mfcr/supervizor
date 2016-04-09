@@ -24,34 +24,33 @@ namespace Extensions\Importer;
 use Nette;
 
 class Importer extends Nette\Object
-{   
+{
+
     /** @var string */
     public static $namespace = 'Importer-Importer';
-    
+
     /** @var Nette\Caching\Cache */
     public $cache;
-    
     private $imports = [];
-    
     private $target;
-    
+
     public function __construct(Nette\Caching\IStorage $cacheStorage, array $imports, $target)
     {
         $this->cache = new Nette\Caching\Cache($cacheStorage, self::$namespace);
         $this->imports = $imports;
         $this->target = $target;
     }
-    
+
     public function doImport()
     {
         foreach ($this->imports as $import)
         {
-            foreach($import['datasets'] AS $dataset)
+            foreach ($import['datasets'] AS $dataset)
             {
                 //Parse
                 new $dataset['parser']($this->cache, $dataset['source'], $this->target);
             }
-            
         }
     }
+
 }

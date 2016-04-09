@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -17,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+
 namespace App\Model\Repository;
 
 use App\Model\Entities\Invoice;
@@ -26,15 +28,15 @@ use Kdyby\Doctrine\EntityManager;
 
 class InvoiceRepository
 {
+
     /** @var \Kdyby\Doctrine\EntityRepository */
     private $invoiceRepository;
-    
+
     /** @var \Kdyby\Doctrine\EntityRepository */
     private $budgetGroupRepository;
-    
+
     /** @var \Kdyby\Doctrine\EntityRepository */
     private $invoiceItemRepository;
-    
 
     public function __construct(EntityManager $entityManager)
     {
@@ -42,19 +44,20 @@ class InvoiceRepository
         $this->budgetGroupRepository = $entityManager->getRepository(BudgetGroup::class);
         $this->invoiceItemRepository = $entityManager->getRepository(InvoiceItem::class);
     }
-    
+
     public function findItemByInvoiceAndBudgetItem($budgetItem, $invoice)
     {
         return $this->invoiceItemRepository->findOneBy(['budgetItem' => $budgetItem, 'invoice' => $invoice]);
     }
-    
+
     public function findByIdentifier($identifier)
     {
         return $this->invoiceRepository->findOneBy(['identifier' => $identifier]);
     }
-    
+
     public function getLastUpdated()
     {
         return $this->invoiceRepository->findOneBy([], ['updated' => 'DESC']);
     }
+
 }

@@ -30,6 +30,7 @@ use Nette\Application\UI\Form;
  */
 interface BaseFormFactory
 {
+
     /**
      * @return Form
      */

@@ -17,4 +17,5 @@ use Nette;
  */
 abstract class ImportParser extends Nette\Object
 {
+    
 }

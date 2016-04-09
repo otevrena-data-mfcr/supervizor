@@ -17,5 +17,6 @@ use Nette;
  */
 interface IImportParser
 {
+
     public function __construct(Nette\Caching\Cache $cache, $data, $target);
 }

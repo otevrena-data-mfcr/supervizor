@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -22,6 +23,7 @@ namespace App\Components;
 
 interface SignInFormFactory
 {
+
     /** @return SignInForm */
     public function create();
 }

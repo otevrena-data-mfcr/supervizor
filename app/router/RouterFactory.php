@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -17,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+
 use Nette\Application\Routers\RouteList;
 use Nette\Application\Routers\Route;
 
@@ -26,25 +28,24 @@ use Nette\Application\Routers\Route;
 class RouterFactory
 {
 
-  /**
-   * @return Nette\Application\IRouter
-   */
-  public function createRouter()
-  {
-    $useSsl = (
-              isset($_SERVER['REMOTE_ADDR']) &&
-              !in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1'))
-            ? true : false);
+    /**
+     * @return Nette\Application\IRouter
+     */
+    public function createRouter()
+    {
+        $useSsl = (
+                isset($_SERVER['REMOTE_ADDR']) &&
+                !in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1')) ? true : false);
 
-    $router = new RouteList();
- 
-    $router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
-    $router[] = new Route('faktura/<id>', 'Invoice:default',($useSsl ? Route::SECURED : null));
-    $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]', 'Homepage:default',($useSsl ? Route::SECURED : null));
-    $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]<supplierIdentifier>', 'Homepage:default',($useSsl ? Route::SECURED : null));
-    $router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default',($useSsl ? Route::SECURED : null));
+        $router = new RouteList();
 
-    return $router;
-  }
+        $router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
+        $router[] = new Route('faktura/<id>', 'Invoice:default', ($useSsl ? Route::SECURED : null));
+        $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]', 'Homepage:default', ($useSsl ? Route::SECURED : null));
+        $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]<supplierIdentifier>', 'Homepage:default', ($useSsl ? Route::SECURED : null));
+        $router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default', ($useSsl ? Route::SECURED : null));
+
+        return $router;
+    }
 
 }

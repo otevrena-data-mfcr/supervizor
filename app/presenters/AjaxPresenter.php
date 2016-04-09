@@ -26,29 +26,30 @@ use Nette\Caching\Cache;
 
 class AjaxPresenter extends BasePresenter
 {
+
     /** @var InvoiceRepository @inject */
     public $invoiceRepository;
-    
+
     /** @var BudgetRepository @inject */
     public $budgetGroupRepository;
-    
+
     /** @var SupplierRepository @inject */
     public $supplierRepository;
-    
+
     /** @var Nette\Http\Context @inject */
     public $httpContext;
-    
+
     /** @var Nette\Caching\IStorage @inject */
     public $cacheStorage;
-    
+
     const DATE_FORMAT = 'Y-m-d H:i:s';
-    
+
     /**
      *
      * @var type 
      */
     private $cache;
-    
+
     public function startup()
     {
         parent::startup();
@@ -62,7 +63,7 @@ class AjaxPresenter extends BasePresenter
         {
             $this->terminate();
         }
-        
+
         $data = $this->cache->load($name);
         if (!$data)
         {
@@ -73,10 +74,11 @@ class AjaxPresenter extends BasePresenter
         }
         return $data;
     }
-    
+
     public function renderBudgetGroups($budgetGroupId = null)
     {
-        $data = $this->ajaxCache(__FUNCTION__.$budgetGroupId, function() use($budgetGroupId){
+        $data = $this->ajaxCache(__FUNCTION__ . $budgetGroupId, function() use($budgetGroupId)
+        {
             $finalArray = [];
             $filter = [];
             $min = 0;
@@ -87,8 +89,8 @@ class AjaxPresenter extends BasePresenter
                 $filter['id'] = $budgetGroupId;
             }
             $s = $this->budgetGroupRepository->getBudgetGroupRepository()->findBy($filter);
-            foreach($s AS $u)
-            {   
+            foreach ($s AS $u)
+            {
                 $group = [];
                 $group['id'] = $u->getSlug();
                 $group['nazev'] = $u->getName();
@@ -101,13 +103,13 @@ class AjaxPresenter extends BasePresenter
                 $group['objem'] = 0;
                 $group['pocet'] = 0;
                 $group['polozky'] = [];
-                foreach($u->getBudgetItems() AS $i)
+                foreach ($u->getBudgetItems() AS $i)
                 {
                     $item = [];
                     $item['id'] = $i->getIdentifier();
                     $item['nazev'] = $i->getName();
                     $amount = 0;
-                    foreach($i->getinvoiceItems() AS $invoiceItem)
+                    foreach ($i->getinvoiceItems() AS $invoiceItem)
                     {
                         $amount += $invoiceItem->getAmount();
                     }
@@ -117,9 +119,9 @@ class AjaxPresenter extends BasePresenter
                     $group['polozky'][] = $item;
 
                     $objem = [];
-                    foreach ($group['polozky'] as $key => $row) 
+                    foreach ($group['polozky'] as $key => $row)
                     {
-                        $objem[$key]  = $row['objem'];
+                        $objem[$key] = $row['objem'];
                     }
                     array_multisort($objem, SORT_DESC, $group['polozky']);
                 }
@@ -139,13 +141,13 @@ class AjaxPresenter extends BasePresenter
                 $finalArray[$u->getSlug()] = $group;
 
                 $objem = [];
-                foreach ($finalArray as $key => $row) 
+                foreach ($finalArray as $key => $row)
                 {
-                    $objem[$key]  = $row['objem'];
+                    $objem[$key] = $row['objem'];
                 }
                 array_multisort($objem, SORT_DESC, $finalArray);
             }
-            
+
             return [
                 'skupiny' => $finalArray,
                 'stats' => [
@@ -155,11 +157,11 @@ class AjaxPresenter extends BasePresenter
                 ]
             ];
         });
-        
+
         if ($this->isAjax())
         {
             $this->payload->result = $data;
-            
+
             //!Not used, exceptions MUST kill app to get logged
             $this->payload->success = true;
             $this->payload->error = null;
@@ -171,10 +173,11 @@ class AjaxPresenter extends BasePresenter
             $this->dataOut($data);
         }
     }
-    
+
     public function renderSupplier($supplierIdentifier)
     {
-        $data = $this->ajaxCache(__FUNCTION__.$supplierIdentifier, function() use($supplierIdentifier){
+        $data = $this->ajaxCache(__FUNCTION__ . $supplierIdentifier, function() use($supplierIdentifier)
+        {
             $supplier = $this->supplierRepository->findByIdentifier($supplierIdentifier);
 
             if (!$supplier)
@@ -193,14 +196,14 @@ class AjaxPresenter extends BasePresenter
 
             if ($supplier->getCompanyIdentifier())
             {
-                $data = @file_get_contents("http://kamos.datlab.cz/company/CZ".$supplier->getCompanyIdentifier());
+                $data = @file_get_contents("http://kamos.datlab.cz/company/CZ" . $supplier->getCompanyIdentifier());
 
                 if ($data)
                 {
                     $kamos = json_decode($data);
 
                     $entitiesDecode = ["company_name"];
-                    foreach($entitiesDecode as $key)
+                    foreach ($entitiesDecode as $key)
                     {
                         if (property_exists($kamos, $key))
                         {
@@ -218,11 +221,11 @@ class AjaxPresenter extends BasePresenter
 
             return $result;
         });
-        
+
         if ($this->isAjax())
         {
             $this->payload->result = $data;
-            
+
             //!Not used, exceptions MUST kill app to get logged
             $this->payload->success = true;
             $this->payload->error = null;
@@ -234,49 +237,49 @@ class AjaxPresenter extends BasePresenter
             $this->dataOut($data);
         }
     }
-    
+
     public function renderSuppliers($budgetGroupSlug = null, $page = 1, array $budgetItems = [], $dateFrom = null, $dateTo = null)
     {
         $limit = 10;
         $qb = $this->supplierRepository->getSupplierRepository()->createQueryBuilder('s');
         $qb->select('s')
                 ->join('s.invoices', 'i')
-                    ->join('i.invoiceItems', 'ii')
-                        ->join('ii.budgetItem', 'bi')
-                            ->join('bi.budgetGroup', 'bg')
+                ->join('i.invoiceItems', 'ii')
+                ->join('ii.budgetItem', 'bi')
+                ->join('bi.budgetGroup', 'bg')
                 ->groupBy('s.identifier');
-        
+
         if ($budgetGroupSlug)
         {
             $qb->andWhere('bg.slug = :slug')
                     ->setParameter('slug', $budgetGroupSlug);
         }
-        
-        
+
+
         if (!empty($budgetItems))
         {
             $qb->andWhere('bi.identifier IN (:budget_items)')
                     ->setParameter('budget_items', $budgetItems);
         }
-        
+
         if ($dateFrom)
         {
             $qb->andWhere('i.issued >= :issued_from')
-                    ->setParameter('issued_from', new \DateTime('@'.(int)$dateFrom));
+                    ->setParameter('issued_from', new \DateTime('@' . (int) $dateFrom));
         }
-        
+
         if ($dateTo)
         {
             $qb->andWhere('i.issued <= :issued_to')
-                    ->setParameter('issued_to', new \DateTime('@'.(int)$dateTo));
+                    ->setParameter('issued_to', new \DateTime('@' . (int) $dateTo));
         }
-        
+
         $all = $qb->getQuery()->getResult();
         $suppliersTotal = count($all);
-        
+
         $suppliersOut = [];
 
-        foreach($all AS $supplier)
+        foreach ($all AS $supplier)
         {
             $supplierOut = [];
             $supplierOut['id'] = $supplier->getIdentifier();
@@ -284,13 +287,13 @@ class AjaxPresenter extends BasePresenter
             $supplierOut['nazev_st'] = $supplier->getName();
             $supplierOut['castka_celkem_am'] = 0;
             $supplierOut['pocet_celkem_no'] = 0;
-            
+
             $invoices = [];
-            foreach($supplier->getInvoices() AS $invoiceSrc)
+            foreach ($supplier->getInvoices() AS $invoiceSrc)
             {
-                $supplierOut['pocet_celkem_no']++;
-                
-                $invoice = [];             
+                $supplierOut['pocet_celkem_no'] ++;
+
+                $invoice = [];
                 $invoice['id'] = $invoiceSrc->getIdentifier();
                 $invoice['dodavatel_id'] = $supplier->getIdentifier();
                 $invoice['typ_dokladu_st'] = $invoiceSrc->getType();
@@ -309,9 +312,9 @@ class AjaxPresenter extends BasePresenter
                 $invoice['ucel_tx'] = $invoiceSrc->getDescription();
                 $invoice['uhrazeno_udt'] = $invoiceSrc->getPaid()->getTimestamp();
                 $invoice['detail_castka_am'] = 0;
-                
+
                 $inoviceItems = [];
-                foreach($invoiceSrc->getinvoiceItems() AS $invoiceItemSrc)
+                foreach ($invoiceSrc->getinvoiceItems() AS $invoiceItemSrc)
                 {
                     $invoiceItem = [];
                     $invoiceItem['faktura_id'] = $invoiceSrc->getIdentifier();
@@ -322,23 +325,23 @@ class AjaxPresenter extends BasePresenter
                     $inoviceItems[] = $invoiceItem;
                 }
                 $invoice['polozky'] = $inoviceItems;
-                
+
                 $supplierOut['castka_celkem_am'] += $invoice['detail_castka_am'];
                 $invoices[] = $invoice;
             }
-            
+
             $supplierOut['faktury'] = $invoices;
-            
+
             $suppliersOut[] = $supplierOut;
         }
-        
+
         $castka_celkem_am = [];
-        foreach ($suppliersOut as $key => $row) 
+        foreach ($suppliersOut as $key => $row)
         {
-            $castka_celkem_am[$key]  = $row['castka_celkem_am'];
+            $castka_celkem_am[$key] = $row['castka_celkem_am'];
         }
         array_multisort($castka_celkem_am, SORT_DESC, $suppliersOut);
-        
+
         $realPage = $page - 1;
         $chunked = array_chunk($suppliersOut, $limit);
         if (array_key_exists($realPage, $chunked))
@@ -349,28 +352,28 @@ class AjaxPresenter extends BasePresenter
         {
             $pageItems = [];
         }
-        
-        
+
+
         $result = [
-            'dodavatele' => $pageItems, 
+            'dodavatele' => $pageItems,
             'pager' => [
-                'pages' => ceil($suppliersTotal/$limit),
+                'pages' => ceil($suppliersTotal / $limit),
                 'total' => $suppliersTotal,
                 'current' => $page,
                 'previous' => $page > 1 ? $page - 1 : null,
-                'next' => $page+1,
+                'next' => $page + 1,
                 'offset' => 0,
                 'limit' => $limit,
                 'start' => 1,
                 'end' => $limit
             ]
         ];
-        
-        
+
+
         if ($this->isAjax())
         {
             $this->payload->result = $result;
-            
+
             //!Not used, exceptions MUST kill app to get logged
             $this->payload->success = true;
             $this->payload->error = null;
@@ -381,12 +384,13 @@ class AjaxPresenter extends BasePresenter
             $this->dataOut($result);
         }
     }
-    
+
     private function dataOut($data)
     {
-        echo  '<pre>';
+        echo '<pre>';
         print_r($data);
         echo '</pre>';
         $this->terminate();
     }
+
 }

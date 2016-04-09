@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -37,13 +38,14 @@ class DefaultData extends Command
     protected function configure()
     {
         $this
-            ->setName('orm:default-data:load')
-            ->setDescription('Load data fixtures to your database.');
+                ->setName('orm:default-data:load')
+                ->setDescription('Load data fixtures to your database.');
     }
 
     protected function execute(InputInterface $input, OutputInterface $output)
     {
-        try {
+        try
+        {
             $loader = new Loader();
             $loader->loadFromDirectory(__DIR__ . '/default-data/');
             $fixtures = $loader->getFixtures();
@@ -51,14 +53,18 @@ class DefaultData extends Command
             $purger = new ORMPurger($this->em);
 
             $executor = new ORMExecutor($this->em, $purger);
-            $executor->setLogger(function ($message) use ($output) {
+            $executor->setLogger(function ($message) use ($output)
+            {
                 $output->writeln(sprintf('  <comment>></comment> <info>%s</info>', $message));
             });
             $executor->execute($fixtures);
             return 0; // zero return code means everything is ok
-        } catch (\Exception $exc) {
+        }
+        catch (\Exception $exc)
+        {
             $output->writeLn("<error>{$exc->getMessage()}</error>");
             return 1; // non-zero return code means error
         }
     }
+
 }

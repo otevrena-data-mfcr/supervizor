@@ -30,15 +30,15 @@ use Nette\Localization\ITranslator;
  *
  * @author Adam Schubert <adam.schubert@sg1-game.net>
  */
-
 class BaseForm extends BaseControl implements BaseFormFactory
 {
+
     /** @var IFormRenderer */
     private $renderer;
 
     /** @var ITranslator */
     private $translator;
-    
+
     /** @var IReCaptchaValidatorFactory */
     private $validatorFactory;
 
@@ -50,7 +50,7 @@ class BaseForm extends BaseControl implements BaseFormFactory
         $this->translator = $translator;
         $this->validatorFactory = $validatorFactory;
     }
-    
+
     /**
      * @param  string  $name   Field name
      * @param  string  $label  Html label

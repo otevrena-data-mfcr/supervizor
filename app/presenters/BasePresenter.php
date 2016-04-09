@@ -24,6 +24,7 @@
  */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter
 {
+
     /**
      * @return \Nette\Security\IIdentity|User|NULL
      */
@@ -35,51 +36,51 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
     public function createComponentCss()
     {
         $wwwDir = $this->getContext()->parameters['wwwDir'];
-        $files = new \WebLoader\FileCollection($wwwDir.'/bower_components');
+        $files = new \WebLoader\FileCollection($wwwDir . '/bower_components');
         $files->addRemoteFile('http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext');
-        
+
         $files->addFiles(array(
             'jquery-ui/themes/smoothness/jquery-ui.min.css',
             'bootstrap/dist/css/bootstrap.min.css',
             'bootstrap/dist/css/bootstrap-theme.min.css',
-            $wwwDir.'/js/jquery/jQRangeSlider/jQAllRangeSliders-classic-min.css',
+            $wwwDir . '/js/jquery/jQRangeSlider/jQAllRangeSliders-classic-min.css',
             'fancybox/source/jquery.fancybox.css',
-            $wwwDir.'/scss/style-default.scss'
+            $wwwDir . '/scss/style-default.scss'
         ));
 
         $compiler = \WebLoader\Compiler::createCssCompiler($files, $wwwDir . '/webtemp');
-        
+
         $compiler->addFileFilter(new \WebLoader\Filter\ScssFilter());
 
         $root = $wwwDir . '/bower_components';
-        $base = $this->template->basePath.'/bower_components';
+        $base = $this->template->basePath . '/bower_components';
         $compiler->addFileFilter(new \WebLoader\Filter\CssUrlsFilter($root, $base));
-        
+
         return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
     }
 
     public function createComponentJs()
     {
         $wwwDir = $this->getContext()->parameters['wwwDir'];
-        $files = new \WebLoader\FileCollection($wwwDir.'/bower_components');
+        $files = new \WebLoader\FileCollection($wwwDir . '/bower_components');
 
         $files->addRemoteFile('https://www.google.com/recaptcha/api.js');
-        
-        
+
+
         $files->addFiles(array(
             'jquery/jquery.min.js',
             'jquery-ui/jquery-ui.min.js',
             'fancybox/source/jquery.fancybox.pack.js',
             'bootstrap/dist/js/bootstrap.min.js',
             'history.js/scripts/bundled/html4+html5/native.history.js',
-            
-            $wwwDir.'/js/jquery/jQRangeSlider/jQAllRangeSliders-min.js',
+            $wwwDir . '/js/jquery/jQRangeSlider/jQAllRangeSliders-min.js',
             'raphael/raphael-min.js',
-            $wwwDir.'/js/raphael-style.js',
-            $wwwDir.'/js/global.js'
+            $wwwDir . '/js/raphael-style.js',
+            $wwwDir . '/js/global.js'
         ));
 
         $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
         return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
     }
+
 }

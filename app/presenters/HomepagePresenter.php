@@ -21,6 +21,7 @@
 
 class HomepagePresenter extends BasePresenter
 {
+
     public function renderDefault($budgetGroupIdentifier = null, $page = 1, $supplierIdentifier = null)
     {
         $this->template->budgetGroupIdentifier = $budgetGroupIdentifier;
@@ -29,8 +30,7 @@ class HomepagePresenter extends BasePresenter
         $this->template->view = ($budgetGroupIdentifier ? 'skupina' : 'index');
         $this->template->title = 'Supervizor Ministerstva financí';
     }
-    
-    
+
     public function renderAbout($popup = false)
     {
         if ($popup)
@@ -39,5 +39,6 @@ class HomepagePresenter extends BasePresenter
         }
         $this->template->popup = $popup;
         $this->template->title = 'O projektu';
-    }    
+    }
+
 }

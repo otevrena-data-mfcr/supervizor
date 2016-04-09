@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -34,6 +35,7 @@ use Doctrine\Common\Collections\ArrayCollection;
  */
 class Supplier extends Nette\Object
 {
+
     use Identifier;
 
     /**
@@ -47,7 +49,7 @@ class Supplier extends Nette\Object
      * @ORM\Column(type="string",length=10,nullable=false)
      */
     private $companyIdentifier;
-    
+
     /**
      * @var string
      * @ORM\Column(type="string",length=255,nullable=false)
@@ -65,7 +67,7 @@ class Supplier extends Nette\Object
      * @ORM\Column(type="datetime",nullable=false)
      */
     private $updated;
-    
+
     /**
      * @var ArrayCollection|Invoices[]
      * @ORM\OneToMany(targetEntity="Invoice", mappedBy="supplier",cascade={"persist"})
@@ -85,7 +87,7 @@ class Supplier extends Nette\Object
         $this->setName($name);
         $this->invoices = new ArrayCollection;
     }
-    
+
     /**
      * Gets triggered only on insert
      * @ORM\PrePersist
@@ -110,39 +112,39 @@ class Supplier extends Nette\Object
     protected function setIdentifier($identifier)
     {
         $identifier = Nette\Utils\Strings::trim($identifier);
-        if (Nette\Utils\Strings::length($identifier) === 0) 
+        if (Nette\Utils\Strings::length($identifier) === 0)
         {
-            throw new Nette\InvalidArgumentException('Invalid $identifier value: '.$identifier);
+            throw new Nette\InvalidArgumentException('Invalid $identifier value: ' . $identifier);
         }
         $this->identifier = $identifier;
     }
-    
+
     /**
      * @param string $supplierCompanyIdentifier
      */
     protected function setCompanyIdentifier($companyIdentifier)
     {
         $companyIdentifier = Nette\Utils\Strings::trim($companyIdentifier);
-        /*if (Nette\Utils\Strings::length($supplierCompanyIdentifier) === 0) 
-        {
-            throw new Nette\InvalidArgumentException('Invalid $supplierCompanyIdentifier value'.$supplierCompanyIdentifier);
-        }*/
+        /* if (Nette\Utils\Strings::length($supplierCompanyIdentifier) === 0) 
+          {
+          throw new Nette\InvalidArgumentException('Invalid $supplierCompanyIdentifier value'.$supplierCompanyIdentifier);
+          } */
         $this->companyIdentifier = $companyIdentifier;
     }
-    
+
     /**
      * @param string $name
      */
     protected function setName($name)
     {
         $name = Nette\Utils\Strings::trim($name);
-        if (Nette\Utils\Strings::length($name) === 0) 
+        if (Nette\Utils\Strings::length($name) === 0)
         {
             throw new Nette\InvalidArgumentException('Name cannot be empty');
         }
         $this->name = $name;
     }
-    
+
     /**
      * @return string
      */
@@ -150,7 +152,7 @@ class Supplier extends Nette\Object
     {
         return $this->name;
     }
-    
+
     /**
      * @return string
      */
@@ -158,7 +160,7 @@ class Supplier extends Nette\Object
     {
         return $this->identifier;
     }
-    
+
     /**
      * @return string
      */
@@ -166,14 +168,15 @@ class Supplier extends Nette\Object
     {
         return $this->vatIdentifier;
     }
-    
+
     public function getCompanyIdentifier()
     {
         return $this->companyIdentifier;
     }
-    
+
     public function getInvoices()
     {
         return $this->invoices;
     }
+
 }

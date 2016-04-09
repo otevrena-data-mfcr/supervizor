@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Copyright (C) 2016 Adam Schubert <adam.schubert@sg1-game.net>.
  *
@@ -17,6 +18,7 @@
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
  * MA 02110-1301  USA
  */
+
 namespace App\Model\Security;
 
 use App\Model\Entities;
@@ -27,6 +29,7 @@ use Nette\Security\IIdentity;
 
 class Authenticator extends Nette\Object implements Nette\Security\IAuthenticator
 {
+
     /** @var PasswordManager */
     private $passwordManager;
 
@@ -52,7 +55,7 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
      */
     public function setNamespace($namespace)
     {
-        $this->namespace = $namespace ?: null;
+        $this->namespace = $namespace ? : null;
     }
 
     /**
@@ -68,17 +71,23 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
 
         $criteria = ['email' => $email];
 
-        if ($this->namespace) $criteria['namespace'] = $this->namespace;
+        if ($this->namespace)
+            $criteria['namespace'] = $this->namespace;
 
         /** @var Entities\User|null $user */
         $user = $this->userRepository->getUserRepository()->findOneBy($criteria);
 
-        if (!$user) {
+        if (!$user)
+        {
             throw new AuthenticationException('User not found', self::IDENTITY_NOT_FOUND);
         }
 
-        $verifyPassword = $user->verifyPassword($password, function($password, $hash) { return $this->passwordManager->verify($password, $hash); });
-        if (!$verifyPassword) {
+        $verifyPassword = $user->verifyPassword($password, function($password, $hash)
+        {
+            return $this->passwordManager->verify($password, $hash);
+        });
+        if (!$verifyPassword)
+        {
             throw new AuthenticationException('Invalid credentials', self::INVALID_CREDENTIAL);
         }
 

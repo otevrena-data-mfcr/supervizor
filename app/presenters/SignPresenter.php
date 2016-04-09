@@ -19,7 +19,6 @@
  * MA 02110-1301  USA
  */
 
-
 /**
  * Description of SignPresenter
  *
@@ -83,4 +82,5 @@ class SignPresenter extends BasePresenter
         $this->flashMessage('You has been logged out.', 'alert-success');
         $this->redirect('in');
     }
+
 }

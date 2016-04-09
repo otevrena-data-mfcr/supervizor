@@ -6,24 +6,25 @@ use Nette;
 
 class Mmr extends ImportParser implements IImportParser
 {
+
     /**
      *
      * @var type 
      */
     private $info;
-    
+
     /**
      *
      * @var ette\Caching\Cache 
      */
     private $cache;
-    
+
     /**
      *
      * @var type 
      */
     private $target;
-    
+
     /**
      * 
      * @param Nette\Caching\Cache $cache
@@ -35,24 +36,24 @@ class Mmr extends ImportParser implements IImportParser
     {
         $this->cache = $cache;
         $this->target = $target;
-        
+
         $data = @file_get_contents($source);
         if (!$data)
         {
             throw new ImporterBadSourceException($source);
         }
-                    
+
         $json = json_decode($data);
         if (!$json->success)
         {
             throw new ImporterBadSourceException($source);
-        } 
-        
+        }
+
         $this->info = $json->result;
 
         $this->proccess();
     }
-    
+
     /**
      * converts shitty date to DateTime
      * @param type $mess
@@ -75,14 +76,15 @@ class Mmr extends ImportParser implements IImportParser
             "Prosinec" => 12
         ];
 
-        $parts = [];      
-        $match = preg_match("/^[^\t]*\t(\d{1,2})\. (\w+) (\d{4}) \- (\d{1,2})\:(\d{1,2})$/",$mess, $parts);
+        $parts = [];
+        $match = preg_match("/^[^\t]*\t(\d{1,2})\. (\w+) (\d{4}) \- (\d{1,2})\:(\d{1,2})$/", $mess, $parts);
 
-        if(!$match) return false;
+        if (!$match)
+            return false;
 
-        return new \DateTime('@'.mktime($parts[4],$parts[5],0,$months[$parts[2]],$parts[1],$parts[3]));
+        return new \DateTime('@' . mktime($parts[4], $parts[5], 0, $months[$parts[2]], $parts[1], $parts[3]));
     }
-    
+
     /**
      * 
      * @param string $cs
@@ -92,12 +94,12 @@ class Mmr extends ImportParser implements IImportParser
     {
         return (float) strtr($cs, array(',' => '.', ' ' => ''));
     }
-    
+
     public function proccess()
     {
-        $parsedDataKey = $this->info->id.'_parsedData';
-        $lastModifiedKey = $this->info->id.'_lastModified';
-        
+        $parsedDataKey = $this->info->id . '_parsedData';
+        $lastModifiedKey = $this->info->id . '_lastModified';
+
         $lastModified = $this->cache->load($lastModifiedKey);
         if (!$lastModified || $this->mess2DateTime($lastModified) < $this->mess2DateTime($this->info->last_modified))
         {
@@ -107,58 +109,57 @@ class Mmr extends ImportParser implements IImportParser
         }
         else
         {
-            $parsedData = $this->cache->load($parsedDataKey, function(& $depedencies) use($parsedDataKey){
+            $parsedData = $this->cache->load($parsedDataKey, function(& $depedencies) use($parsedDataKey)
+            {
                 $parsedData = $this->parse();
                 $this->cache->save($parsedDataKey, $parsedData);
                 return $parsedData;
             });
         }
-        
-        foreach($parsedData AS $inovice)
+
+        foreach ($parsedData AS $inovice)
         {
             call_user_func_array(array($this->target, 'setInvoice'), $inovice);
         }
     }
-    
+
     public function parse()
     {
         $csvArray = file($this->info->url);
         //Remove first row of CSV
         unset($csvArray[0]);
-        $csv = array_map(function($rowRaw){
+        $csv = array_map(function($rowRaw)
+        {
             //Convert from fag shit to UTF-8
-            $rowRaw = iconv("WINDOWS-1250","UTF-8",$rowRaw);
+            $rowRaw = iconv("WINDOWS-1250", "UTF-8", $rowRaw);
             $row = str_getcsv($rowRaw, ';');
-                        
+
             return [
-                'identifier' => join("-", array("MMR",$row[0],$row[1],$row[2])), 
-                'type' => "Faktura",  //!FIXME TO CONSTANTS
-                'distinction' => null, 
-                'vat_record' => null, 
-                'ammount' => null, 
-                'amountWithoutVat' => null, 
-                'amountOriginal' => null, 
-                'amountPaid' => null, 
-                'amountPaidOriginal' => null, 
-                'currency' => $row[7] ? strtr($row[7], ["KČ" => "CZK"]) : null, 
-                'issued' => null, 
+                'identifier' => join("-", array("MMR", $row[0], $row[1], $row[2])),
+                'type' => "Faktura", //!FIXME TO CONSTANTS
+                'distinction' => null,
+                'vat_record' => null,
+                'ammount' => null,
+                'amountWithoutVat' => null,
+                'amountOriginal' => null,
+                'amountPaid' => null,
+                'amountPaidOriginal' => null,
+                'currency' => $row[7] ? strtr($row[7], ["KČ" => "CZK"]) : null,
+                'issued' => null,
                 'received' => $row[8] ? new \DateTime($row[8]) : null,
                 'maturity' => null,
                 'paid' => $row[9] ? new \DateTime($row[9]) : null,
-                'description' => $row[10] ?: null,
-
-                'supplierIdentifier' => $row[5] ?: substr(md5($row[4]),0,8), 
-                'supplierName' => $row[4] ?: null,
-                'supplierCompanyId' => $row[5] ? str_pad($row[5],8,"0",STR_PAD_LEFT) : null,
-
-                'budgetItemIdentifier' => ((int) $row[11]) ?: null,
-                'budgetItemName' => $row[12] ?: null,
+                'description' => $row[10] ? : null,
+                'supplierIdentifier' => $row[5] ? : substr(md5($row[4]), 0, 8),
+                'supplierName' => $row[4] ? : null,
+                'supplierCompanyId' => $row[5] ? str_pad($row[5], 8, "0", STR_PAD_LEFT) : null,
+                'budgetItemIdentifier' => ((int) $row[11]) ? : null,
+                'budgetItemName' => $row[12] ? : null,
                 'budgetItemAmount' => $row[6] ? $this->cs2float($row[6]) : null
             ];
-            
-            
         }, $csvArray);
-        
+
         return $csv;
     }
+
 }

@@ -56,7 +56,7 @@ class BudgetItem extends Nette\Object
      * @ORM\JoinColumn(name="budgetgroup_id", referencedColumnName="id", nullable=true)
      */
     private $budgetGroup;
-    
+
     /**
      * @var \DateTimeInterface
      * @ORM\Column(type="datetime",nullable=false)
@@ -68,8 +68,8 @@ class BudgetItem extends Nette\Object
      * @ORM\Column(type="datetime",nullable=false)
      */
     private $updated;
-    
-     /**
+
+    /**
      * @var ArrayCollection|InvoiceItem[]
      * @ORM\OneToMany(targetEntity="InvoiceItem", mappedBy="budgetItem",cascade={"persist"})
      */
@@ -86,10 +86,9 @@ class BudgetItem extends Nette\Object
         $this->budgetGroup = $budgetGroup;
         $this->setIdentifier($identifier);
         $this->setName($name);
-        
+
         $this->invoiceItems = new ArrayCollection();
     }
-    
 
     /**
      * Gets triggered only on insert
@@ -109,37 +108,37 @@ class BudgetItem extends Nette\Object
         $this->updated = new \DateTime();
     }
 
-     /**
-    * @param string $identifier
-    */
+    /**
+     * @param string $identifier
+     */
     protected function setIdentifier($identifier)
     {
         $identifier = Nette\Utils\Strings::trim($identifier);
-        if (Nette\Utils\Strings::length($identifier) === 0) 
+        if (Nette\Utils\Strings::length($identifier) === 0)
         {
             throw new Nette\InvalidArgumentException('Identifier cannot be empty');
         }
         $this->identifier = $identifier;
     }
-    
+
     /**
-    * @param string $name
-    */
+     * @param string $name
+     */
     protected function setName($name)
     {
         $name = Nette\Utils\Strings::trim($name);
-        if (Nette\Utils\Strings::length($name) === 0) 
+        if (Nette\Utils\Strings::length($name) === 0)
         {
             throw new Nette\InvalidArgumentException('Name cannot be empty');
         }
         $this->name = $name;
     }
-    
+
     public function setBudgetGroup(BudgetGroup $budgetGroup)
     {
         $this->budgetGroup = $budgetGroup;
     }
-    
+
     /**
      * 
      * @return string
@@ -148,17 +147,18 @@ class BudgetItem extends Nette\Object
     {
         return $this->name;
     }
-    
-     /**
+
+    /**
      * @return InvoiceItems[]|ArrayCollection
      */
     public function getinvoiceItems()
     {
         return $this->invoiceItems;
     }
-    
+
     public function getIdentifier()
     {
         return $this->identifier;
     }
+
 }

@@ -99,7 +99,7 @@ class InvoiceItem extends Nette\Object
     {
         $this->updated = new \DateTime();
     }
-    
+
     /**
      * 
      * @return Invoice
@@ -117,7 +117,7 @@ class InvoiceItem extends Nette\Object
     {
         return $this->amount;
     }
-    
+
     /**
      * 
      * @return type
