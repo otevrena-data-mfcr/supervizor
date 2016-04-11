@@ -190,7 +190,7 @@ $tpl->fetchOutput("styles");
   
 </table>
 <br>
-<form action="<?=$_SERVER["PHP_SELF"]?>" method="POST">
+<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST">
   <input type="hidden" name="import" value="1">
   <button type="submit">Spustit import</button>
   Heslo: <input type="password" name="password" required> 
