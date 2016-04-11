@@ -14,6 +14,7 @@ session_start();
 require_once __DIR__."/../config/constants.php";
 require_once LIB_DIR."/Lethe/LetheTemplate.php";
 
+ini_set('display_errors', DEBUG_MODE);
 
 /* include paths */
 $include_paths = array();
