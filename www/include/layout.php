@@ -18,7 +18,7 @@
 		<meta name="author" content="Martin Kopeček (https://cz.linkedin.com/in/martinkopecek), Benedikt Kotmel (https://cz.linkedin.com/in/benediktkotmel), Jan Vlasatý (https://cz.linkedin.com/in/janvlasaty)">
 		
     <link rel="license" hreflang="cs" href="https://jxself.org/translations/gpl-3.cz.shtml">
-    <link rel="license" hreflang="en" href="http://www.gnu.org/licenses/gpl-3.0.txt">
+    <link rel="license" hreflang="en" href="https://www.gnu.org/licenses/gpl-3.0.txt">
     <link rel="author" href="https://cz.linkedin.com/in/martinkopecek">
     
 		<?php if(@$share_url): ?><meta property="og:url" content="<?=$share_url?>"><?php endif; ?>
@@ -30,7 +30,7 @@
 
 		<!-- STYLES -->
 		
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 		
 		<!-- jQuery -->
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -55,7 +55,7 @@
 		
 		<!-- jQuery -->
 		<script src="<?=STATIC_ROOT?>/lib/jquery-1.11.3.min.js"></script>
-		<script src="http://code.jquery.com/jquery-migrate-1.2.1.js"></script>
+		<script src="https://code.jquery.com/jquery-migrate-1.2.1.js"></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
 		
 		<!-- History.js -->

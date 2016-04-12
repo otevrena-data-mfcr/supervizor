@@ -11,7 +11,7 @@
 
 		<!-- STYLES -->
 
-		<link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+		<link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
 
 		<!-- jQuery -->
 		<link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
@@ -56,7 +56,7 @@
 			var js, fjs = d.getElementsByTagName(s)[0];
 				if (d.getElementById(id)) return;
 				js = d.createElement(s); js.id = id;
-				js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=200297620132275";
+				js.src = "https://connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=200297620132275";
 				fjs.parentNode.insertBefore(js, fjs);
 			}(document, 'script', 'facebook-jssdk'));
 		</script>
