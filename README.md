@@ -50,12 +50,12 @@ Supervizor je aplikace na vizualizaci výdajů státní správy, kterou vytvoři
 
 ### Mapping
 - Vytvořením Mappingu pro váš formát faktur definujete napojení polí faktury v CSV zdroji na pole v databázi Supervizoru
-- Který Mapping se použije se nastaví v souboru [profiles.json](#profily)
+- Který Mapping se použije se nastaví v souboru [profiles.json](#profily---wwwconfigprofilesjson)
 - Mapping je PHP soubor ve složce `//www/app/import` s názvem `FakturyMapping_XXXX.php`, kde XXXX je identifikátor Mappingu
 - Soubor obsahuje třídu `FakturyMapping_XXXX` (stejný identifikátor), která implementuje rozhraní `IFakturyMapping`
 - Třída `FakturyMapping_XXXX`:
   - metoda `getTimestamp()` - vrátí datum a čas poslední aktualizace dat na datovém zdroji ve formátu UNIX time
-  - metoda `setSource( (string) $source )` - nastaví zdroj dat; jako parametr dostane údaj endpoint z [objektu datasetu v profiles.json](#profily)
+  - metoda `setSource( (string) $source )` - nastaví zdroj dat; jako parametr dostane údaj endpoint z [objektu datasetu v profiles.json](#profily---wwwconfigprofilesjson)
   - metoda `import( FakturyImport $fi )` - provede import zápis do databáze provádí pomocí metod insertRow() a insertRows() dodaného objektu třídy `FakturyImport`
 - Třída `FakturyImport`:
   - metoda `insertRow( (array) $row )`
