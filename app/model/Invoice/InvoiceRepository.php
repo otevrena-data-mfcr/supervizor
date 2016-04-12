@@ -82,7 +82,13 @@ class InvoiceRepository
      * @param BudgetGroup $budgetGroup
      * @return array
      */
-    public function getBySupplierAndGroup(Supplier $supplier, BudgetGroup $budgetGroup)
+    public function getBySupplierAndGroup(
+        Supplier $supplier,
+        BudgetGroup $budgetGroup,
+        array $budgetItems = [],
+        $dateFrom = null,
+        $dateTo = null
+    )
     {
         $qb = $this->invoiceRepository->createQueryBuilder('i')
             ->select('i')
@@ -92,6 +98,22 @@ class InvoiceRepository
             ->andWhere('bi.budgetGroup = :budgetGroup')
             ->groupBy('i.id')
             ->setParameters(['supplier' => $supplier, 'budgetGroup' => $budgetGroup]);
+
+
+        if (!empty($budgetItems)) {
+            $qb->andWhere('bi.identifier IN (:budget_items)')
+                ->setParameter('budget_items', $budgetItems);
+        }
+
+        if ($dateFrom) {
+            $qb->andWhere('i.issued >= :issued_from')
+                ->setParameter('issued_from', new \DateTime('@' . (int)$dateFrom));
+        }
+
+        if ($dateTo) {
+            $qb->andWhere('i.issued <= :issued_to')
+                ->setParameter('issued_to', new \DateTime('@' . (int)$dateTo));
+        }
 
         return $qb->getQuery()->getResult();
     }

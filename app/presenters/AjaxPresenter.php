@@ -273,118 +273,120 @@ class AjaxPresenter extends BasePresenter
      */
     public function renderSuppliers($budgetGroupSlug = null, $page = 1, array $budgetItems = [], $dateFrom = null, $dateTo = null)
     {
-        $budgetGroup = $this->budgetGroupRepository->findGroupBySlug($budgetGroupSlug);
-
-        if (!$budgetGroup)
-        {
-            $this->error('Subject not found!', IResponse::S404_NOT_FOUND);
-        }
-        
         $limit = 10;
-        $qb = $this->supplierRepository->getSupplierRepository()->createQueryBuilder('s');
-        $qb->select('s')
+        $suppliersOut = $this->ajaxCache(__FUNCTION__ . md5(json_encode([
+                $budgetGroupSlug,
+                $budgetItems,
+                $dateFrom,
+                $dateTo
+            ])), function () use ($budgetGroupSlug, $budgetItems, $dateFrom, $dateTo) {
+            $budgetGroup = $this->budgetGroupRepository->findGroupBySlug($budgetGroupSlug);
+
+            if (!$budgetGroup) {
+                $this->error('Subject not found!', IResponse::S404_NOT_FOUND);
+            }
+
+
+            $qb = $this->supplierRepository->getSupplierRepository()->createQueryBuilder('s');
+            $qb->select('s')
                 ->join('s.invoices', 'i')
                 ->join('i.invoiceItems', 'ii')
                 ->join('ii.budgetItem', 'bi')
                 ->join('bi.budgetGroup', 'bg')
                 ->groupBy('s.identifier');
 
-        if ($budgetGroupSlug)
-        {
-            $qb->andWhere('bg.slug = :slug')
+            if ($budgetGroupSlug) {
+                $qb->andWhere('bg.slug = :slug')
                     ->setParameter('slug', $budgetGroupSlug);
-        }
-
-
-        if (!empty($budgetItems))
-        {
-            $qb->andWhere('bi.identifier IN (:budget_items)')
-                    ->setParameter('budget_items', $budgetItems);
-        }
-
-        if ($dateFrom)
-        {
-            $qb->andWhere('i.issued >= :issued_from')
-                    ->setParameter('issued_from', new \DateTime('@' . (int) $dateFrom));
-        }
-
-        if ($dateTo)
-        {
-            $qb->andWhere('i.issued <= :issued_to')
-                    ->setParameter('issued_to', new \DateTime('@' . (int) $dateTo));
-        }
-
-        $all = $qb->getQuery()->getResult();
-        $suppliersTotal = count($all);
-
-        $suppliersOut = [];
-
-        /** @var Supplier $supplier */
-        foreach ($all AS $supplier)
-        {
-            $supplierOut = [];
-            $supplierOut['id'] = $supplier->getIdentifier();
-            $supplierOut['ico_st'] = $supplier->getCompanyIdentifier();
-            $supplierOut['nazev_st'] = $supplier->getName();
-            $supplierOut['castka_celkem_am'] = 0;
-            $supplierOut['pocet_celkem_no'] = 0;
-
-            $invoices = [];
-
-            /** @var Invoice $invoiceSrc */
-            foreach ($this->invoiceRepository->getBySupplierAndGroup($supplier, $budgetGroup) AS $invoiceSrc)
-            {
-                $supplierOut['pocet_celkem_no'] ++;
-
-                $invoice = [];
-                $invoice['id'] = $invoiceSrc->getIdentifier();
-                $invoice['dodavatel_id'] = $supplier->getIdentifier();
-                $invoice['typ_dokladu_st'] = $invoiceSrc->getType();
-                $invoice['rozliseni_st'] = $invoiceSrc->getDistinction();
-                $invoice['evidence_dph_in'] = $invoiceSrc->getVatRecord();
-                $invoice['castka_am'] = $invoiceSrc->getAmount();
-                $invoice['castka_bez_dph_am'] = $invoiceSrc->getAmountWithoutVat();
-                $invoice['castka_orig_am'] = $invoiceSrc->getAmountOriginal();
-                $invoice['uhrazeno_am'] = $invoiceSrc->getAmountPaid();
-                $invoice['uhrazeno_orig_am'] = $invoiceSrc->getAmountPaidOriginal();
-                $invoice['mena_curr'] = $invoiceSrc->getCurrency();
-                $invoice['vystaveno_dt'] = $invoiceSrc->getIssued()->format(self::DATE_FORMAT);
-                $invoice['prijato_dt'] = $invoiceSrc->getReceived()->format(self::DATE_FORMAT);
-                $invoice['splatnost_dt'] = $invoiceSrc->getMaturity()->format(self::DATE_FORMAT);
-                $invoice['uhrazeno_dt'] = $invoiceSrc->getPaid()->format(self::DATE_FORMAT);
-                $invoice['ucel_tx'] = $invoiceSrc->getDescription();
-                $invoice['uhrazeno_udt'] = $invoiceSrc->getPaid()->getTimestamp();
-                $invoice['detail_castka_am'] = 0;
-
-                $inoviceItems = [];
-                foreach ($invoiceSrc->getinvoiceItems() AS $invoiceItemSrc)
-                {
-                    $invoiceItem = [];
-                    $invoiceItem['faktura_id'] = $invoiceSrc->getIdentifier();
-                    $invoiceItem['polozka_id'] = $invoiceItemSrc->getBudgetItem()->getIdentifier();
-                    $invoice['detail_castka_am'] += $invoiceItem['castka_am'] = $invoiceItemSrc->getAmount();
-                    $invoiceItem['nazev_st'] = $invoiceItemSrc->getBudgetItem()->getName();
-                    $invoiceItem['ve_vyberu'] = in_array($invoiceSrc->getIdentifier(), $budgetItems);
-                    $inoviceItems[] = $invoiceItem;
-                }
-                $invoice['polozky'] = $inoviceItems;
-
-                $supplierOut['castka_celkem_am'] += $invoice['detail_castka_am'];
-                $invoices[] = $invoice;
             }
 
-            $supplierOut['faktury'] = $invoices;
 
-            $suppliersOut[] = $supplierOut;
-        }
+            if (!empty($budgetItems)) {
+                $qb->andWhere('bi.identifier IN (:budget_items)')
+                    ->setParameter('budget_items', $budgetItems);
+            }
 
-        $castka_celkem_am = [];
-        foreach ($suppliersOut as $key => $row)
-        {
-            $castka_celkem_am[$key] = $row['castka_celkem_am'];
-        }
-        array_multisort($castka_celkem_am, SORT_DESC, $suppliersOut);
+            if ($dateFrom) {
+                $qb->andWhere('i.issued >= :issued_from')
+                    ->setParameter('issued_from', new \DateTime('@' . (int)$dateFrom));
+            }
 
+            if ($dateTo) {
+                $qb->andWhere('i.issued <= :issued_to')
+                    ->setParameter('issued_to', new \DateTime('@' . (int)$dateTo));
+            }
+
+            $all = $qb->getQuery()->getResult();
+
+            $suppliersOut = [];
+
+            /** @var Supplier $supplier */
+            foreach ($all AS $supplier) {
+                $supplierOut = [];
+                $supplierOut['id'] = $supplier->getIdentifier();
+                $supplierOut['ico_st'] = $supplier->getCompanyIdentifier();
+                $supplierOut['nazev_st'] = $supplier->getName();
+                $supplierOut['castka_celkem_am'] = 0;
+                $supplierOut['pocet_celkem_no'] = 0;
+
+                $invoices = [];
+
+                /** @var Invoice $invoiceSrc */
+                foreach ($this->invoiceRepository->getBySupplierAndGroup($supplier, $budgetGroup, $budgetItems,
+                    $dateFrom, $dateTo) AS $invoiceSrc) {
+                    $supplierOut['pocet_celkem_no']++;
+
+                    $invoice = [];
+                    $invoice['id'] = $invoiceSrc->getIdentifier();
+                    $invoice['dodavatel_id'] = $supplier->getIdentifier();
+                    $invoice['typ_dokladu_st'] = $invoiceSrc->getType();
+                    $invoice['rozliseni_st'] = $invoiceSrc->getDistinction();
+                    $invoice['evidence_dph_in'] = $invoiceSrc->getVatRecord();
+                    $invoice['castka_am'] = $invoiceSrc->getAmount();
+                    $invoice['castka_bez_dph_am'] = $invoiceSrc->getAmountWithoutVat();
+                    $invoice['castka_orig_am'] = $invoiceSrc->getAmountOriginal();
+                    $invoice['uhrazeno_am'] = $invoiceSrc->getAmountPaid();
+                    $invoice['uhrazeno_orig_am'] = $invoiceSrc->getAmountPaidOriginal();
+                    $invoice['mena_curr'] = $invoiceSrc->getCurrency();
+                    $invoice['vystaveno_dt'] = $invoiceSrc->getIssued()->format(self::DATE_FORMAT);
+                    $invoice['prijato_dt'] = $invoiceSrc->getReceived()->format(self::DATE_FORMAT);
+                    $invoice['splatnost_dt'] = $invoiceSrc->getMaturity()->format(self::DATE_FORMAT);
+                    $invoice['uhrazeno_dt'] = $invoiceSrc->getPaid()->format(self::DATE_FORMAT);
+                    $invoice['ucel_tx'] = $invoiceSrc->getDescription();
+                    $invoice['uhrazeno_udt'] = $invoiceSrc->getPaid()->getTimestamp();
+                    $invoice['detail_castka_am'] = 0;
+
+                    $inoviceItems = [];
+                    foreach ($invoiceSrc->getinvoiceItems() AS $invoiceItemSrc) {
+                        $invoiceItem = [];
+                        $invoiceItem['faktura_id'] = $invoiceSrc->getIdentifier();
+                        $invoiceItem['polozka_id'] = $invoiceItemSrc->getBudgetItem()->getIdentifier();
+                        $invoice['detail_castka_am'] += $invoiceItem['castka_am'] = $invoiceItemSrc->getAmount();
+                        $invoiceItem['nazev_st'] = $invoiceItemSrc->getBudgetItem()->getName();
+                        $invoiceItem['ve_vyberu'] = in_array($invoiceSrc->getIdentifier(), $budgetItems);
+                        $inoviceItems[] = $invoiceItem;
+                    }
+                    $invoice['polozky'] = $inoviceItems;
+
+                    $supplierOut['castka_celkem_am'] += $invoice['detail_castka_am'];
+                    $invoices[] = $invoice;
+                }
+
+                $supplierOut['faktury'] = $invoices;
+
+                $suppliersOut[] = $supplierOut;
+            }
+
+            $amountTotal = [];
+            foreach ($suppliersOut as $key => $row) {
+                $amountTotal[$key] = $row['castka_celkem_am'];
+            }
+            array_multisort($amountTotal, SORT_DESC, $suppliersOut);
+
+            return $suppliersOut;
+        });
+
+        $suppliersTotal = count($suppliersOut);
         $realPage = $page - 1;
         $chunked = array_chunk($suppliersOut, $limit);
         if (array_key_exists($realPage, $chunked))
