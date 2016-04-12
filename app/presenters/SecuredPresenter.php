@@ -19,7 +19,6 @@
  * MA 02110-1301  USA
  */
 
-use App\Model\DefaultDataCreator;
 use App\Model\Entities\User;
 use Kdyby\Doctrine\EntityManager;
 use thomaswelton\GravatarLib\Gravatar;
@@ -35,9 +34,6 @@ abstract class SecuredPresenter extends BasePresenter
     /** @var EntityManager @inject */
     public $entityManager;
 
-    /** @var DefaultDataCreator @inject */
-    public $defaultDataCreator;
-
     /** @var bool */
     private $assigned = false;
 
@@ -49,39 +45,33 @@ abstract class SecuredPresenter extends BasePresenter
     {
         parent::checkRequirements($element);
 
-        if (!$this->getUser()->isLoggedIn())
-        {
+        if (!$this->getUser()->isLoggedIn()) {
             $this->redirect('Sign:In', array('backlink' => $this->storeRequest()));
-        }
-        elseif ($this->getUser()->isLoggedIn())
-        {
-            if ($this->getUserEntity()->initializeDefaultData($this->defaultDataCreator))
-            {
-                $this->entityManager->flush();
-                $this->redirect('this');
-            }
-
+        } elseif ($this->getUser()->isLoggedIn()) {
             $this->assignUserInfo();
         }
     }
 
+    /**
+     * @throws Exception
+     */
     private function assignUserInfo()
     {
-        if ($this->assigned)
+        if ($this->assigned) {
             return;
+        }
 
         /** @var User $user */
         $user = $this->getUser()->getIdentity();
-        $user->updateLastActivity();
         $this->entityManager->flush();
 
         $this->template->userInfo = $user;
 
         $gravatar = new Gravatar;
         $gravatar->setDefaultImage('retro')
-                ->setAvatarSize(64)
-                ->setMaxRating('pg')
-                ->enableSecureImages();
+            ->setAvatarSize(64)
+            ->setMaxRating('pg')
+            ->enableSecureImages();
 
         $this->template->avatar = $gravatar->buildGravatarURL($user->getEmail());
 

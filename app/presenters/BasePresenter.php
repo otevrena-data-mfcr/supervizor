@@ -19,6 +19,8 @@
  * MA 02110-1301  USA
  */
 
+use \App\Model\Entities\User;
+
 /**
  * Base presenter for all application presenters.
  */
@@ -33,6 +35,10 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         return $this->getUser()->getIdentity();
     }
 
+    /**
+     * @return \WebLoader\Nette\CssLoader
+     * @throws \WebLoader\InvalidArgumentException
+     */
     public function createComponentCss()
     {
         $wwwDir = $this->getContext()->parameters['wwwDir'];
@@ -59,6 +65,9 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
     }
 
+    /**
+     * @return \WebLoader\Nette\JavaScriptLoader
+     */
     public function createComponentJs()
     {
         $wwwDir = $this->getContext()->parameters['wwwDir'];

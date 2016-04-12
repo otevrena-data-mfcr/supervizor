@@ -70,31 +70,31 @@ class Invoice extends Nette\Object
     private $vatRecord;
 
     /**
-     * @var decimal
+     * @var float
      * @ORM\Column(type="decimal", precision=14, scale=2)
      */
     private $amount;
 
     /**
-     * @var decimal
+     * @var float
      * @ORM\Column(type="decimal", precision=14, scale=2)
      */
     private $amountWithoutVat;
 
     /**
-     * @var decimal
+     * @var float
      * @ORM\Column(type="decimal", precision=14, scale=2)
      */
     private $amountOriginal;
 
     /**
-     * @var decimal
+     * @var float
      * @ORM\Column(type="decimal", precision=14, scale=2)
      */
     private $amountPaid;
 
     /**
-     * @var decimal
+     * @var float
      * @ORM\Column(type="decimal", precision=14, scale=2)
      */
     private $amountPaidOriginal;
@@ -155,22 +155,22 @@ class Invoice extends Nette\Object
 
     /**
      * Invoice constructor.
-     * @param string $identifier
-     * @param string $type
-     * @param string $distinction
-     * @param bool $vatRecord
-     * @param decimal $amount
-     * @param decimal $amountWithoutVat
-     * @param decimal $amountOriginal
-     * @param decimal $amountPaid
-     * @param decimal $amountPaidOriginal
-     * @param string $currency
-     * @param DateTime $issued
-     * @param DateTime $received
-     * @param DateTime $maturity
-     * @param DateTime $paid
-     * @param string $description
-     * @param \App\Model\Entities\Supplier $supplier
+     * @param $identifier
+     * @param $type
+     * @param $distinction
+     * @param $vatRecord
+     * @param $amount
+     * @param $amountWithoutVat
+     * @param $amountOriginal
+     * @param $amountPaid
+     * @param $amountPaidOriginal
+     * @param $currency
+     * @param $issued
+     * @param $received
+     * @param $maturity
+     * @param $paid
+     * @param $description
+     * @param Supplier|null $supplier
      */
     public function __construct($identifier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat, $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, $issued, $received, $maturity, $paid, $description, Supplier $supplier = null)
     {
@@ -213,7 +213,7 @@ class Invoice extends Nette\Object
     }
 
     /**
-     * @return InvoiceItems[]|ArrayCollection
+     * @return InvoiceItem[]|ArrayCollection
      */
     public function getinvoiceItems()
     {
@@ -221,8 +221,7 @@ class Invoice extends Nette\Object
     }
 
     /**
-     * 
-     * @return DateTime
+     * @return \DateTimeInterface
      */
     public function getPaid()
     {
@@ -230,8 +229,7 @@ class Invoice extends Nette\Object
     }
 
     /**
-     * 
-     * @return type
+     * @return \DateTimeInterface
      */
     public function getUpdated()
     {
@@ -239,74 +237,112 @@ class Invoice extends Nette\Object
     }
 
     /**
-     * 
-     * @return type
+     * @return string
      */
     public function getIdentifier()
     {
         return $this->identifier;
     }
 
+    /**
+     * @return string
+     */
     public function getType()
     {
         return $this->type;
     }
 
+    /**
+     * @return string
+     */
     public function getDistinction()
     {
         return $this->distinction;
     }
 
+    /**
+     * @return bool
+     */
     public function getVatRecord()
     {
         return $this->vatRecord;
     }
 
+    /**
+     * @return float
+     */
     public function getAmount()
     {
         return $this->amount;
     }
 
+    /**
+     * @return float
+     */
     public function getAmountWithoutVat()
     {
         return $this->amountWithoutVat;
     }
 
+    /**
+     * @return float
+     */
     public function getAmountOriginal()
     {
         return $this->amountOriginal;
     }
 
+    /**
+     * @return float
+     */
     public function getAmountPaidOriginal()
     {
         return $this->amountPaidOriginal;
     }
 
+    /**
+     * @return string
+     */
     public function getCurrency()
     {
         return $this->currency;
     }
 
+    /**
+     * @return \DateTimeInterface
+     */
     public function getIssued()
     {
         return $this->issued;
     }
 
+    /**
+     * @return \DateTimeInterface
+     */
     public function getReceived()
     {
         return $this->received;
     }
 
+    /**
+     * @return \DateTimeInterface
+     */
     public function getMaturity()
     {
         return $this->maturity;
     }
 
+    /**
+     * @return float
+     */
     public function getAmountPaid()
     {
         return $this->amountPaid;
     }
 
+    /**
+     * @return string
+     */
     public function getDescription()
     {
         return $this->description;

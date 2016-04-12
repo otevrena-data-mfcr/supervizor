@@ -38,11 +38,10 @@ class ImportTarget implements \Extensions\Importer\IImportTarget
     public $entityManager;
 
     /**
-     * 
-     * @param type $identifier
-     * @param type $supplierCompanyIdentifier
-     * @param type $name
-     * @return Supplier
+     * @param $identifier
+     * @param $supplierCompanyIdentifier
+     * @param $name
+     * @return Supplier|mixed|null|object
      */
     private function createSupplier($identifier, $supplierCompanyIdentifier, $name)
     {
@@ -58,10 +57,9 @@ class ImportTarget implements \Extensions\Importer\IImportTarget
     }
 
     /**
-     * 
-     * @param type $identifier
-     * @param type $name
-     * @return BudgetItem
+     * @param $identifier
+     * @param $name
+     * @return BudgetItem|mixed|null|object
      */
     private function createBudgetItem($identifier, $name)
     {
@@ -77,10 +75,9 @@ class ImportTarget implements \Extensions\Importer\IImportTarget
     }
 
     /**
-     * 
-     * @param type $budgetItem
-     * @param type $invoice
-     * @param type $budgetItemAmount
+     * @param $budgetItem
+     * @param $invoice
+     * @param $budgetItemAmount
      */
     private function createInvoiceItem($budgetItem, $invoice, $budgetItemAmount)
     {
@@ -93,28 +90,28 @@ class ImportTarget implements \Extensions\Importer\IImportTarget
     }
 
     /**
-     * 
-     * @param type $identifier
-     * @param type $type
-     * @param type $distinction
-     * @param type $vatRecord
-     * @param type $amount
-     * @param type $amountWithoutVat
-     * @param type $amountOriginal
-     * @param type $amountPaid
-     * @param type $amountPaidOriginal
-     * @param type $currency
+     * @param $identifier
+     * @param $type
+     * @param $distinction
+     * @param $vatRecord
+     * @param $amount
+     * @param $amountWithoutVat
+     * @param $amountOriginal
+     * @param $amountPaid
+     * @param $amountPaidOriginal
+     * @param $currency
      * @param \DateTime $issued
      * @param \DateTime $received
      * @param \DateTime $paid
      * @param \DateTime $maturity
-     * @param type $description
-     * @param type $supplierIdentifier
-     * @param type $supplierName
-     * @param type $supplierCompanyIdentifier
-     * @param int $budgetItemIdentifier
-     * @param string $budgetItemName
-     * @param type $budgetItemAmount
+     * @param $description
+     * @param $supplierIdentifier
+     * @param $supplierName
+     * @param $supplierCompanyIdentifier
+     * @param $budgetItemIdentifier
+     * @param $budgetItemName
+     * @param $budgetItemAmount
+     * @throws \Exception
      */
     public function setInvoice($identifier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat, $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, \DateTime $issued, \DateTime $received, \DateTime $paid, \DateTime $maturity, $description, $supplierIdentifier, $supplierName, $supplierCompanyIdentifier, $budgetItemIdentifier, $budgetItemName, $budgetItemAmount
     )

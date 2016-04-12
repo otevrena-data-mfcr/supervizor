@@ -51,6 +51,9 @@ class SignPresenter extends BasePresenter
         return $signInControl;
     }
 
+    /**
+     * @param Form $form
+     */
     public function signInFormSucceeded(Form $form)
     {
         $values = $form->getValues();
@@ -76,6 +79,9 @@ class SignPresenter extends BasePresenter
         }
     }
 
+    /**
+     *
+     */
     public function actionOut()
     {
         $this->getUser()->logout();

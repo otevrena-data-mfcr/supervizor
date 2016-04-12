@@ -31,9 +31,19 @@ class Importer extends Nette\Object
 
     /** @var Nette\Caching\Cache */
     public $cache;
+
+    /** @var array */
     private $imports = [];
+
+    /** @var  IImportTarget */
     private $target;
 
+    /**
+     * Importer constructor.
+     * @param Nette\Caching\IStorage $cacheStorage
+     * @param array $imports
+     * @param $target
+     */
     public function __construct(Nette\Caching\IStorage $cacheStorage, array $imports, $target)
     {
         $this->cache = new Nette\Caching\Cache($cacheStorage, self::$namespace);
@@ -41,6 +51,9 @@ class Importer extends Nette\Object
         $this->target = $target;
     }
 
+    /**
+     *
+     */
     public function doImport()
     {
         foreach ($this->imports as $import)

@@ -76,10 +76,10 @@ class BudgetItem extends Nette\Object
     private $invoiceItems;
 
     /**
-     * 
-     * @param type $identifier
-     * @param type $name
-     * @param \App\Model\Entities\BudgetGroup $budgetGroup
+     * BudgetItem constructor.
+     * @param $identifier
+     * @param $name
+     * @param BudgetGroup|null $budgetGroup
      */
     public function __construct($identifier, $name, BudgetGroup $budgetGroup = null)
     {
@@ -149,13 +149,16 @@ class BudgetItem extends Nette\Object
     }
 
     /**
-     * @return InvoiceItems[]|ArrayCollection
+     * @return InvoiceItem[]|ArrayCollection
      */
     public function getinvoiceItems()
     {
         return $this->invoiceItems;
     }
 
+    /**
+     * @return int
+     */
     public function getIdentifier()
     {
         return $this->identifier;

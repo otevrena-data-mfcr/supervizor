@@ -69,7 +69,7 @@ class Supplier extends Nette\Object
     private $updated;
 
     /**
-     * @var ArrayCollection|Invoices[]
+     * @var ArrayCollection|Invoice[]
      * @ORM\OneToMany(targetEntity="Invoice", mappedBy="supplier",cascade={"persist"})
      */
     private $invoices;
@@ -169,11 +169,17 @@ class Supplier extends Nette\Object
         return $this->vatIdentifier;
     }
 
+    /**
+     * @return string
+     */
     public function getCompanyIdentifier()
     {
         return $this->companyIdentifier;
     }
 
+    /**
+     * @return Invoice[]|ArrayCollection
+     */
     public function getInvoices()
     {
         return $this->invoices;

@@ -38,6 +38,7 @@ final class ImporterExtension extends CompilerExtension
         'imports' => []
     ];
 
+
     public function loadConfiguration()
     {
         $config = $this->validateConfig($this->defaults);

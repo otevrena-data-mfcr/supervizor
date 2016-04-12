@@ -30,11 +30,19 @@ class SupplierRepository
     /** @var \Kdyby\Doctrine\EntityRepository */
     private $supplierRepository;
 
+    /**
+     * SupplierRepository constructor.
+     * @param EntityManager $entityManager
+     */
     public function __construct(EntityManager $entityManager)
     {
         $this->supplierRepository = $entityManager->getRepository(Supplier::class);
     }
 
+    /**
+     * @param $identifier
+     * @return mixed|null|object
+     */
     public function findByIdentifier($identifier)
     {
         return $this->supplierRepository->findOneBy(['identifier' => $identifier]);

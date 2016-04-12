@@ -52,7 +52,7 @@ class InvoiceItem extends Nette\Object
     private $budgetItem;
 
     /**
-     * @var decimal
+     * @var float
      * @ORM\Column(type="decimal", precision=14, scale=2)
      */
     private $amount;
@@ -73,7 +73,7 @@ class InvoiceItem extends Nette\Object
      * InvoiceItem description.
      * @param \App\Model\Entities\Invoice $invoice
      * @param \App\Model\Entities\BudgetItem $budgetItem
-     * @param decimal $amount
+     * @param float $amount
      */
     public function __construct(Invoice $invoice, BudgetItem $budgetItem, $amount)
     {
@@ -119,8 +119,7 @@ class InvoiceItem extends Nette\Object
     }
 
     /**
-     * 
-     * @return type
+     * @return BudgetItem
      */
     public function getBudgetItem()
     {

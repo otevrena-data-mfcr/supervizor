@@ -31,9 +31,13 @@ class BudgetRepository
     /** @var \Kdyby\Doctrine\EntityRepository */
     private $budgetGroupRepository;
 
-    /** @var \Kdyby\Doctrine\BudgetItem */
+    /** @var BudgetItem */
     private $budgetItemRepository;
 
+    /**
+     * BudgetRepository constructor.
+     * @param EntityManager $entityManager
+     */
     public function __construct(EntityManager $entityManager)
     {
         $this->budgetGroupRepository = $entityManager->getRepository(BudgetGroup::class);
@@ -48,6 +52,19 @@ class BudgetRepository
         return $this->budgetGroupRepository;
     }
 
+    /**
+     * @param $slug
+     * @return mixed|null|object
+     */
+    public function findGroupBySlug($slug)
+    {
+        return $this->budgetGroupRepository->findOneBy(['slug' => $slug]);
+    }
+
+    /**
+     * @param $identifier
+     * @return mixed|null|object
+     */
     public function findByIdentifier($identifier)
     {
         return $this->budgetItemRepository->findOneBy(['identifier' => $identifier]);

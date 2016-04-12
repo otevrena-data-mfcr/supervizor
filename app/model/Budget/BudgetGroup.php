@@ -153,7 +153,7 @@ class BudgetGroup extends Nette\Object
     }
 
     /**
-     * @return BudgetItems[]|ArrayCollection
+     * @return BudgetItem[]|ArrayCollection
      */
     public function getBudgetItems()
     {
@@ -197,8 +197,8 @@ class BudgetGroup extends Nette\Object
     }
 
     /**
-     * 
-     * @return type
+     *
+     * @return string
      */
     public function getColor()
     {
@@ -206,8 +206,8 @@ class BudgetGroup extends Nette\Object
     }
 
     /**
-     * 
-     * @return type
+     *
+     * @return string
      */
     public function getSlug()
     {

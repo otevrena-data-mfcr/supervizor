@@ -77,7 +77,11 @@ class InvoiceRepository
         return $this->invoiceRepository->findOneBy([], ['updated' => 'DESC']);
     }
 
-
+    /**
+     * @param Supplier $supplier
+     * @param BudgetGroup $budgetGroup
+     * @return array
+     */
     public function getBySupplierAndGroup(Supplier $supplier, BudgetGroup $budgetGroup)
     {
         $qb = $this->invoiceRepository->createQueryBuilder('i')

@@ -16,6 +16,30 @@ namespace Extensions\Importer;
 interface IImportTarget
 {
 
+    /**
+     * @param $identifier
+     * @param $type
+     * @param $distinction
+     * @param $vatRecord
+     * @param $amount
+     * @param $amountWithoutVat
+     * @param $amountOriginal
+     * @param $amountPaid
+     * @param $amountPaidOriginal
+     * @param $currency
+     * @param \DateTime $issued
+     * @param \DateTime $received
+     * @param \DateTime $paid
+     * @param \DateTime $maturity
+     * @param $description
+     * @param $supplierIdentifier
+     * @param $supplierName
+     * @param $supplierCompanyIdentifier
+     * @param $budgetItemIdentifier
+     * @param $budgetItemName
+     * @param $budgetItemAmount
+     * @return mixed
+     */
     public function setInvoice($identifier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat, $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, \DateTime $issued, \DateTime $received, \DateTime $paid, \DateTime $maturity, $description, $supplierIdentifier, $supplierName, $supplierCompanyIdentifier, $budgetItemIdentifier, $budgetItemName, $budgetItemAmount
     );
 }

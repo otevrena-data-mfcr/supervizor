@@ -22,6 +22,11 @@
 use App\Model\Repository\InvoiceRepository;
 use App\Model\Repository\BudgetRepository;
 use App\Model\Repository\SupplierRepository;
+use App\Model\Entities\BudgetGroup;
+use Doctrine\Common\Collections\ArrayCollection;
+use App\Model\Entities\InvoiceItem;
+use App\Model\Entities\Supplier;
+use App\Model\Entities\Invoice;
 use Nette\Caching\Cache;
 use Nette\Http\IResponse;
 
@@ -46,10 +51,10 @@ class AjaxPresenter extends BasePresenter
     const DATE_FORMAT = 'Y-m-d H:i:s';
 
     /**
-     *
-     * @var type 
+     * @var Cache
      */
     private $cache;
+
 
     public function startup()
     {
@@ -57,6 +62,14 @@ class AjaxPresenter extends BasePresenter
         $this->cache = new Cache($this->cacheStorage, 'Ajax');
     }
 
+    /**
+     * @param $name
+     * @param callable $dataSource
+     * @return mixed|NULL
+     * @throws Exception
+     * @throws Throwable
+     * @throws \Nette\Application\AbortException
+     */
     private function ajaxCache($name, callable $dataSource)
     {
         $lastUpdatedInvoice = $this->invoiceRepository->getLastUpdated();
@@ -76,6 +89,9 @@ class AjaxPresenter extends BasePresenter
         return $data;
     }
 
+    /**
+     * @param null $budgetGroupId
+     */
     public function renderBudgetGroups($budgetGroupId = null)
     {
         $data = $this->ajaxCache(__FUNCTION__ . $budgetGroupId, function() use($budgetGroupId)
@@ -89,7 +105,11 @@ class AjaxPresenter extends BasePresenter
             {
                 $filter['id'] = $budgetGroupId;
             }
+
+            /** @var ArrayCollection $s */
             $s = $this->budgetGroupRepository->getBudgetGroupRepository()->findBy($filter);
+
+            /** @var BudgetGroup $u */
             foreach ($s AS $u)
             {
                 $group = [];
@@ -110,6 +130,7 @@ class AjaxPresenter extends BasePresenter
                     $item['id'] = $i->getIdentifier();
                     $item['nazev'] = $i->getName();
                     $amount = 0;
+                    /** @var InvoiceItem $invoiceItem */
                     foreach ($i->getinvoiceItems() AS $invoiceItem)
                     {
                         $amount += $invoiceItem->getAmount();
@@ -175,6 +196,9 @@ class AjaxPresenter extends BasePresenter
         }
     }
 
+    /**
+     * @param $supplierIdentifier
+     */
     public function renderSupplier($supplierIdentifier)
     {
         $data = $this->ajaxCache(__FUNCTION__ . $supplierIdentifier, function() use($supplierIdentifier)
@@ -239,6 +263,14 @@ class AjaxPresenter extends BasePresenter
         }
     }
 
+    /**
+     * @param null $budgetGroupSlug
+     * @param int $page
+     * @param array $budgetItems
+     * @param null $dateFrom
+     * @param null $dateTo
+     * @throws \Nette\Application\BadRequestException
+     */
     public function renderSuppliers($budgetGroupSlug = null, $page = 1, array $budgetItems = [], $dateFrom = null, $dateTo = null)
     {
         $budgetGroup = $this->budgetGroupRepository->findGroupBySlug($budgetGroupSlug);
@@ -287,6 +319,7 @@ class AjaxPresenter extends BasePresenter
 
         $suppliersOut = [];
 
+        /** @var Supplier $supplier */
         foreach ($all AS $supplier)
         {
             $supplierOut = [];
@@ -297,6 +330,8 @@ class AjaxPresenter extends BasePresenter
             $supplierOut['pocet_celkem_no'] = 0;
 
             $invoices = [];
+
+            /** @var Invoice $invoiceSrc */
             foreach ($this->invoiceRepository->getBySupplierAndGroup($supplier, $budgetGroup) AS $invoiceSrc)
             {
                 $supplierOut['pocet_celkem_no'] ++;
@@ -393,6 +428,10 @@ class AjaxPresenter extends BasePresenter
         }
     }
 
+    /**
+     * @param $data
+     * @throws \Nette\Application\AbortException
+     */
     private function dataOut($data)
     {
         echo '<pre>';
