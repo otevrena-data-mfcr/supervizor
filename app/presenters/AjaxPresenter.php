@@ -23,6 +23,7 @@ use App\Model\Repository\InvoiceRepository;
 use App\Model\Repository\BudgetRepository;
 use App\Model\Repository\SupplierRepository;
 use Nette\Caching\Cache;
+use Nette\Http\IResponse;
 
 class AjaxPresenter extends BasePresenter
 {
@@ -35,7 +36,7 @@ class AjaxPresenter extends BasePresenter
 
     /** @var SupplierRepository @inject */
     public $supplierRepository;
-
+    
     /** @var Nette\Http\Context @inject */
     public $httpContext;
 
@@ -240,6 +241,13 @@ class AjaxPresenter extends BasePresenter
 
     public function renderSuppliers($budgetGroupSlug = null, $page = 1, array $budgetItems = [], $dateFrom = null, $dateTo = null)
     {
+        $budgetGroup = $this->budgetGroupRepository->findGroupBySlug($budgetGroupSlug);
+
+        if (!$budgetGroup)
+        {
+            $this->error('Subject not found!', IResponse::S404_NOT_FOUND);
+        }
+        
         $limit = 10;
         $qb = $this->supplierRepository->getSupplierRepository()->createQueryBuilder('s');
         $qb->select('s')
@@ -289,7 +297,7 @@ class AjaxPresenter extends BasePresenter
             $supplierOut['pocet_celkem_no'] = 0;
 
             $invoices = [];
-            foreach ($supplier->getInvoices() AS $invoiceSrc)
+            foreach ($this->invoiceRepository->getBySupplierAndGroup($supplier, $budgetGroup) AS $invoiceSrc)
             {
                 $supplierOut['pocet_celkem_no'] ++;
 

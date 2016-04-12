@@ -24,6 +24,7 @@ namespace App\Model\Repository;
 use App\Model\Entities\Invoice;
 use App\Model\Entities\InvoiceItem;
 use App\Model\Entities\BudgetGroup;
+use App\Model\Entities\Supplier;
 use Kdyby\Doctrine\EntityManager;
 
 class InvoiceRepository
@@ -38,6 +39,10 @@ class InvoiceRepository
     /** @var \Kdyby\Doctrine\EntityRepository */
     private $invoiceItemRepository;
 
+    /**
+     * InvoiceRepository constructor.
+     * @param EntityManager $entityManager
+     */
     public function __construct(EntityManager $entityManager)
     {
         $this->invoiceRepository = $entityManager->getRepository(Invoice::class);
@@ -45,19 +50,46 @@ class InvoiceRepository
         $this->invoiceItemRepository = $entityManager->getRepository(InvoiceItem::class);
     }
 
+    /**
+     * @param $budgetItem
+     * @param $invoice
+     * @return mixed|null|object
+     */
     public function findItemByInvoiceAndBudgetItem($budgetItem, $invoice)
     {
         return $this->invoiceItemRepository->findOneBy(['budgetItem' => $budgetItem, 'invoice' => $invoice]);
     }
 
+    /**
+     * @param $identifier
+     * @return mixed|null|object
+     */
     public function findByIdentifier($identifier)
     {
         return $this->invoiceRepository->findOneBy(['identifier' => $identifier]);
     }
 
+    /**
+     * @return mixed|null|object
+     */
     public function getLastUpdated()
     {
         return $this->invoiceRepository->findOneBy([], ['updated' => 'DESC']);
+    }
+
+
+    public function getBySupplierAndGroup(Supplier $supplier, BudgetGroup $budgetGroup)
+    {
+        $qb = $this->invoiceRepository->createQueryBuilder('i')
+            ->select('i')
+            ->join('i.invoiceItems', 'ii')
+            ->join('ii.budgetItem', 'bi')
+            ->where('i.supplier = :supplier')
+            ->andWhere('bi.budgetGroup = :budgetGroup')
+            ->groupBy('i.id')
+            ->setParameters(['supplier' => $supplier, 'budgetGroup' => $budgetGroup]);
+
+        return $qb->getQuery()->getResult();
     }
 
 }
