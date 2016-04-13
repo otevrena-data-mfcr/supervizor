@@ -215,7 +215,7 @@ class Invoice extends Nette\Object
     /**
      * @return InvoiceItem[]|ArrayCollection
      */
-    public function getinvoiceItems()
+    public function getInvoiceItems()
     {
         return $this->invoiceItems;
     }
@@ -348,4 +348,8 @@ class Invoice extends Nette\Object
         return $this->description;
     }
 
+    public function getSupplier()
+    {
+        return $this->supplier;
+    }
 }

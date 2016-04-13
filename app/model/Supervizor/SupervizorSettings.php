@@ -30,5 +30,4 @@ use Nette;
  */
 class SupervizorSettings extends Nette\Object
 {
-    
 }

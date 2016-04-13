@@ -35,6 +35,27 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
         return $this->getUser()->getIdentity();
     }
 
+    public function createTemplate()
+    {
+        $template = parent::createTemplate();
+
+        $template->registerHelper('formatNumber', $this->formatNumber);
+
+        $template->registerHelper('formatPrice', $this->formatPrice);
+
+        return $template;
+    }
+
+    public function formatPrice($price)
+    {
+        return $this->formatNumber($price) . ' Kč'; //!FIXME Locales
+    }
+
+    public function formatNumber($number)
+    {
+        return number_format($number, 0, ',', ' '); //!FIXME Locales
+    }
+
     /**
      * @return \WebLoader\Nette\CssLoader
      * @throws \WebLoader\InvalidArgumentException

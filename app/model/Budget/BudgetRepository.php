@@ -23,6 +23,7 @@ namespace App\Model\Repository;
 
 use App\Model\Entities\BudgetGroup;
 use App\Model\Entities\BudgetItem;
+use App\Model\Entities\Invoice;
 use Kdyby\Doctrine\EntityManager;
 
 class BudgetRepository
@@ -68,6 +69,17 @@ class BudgetRepository
     public function findByIdentifier($identifier)
     {
         return $this->budgetItemRepository->findOneBy(['identifier' => $identifier]);
+    }
+
+    public function getGroupByInvoice(Invoice $invoice)
+    {
+        $qb = $this->budgetGroupRepository->createQueryBuilder('bg')
+            ->join('bg.budgetItems', 'bi')
+            ->join('bi.invoiceItems', 'ii')
+            ->where('ii.invoice = :invoice')
+            ->setParameter('invoice', $invoice);
+
+        return $qb->getQuery()->getSingleResult();
     }
 
 }
