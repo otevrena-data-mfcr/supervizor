@@ -181,9 +181,9 @@ class Import extends Nette\Object
     /**
      * @param ImportGroup $setImportGroup
      */
-    public function setImportGroup(ImportGroup $setImportGroup)
+    public function setImportGroup(ImportGroup $importGroup)
     {
-        $this->setImportGroup = $setImportGroup;
+        $this->importGroup = $importGroup;
     }
 
     /**
