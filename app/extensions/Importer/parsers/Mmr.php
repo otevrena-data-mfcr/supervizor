@@ -8,29 +8,26 @@ class Mmr extends ImportParser implements IImportParser
 {
 
     /**
-     *
-     * @var type 
+     * @var
      */
     private $info;
 
     /**
      *
-     * @var ette\Caching\Cache 
+     * @var Nette\Caching\Cache
      */
     private $cache;
 
     /**
-     *
-     * @var type 
+     * @var
      */
     private $target;
 
     /**
-     * 
+     * Mmr constructor.
      * @param Nette\Caching\Cache $cache
-     * @param type $source
-     * @param type $target
-     * @throws ImporterBadSourceException
+     * @param $source
+     * @param $target
      */
     public function __construct(Nette\Caching\Cache $cache, $source, $target)
     {
@@ -56,7 +53,7 @@ class Mmr extends ImportParser implements IImportParser
 
     /**
      * converts shitty date to DateTime
-     * @param type $mess
+     * @param string $mess
      * @return \DateTime|boolean
      */
     private function mess2DateTime($mess)
@@ -95,6 +92,10 @@ class Mmr extends ImportParser implements IImportParser
         return (float) strtr($cs, array(',' => '.', ' ' => ''));
     }
 
+    /**
+     * @throws \Exception
+     * @throws \Throwable
+     */
     public function proccess()
     {
         $parsedDataKey = $this->info->id . '_parsedData';
@@ -123,6 +124,9 @@ class Mmr extends ImportParser implements IImportParser
         }
     }
 
+    /**
+     * @return mixed
+     */
     public function parse()
     {
         $csvArray = file($this->info->url);

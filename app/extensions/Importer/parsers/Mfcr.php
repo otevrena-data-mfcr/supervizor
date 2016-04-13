@@ -8,29 +8,26 @@ class Mfcr extends ImportParser implements IImportParser
 {
 
     /**
-     *
-     * @var type 
+     * @var
      */
     private $info;
 
     /**
      *
-     * @var ette\Caching\Cache 
+     * @var Nette\Caching\Cache
      */
     private $cache;
 
     /**
-     *
-     * @var type 
+     * @var
      */
     private $target;
 
     /**
-     * 
+     * Mfcr constructor.
      * @param Nette\Caching\Cache $cache
-     * @param type $source
-     * @param type $target
-     * @throws ImporterBadSourceException
+     * @param $source
+     * @param $target
      */
     public function __construct(Nette\Caching\Cache $cache, $source, $target)
     {
@@ -54,6 +51,10 @@ class Mfcr extends ImportParser implements IImportParser
         $this->proccess();
     }
 
+    /**
+     * @throws \Exception
+     * @throws \Throwable
+     */
     public function proccess()
     {
 
@@ -93,6 +94,9 @@ class Mfcr extends ImportParser implements IImportParser
         return (float) strtr($cs, array(',' => '.', ' ' => ''));
     }
 
+    /**
+     * @return mixed
+     */
     public function parse()
     {
         $csvArray = file($this->info->url);
