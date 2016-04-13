@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "56a2932b180045bcf4c896b9b4d8c5e9",
-    "content-hash": "f5e3745af269281b02d1c841a1f70afc",
+    "hash": "438ed8b450bd41c6b322396cc27da67b",
+    "content-hash": "a589b07a2e5023f2f6d380a5eba51869",
     "packages": [
         {
             "name": "dg/adminer-custom",
@@ -683,6 +683,72 @@
             "time": "2016-01-05 21:34:58"
         },
         {
+            "name": "ipub/visual-paginator",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/iPublikuj/visual-paginator.git",
+                "reference": "96d8dd414897c75fa0d0a5add4ca1e253381fcd2"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/iPublikuj/visual-paginator/zipball/96d8dd414897c75fa0d0a5add4ca1e253381fcd2",
+                "reference": "96d8dd414897c75fa0d0a5add4ca1e253381fcd2",
+                "shasum": ""
+            },
+            "require": {
+                "latte/latte": "~2.2",
+                "nette/application": "~2.2",
+                "nette/di": "~2.2",
+                "nette/utils": "~2.2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "janmarek/mockista": "@dev",
+                "nette/bootstrap": "~2.2",
+                "nette/forms": "~2.2",
+                "nette/mail": "~2.2",
+                "nette/robot-loader": "~2.2",
+                "nette/safe-stream": "~2.2",
+                "nette/tester": "@dev",
+                "tracy/tracy": "@dev"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "IPub\\VisualPaginator\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "BSD-3-Clause",
+                "GPL-2.0",
+                "GPL-3.0"
+            ],
+            "authors": [
+                {
+                    "name": "David Grudl",
+                    "email": "david@grudl.com"
+                },
+                {
+                    "name": "iPublikuj:cms",
+                    "email": "info@ipublikuj.eu",
+                    "homepage": "http://www.ipublikuj.eu/"
+                }
+            ],
+            "description": "Visual paginator for Nette Framework",
+            "homepage": "https://github.com/iPublikuj/visual-paginator",
+            "keywords": [
+                "ipub",
+                "ipublikuj",
+                "nette",
+                "paginator",
+                "paging",
+                "tools"
+            ],
+            "time": "2016-02-16 09:39:47"
+        },
+        {
             "name": "janmarek/webloader",
             "version": "dev-master",
             "source": {
@@ -939,16 +1005,16 @@
         },
         {
             "name": "kdyby/doctrine",
-            "version": "v3.0.1",
+            "version": "v3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Kdyby/Doctrine.git",
-                "reference": "69c63fe943d1fade98d8879a9e3aa8fc9e7b5c4b"
+                "reference": "f63bb98bd2a70ccb702259c401cb3dba8c20bb0c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/69c63fe943d1fade98d8879a9e3aa8fc9e7b5c4b",
-                "reference": "69c63fe943d1fade98d8879a9e3aa8fc9e7b5c4b",
+                "url": "https://api.github.com/repos/Kdyby/Doctrine/zipball/f63bb98bd2a70ccb702259c401cb3dba8c20bb0c",
+                "reference": "f63bb98bd2a70ccb702259c401cb3dba8c20bb0c",
                 "shasum": ""
             },
             "require": {
@@ -961,7 +1027,8 @@
                 "nette/di": "~2.3@dev",
                 "nette/neon": "~2.3@dev",
                 "nette/robot-loader": "~2.3@dev",
-                "nette/utils": "~2.3@dev"
+                "nette/utils": "~2.3@dev",
+                "php": ">=5.4"
             },
             "require-dev": {
                 "dg/dibi": "~2.0",
@@ -991,7 +1058,7 @@
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "3.0-dev"
+                    "dev-nette-2.3": "3.1-dev"
                 }
             },
             "autoload": {
@@ -1026,7 +1093,7 @@
                 "nette",
                 "orm"
             ],
-            "time": "2015-11-14 14:11:04"
+            "time": "2016-04-09 10:40:26"
         },
         {
             "name": "kdyby/doctrine-cache",
@@ -1244,6 +1311,59 @@
                 "twig"
             ],
             "time": "2016-02-19 21:52:43"
+        },
+        {
+            "name": "leafo/scssphp",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leafo/scssphp.git",
+                "reference": "c4ad181885e5f85a9f71002983597d9da2c11a8c"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leafo/scssphp/zipball/c4ad181885e5f85a9f71002983597d9da2c11a8c",
+                "reference": "c4ad181885e5f85a9f71002983597d9da2c11a8c",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "kherge/box": "~2.5",
+                "phpunit/phpunit": "~3.7",
+                "squizlabs/php_codesniffer": "~2.5"
+            },
+            "bin": [
+                "bin/pscss"
+            ],
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Leafo\\ScssPhp\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Leaf Corcoran",
+                    "email": "leafot@gmail.com",
+                    "homepage": "http://leafo.net"
+                }
+            ],
+            "description": "scssphp is a compiler for SCSS written in PHP.",
+            "homepage": "http://leafo.github.io/scssphp/",
+            "keywords": [
+                "css",
+                "less",
+                "sass",
+                "scss",
+                "stylesheet"
+            ],
+            "time": "2016-02-24 15:41:07"
         },
         {
             "name": "majkl578/nette-identity-doctrine",
@@ -2546,70 +2666,6 @@
             "time": "2015-08-22 12:32:22"
         },
         {
-            "name": "o5/grido",
-            "version": "dev-master",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/o5/grido.git",
-                "reference": "cec1976480780520bef796daf83798095b9ea1e3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/o5/grido/zipball/cec1976480780520bef796daf83798095b9ea1e3",
-                "reference": "cec1976480780520bef796daf83798095b9ea1e3",
-                "shasum": ""
-            },
-            "require": {
-                "latte/latte": "~2.3",
-                "nette/application": "~2.2",
-                "nette/component-model": "~2.2",
-                "nette/forms": "~2.2",
-                "nette/utils": "~2.2",
-                "php": ">=5.5",
-                "symfony/property-access": "~3.0"
-            },
-            "require-dev": {
-                "dibi/dibi": "~3.0.1",
-                "kdyby/doctrine": "~3.0.1",
-                "mockery/mockery": "~0.9.3",
-                "nette/bootstrap": "~2.3",
-                "nette/database": "~2.2",
-                "nette/tester": "~1.6.1",
-                "squizlabs/php_codesniffer": "~2.5",
-                "tracy/tracy": "~2.3"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Grido\\": "src"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "BSD-3-Clause",
-                "GPL-2.0",
-                "GPL-3.0"
-            ],
-            "authors": [
-                {
-                    "name": "Petr Bugyík",
-                    "homepage": "http://petr.bugyik.cz/"
-                }
-            ],
-            "description": "Grido - DataGrid for Nette Framework",
-            "homepage": "http://o5.github.io/grido-examples/",
-            "keywords": [
-                "datagrid",
-                "datalist",
-                "grid",
-                "list",
-                "nette",
-                "table",
-                "tablegrid"
-            ],
-            "time": "2016-01-16 00:02:53"
-        },
-        {
             "name": "raven/raven",
             "version": "0.13.0",
             "source": {
@@ -2669,12 +2725,12 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/Salamek/raven-nette.git",
-                "reference": "f79c5fdbd4f4c97a42dfb818ff76390ac3d1d26a"
+                "reference": "03f96e6c230b4b7535e70f7a2f58fefb3350a87b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Salamek/raven-nette/zipball/f79c5fdbd4f4c97a42dfb818ff76390ac3d1d26a",
-                "reference": "f79c5fdbd4f4c97a42dfb818ff76390ac3d1d26a",
+                "url": "https://api.github.com/repos/Salamek/raven-nette/zipball/03f96e6c230b4b7535e70f7a2f58fefb3350a87b",
+                "reference": "03f96e6c230b4b7535e70f7a2f58fefb3350a87b",
                 "shasum": ""
             },
             "require": {
@@ -2708,7 +2764,7 @@
                 "sentry",
                 "tracy"
             ],
-            "time": "2016-03-29 15:30:52"
+            "time": "2016-04-08 16:08:29"
         },
         {
             "name": "symfony/console",
@@ -2830,66 +2886,6 @@
             "time": "2016-01-20 09:13:37"
         },
         {
-            "name": "symfony/property-access",
-            "version": "v3.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/symfony/property-access.git",
-                "reference": "475e661a0b90f0e6942a7d2fdf4e0dbf8104fef3"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/symfony/property-access/zipball/475e661a0b90f0e6942a7d2fdf4e0dbf8104fef3",
-                "reference": "475e661a0b90f0e6942a7d2fdf4e0dbf8104fef3",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.9"
-            },
-            "type": "library",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "3.0-dev"
-                }
-            },
-            "autoload": {
-                "psr-4": {
-                    "Symfony\\Component\\PropertyAccess\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Potencier",
-                    "email": "fabien@symfony.com"
-                },
-                {
-                    "name": "Symfony Community",
-                    "homepage": "https://symfony.com/contributors"
-                }
-            ],
-            "description": "Symfony PropertyAccess Component",
-            "homepage": "https://symfony.com",
-            "keywords": [
-                "access",
-                "array",
-                "extraction",
-                "index",
-                "injection",
-                "object",
-                "property",
-                "property path",
-                "reflection"
-            ],
-            "time": "2016-03-23 13:23:25"
-        },
-        {
             "name": "thomaswelton/gravatarlib",
             "version": "dev-master",
             "target-dir": "thomaswelton/GravatarLib",
@@ -3004,12 +3000,13 @@
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": {
-        "o5/grido": 20,
         "janmarek/webloader": 20,
+        "leafo/scssphp": 20,
         "natxet/cssmin": 20,
         "dg/adminer-custom": 20,
+        "salamek/raven-nette": 20,
         "thomaswelton/gravatarlib": 20,
-        "salamek/raven-nette": 20
+        "ipub/visual-paginator": 20
     },
     "prefer-stable": false,
     "prefer-lowest": false,
