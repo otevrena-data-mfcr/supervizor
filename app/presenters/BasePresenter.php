@@ -19,13 +19,24 @@
  * MA 02110-1301  USA
  */
 
-use \App\Model\Entities\User;
+use App\Model\Entities\User;
+use App\Model\Repository\ImportRepository;
 
 /**
  * Base presenter for all application presenters.
  */
 abstract class BasePresenter extends \Nette\Application\UI\Presenter
 {
+    /** @var ImportRepository @inject */
+    public $importRepository;
+
+    /** @var string @persistent */
+    public $importGroupSlug = null;
+
+    /** @var string @persistent */
+    public $importSlug = null;
+
+
 
     /**
      * @return \Nette\Security\IIdentity|User|NULL
@@ -33,6 +44,34 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
     public function getUserEntity()
     {
         return $this->getUser()->getIdentity();
+    }
+
+    public function beforeRender()
+    {
+        parent::beforeRender();
+        $this->template->importGroups = $this->importRepository->getImportGroups();
+
+        if ($this->importGroupSlug) {
+            $selectedImportGroup = $this->importRepository->getImportGroupBySlug($this->importGroupSlug);
+        } else {
+            $selectedImportGroup = $this->importRepository->getDefaultImportGroup();
+        }
+
+        $this->template->imports = $this->importRepository->getImportsByGroup($selectedImportGroup);
+
+        if ($this->importSlug) {
+            $selectedImport = $this->importRepository->getImportByGroupAndSlug($selectedImportGroup, $this->importSlug);
+        } else {
+            $selectedImport = $this->importRepository->getDefaultImport();
+        }
+
+        $this->importGroupSlug = $selectedImportGroup->getSlug();
+        $this->importSlug = $selectedImport->getSlug();
+
+        $this->template->selectedImport = $selectedImport;
+        $this->template->selectedImportGroup = $selectedImportGroup;
+
+
     }
 
     public function createTemplate()
