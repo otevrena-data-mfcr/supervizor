@@ -27,13 +27,13 @@ extensions:
     doctrine: Kdyby\Doctrine\DI\OrmExtension
     doctrine2identity: Majkl578\NetteAddons\Doctrine2Identity\DI\IdentityExtension
     sentryLogger: Salamek\RavenNette\DI\SentryLoggerExtension
-    recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
+    #recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
     importer: Extensions\Importer\ImporterExtension
     visualPaginator: IPub\VisualPaginator\DI\VisualPaginatorExtension
 
-recaptcha:
-    secretKey: 6LcbKvoSAAAAABfcIS7J3xftn0-NXJOsirB13Sj3
-    siteKey: 6LcbKvoSAAAAACZ_sBdoNPkqXxoewSa1TMD6nfHP
+#recaptcha:
+#    secretKey:
+#    siteKey:
 
 doctrine:
     host: %database.host%
@@ -45,7 +45,7 @@ doctrine:
 
 
 sentryLogger:
-    dsn: 'https://5db59f68629d4750b5ef56caae332dfa:d251f29fec1e4bf79768823dffb8f069@sentry.salamek.cz/8'
+    dsn: ''
 
 includes:
     - components.neon
