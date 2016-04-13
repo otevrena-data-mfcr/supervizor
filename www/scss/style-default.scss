@@ -6,473 +6,1031 @@ small, strike, strong, sub, sup, tt, var,
 b, u, i, center,
 dl, dt, dd, ol, ul, li,
 fieldset, form, label, legend,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
 menu, nav, output, ruby, section, summary,
 time, mark, audio, video {
-    margin: 0;
-    padding: 0;
-    border: 0;
-    font-size: 100%;
-    font: inherit;
-    vertical-align: baseline;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
-    display: block;
+  display: block;
 }
+
 body {
-    /* 	line-height: 1; */
+  /* 	line-height: 1; */
 }
+
 ol, ul {
-    /* 	list-style: none; */
+  /* 	list-style: none; */
 }
+
 blockquote, q {
-    quotes: none;
+  quotes: none;
 }
+
 blockquote:before, blockquote:after,
 q:before, q:after {
-    content: '';
-    content: none;
+  content: '';
+  content: none;
 }
+
 /* END OF RESET */
 
-
-
-
-
-body{
-    font-family:"Open Sans","Verdana",sans-serif;
-    background-color:#eee;
-    font-size:11pt;
+body {
+  font-family: "Open Sans", "Verdana", sans-serif;
+  background-color: #eee;
+  font-size: 11pt;
 }
 
-h1{font-size:1.4em;font-weight:bold;margin:20px 0 30px 0;}
-h2{font-size:1.2em;font-weight:bold;margin:15px 0 10px 0;}
-h3{font-size:1.1em;font-weight:bold;margin:10px 0 5px 0;}
-h4{}
+h1 {
+  font-size: 1.4em;
+  font-weight: bold;
+  margin: 20px 0 30px 0;
+}
 
-strong{font-weight:bold;}
+h2 {
+  font-size: 1.2em;
+  font-weight: bold;
+  margin: 15px 0 10px 0;
+}
 
-code{white-space:pre;}
+h3 {
+  font-size: 1.1em;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+}
 
-dl dt{font-weight:bold;margin-top:10px;}
-dl dd{margin-left:10px;}
+h4 {
+}
 
-.clear{display:block;clear:both;}
-.template{display:none;}
-.clickable{cursor:pointer;}
+strong {
+  font-weight: bold;
+}
 
+code {
+  white-space: pre;
+}
 
-.loader{display:none;position:absolute;top:0;left:0;width:100%;height:100%;z-index:1000;}
-.loader span{display:block;width:31px;height:31px;position:absolute;top:50%;left:50%;margin:-15px 0 0 -15px;background:url("../img/ajax-loader.gif") center center no-repeat transparent;}
-.loading .loader{display:block;overflow:hidden;}
+dl dt {
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+dl dd {
+  margin-left: 10px;
+}
+
+.clear {
+  display: block;
+  clear: both;
+}
+
+.template {
+  display: none;
+}
+
+.clickable {
+  cursor: pointer;
+}
+
+.loader {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+}
+
+.loader span {
+  display: block;
+  width: 31px;
+  height: 31px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: -15px 0 0 -15px;
+  background: url("../img/ajax-loader.gif") center center no-repeat transparent;
+}
+
+.loading .loader {
+  display: block;
+  overflow: hidden;
+}
 
 #main {
-    margin: 80px auto;
-    max-width:1140px;
+  margin: 80px auto;
+  max-width: 1140px;
 }
 
 @media (max-height: 1000px) {
-    #main{margin: 60px auto;}
+  #main {
+    margin: 60px auto;
+  }
 }
 
-
-#left{width: 300px;position: relative;float:left;}
-#right{margin-left:330px;}
-
-
-#bubliny{
-    position:absolute;
-    top:0;
-    left:0;
-    display:block;
+#left {
+  width: 300px;
+  position: relative;
+  float: left;
 }
 
-#widget.open{background-color:#fff;height:800px;width:100%;box-shadow:0 0 5px rgba(0,0,0,.1);overflow:hidden;}
-#widget div.polozky{position:absolute;top:348px;left:0;margin:0px;padding: 0 0px 0px 3px;height:452px;overflow:auto;}
-#widget div.polozka{border-left:5px solid #999;padding:10px;margin-bottom:3px;cursor: pointer;transition-duration:.5s;}
-#widget div.polozka:hover{background-color: rgba(45, 185, 255, 0.1);}
-#widget div.polozka.selected{background-color: rgba(45, 185, 255, 0.1);}
-#widget div.polozka h3{font-size:1em;margin-top: 0em;}
-#widget div.polozka p{font-size:.8em;color:#666;margin:0;}
+#right {
+  margin-left: 330px;
+}
 
-#widget .back {display:none;}
+#bubliny {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+}
+
+#widget.open {
+  background-color: #fff;
+  height: 800px;
+  width: 100%;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  overflow: hidden;
+}
+
+#widget div.polozky {
+  position: absolute;
+  top: 348px;
+  left: 0;
+  margin: 0px;
+  padding: 0 0px 0px 3px;
+  height: 452px;
+  overflow: auto;
+}
+
+#widget div.polozka {
+  border-left: 5px solid #999;
+  padding: 10px;
+  margin-bottom: 3px;
+  cursor: pointer;
+  transition-duration: .5s;
+}
+
+#widget div.polozka:hover {
+  background-color: rgba(45, 185, 255, 0.1);
+}
+
+#widget div.polozka.selected {
+  background-color: rgba(45, 185, 255, 0.1);
+}
+
+#widget div.polozka h3 {
+  font-size: 1em;
+  margin-top: 0em;
+}
+
+#widget div.polozka p {
+  font-size: .8em;
+  color: #666;
+  margin: 0;
+}
+
+#widget .back {
+  display: none;
+}
+
 #widget.open .back {
-    position: absolute;
-    top: 6px;
-    left: 6px;
-    border-radius: 50px;
-    display: block;
-    height: 50px;
-    width: 50px;
-    line-height: 50px;
-    text-align: center;
-    font-size: 80%;
-    color: white;
-    font-weight: bold;
-    background-color: rgba(0, 0, 0, 0.16);
-    z-index: 35;
-    cursor: pointer;
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  border-radius: 50px;
+  display: block;
+  height: 50px;
+  width: 50px;
+  line-height: 50px;
+  text-align: center;
+  font-size: 80%;
+  color: white;
+  font-weight: bold;
+  background-color: rgba(0, 0, 0, 0.16);
+  z-index: 35;
+  cursor: pointer;
 }
 
 #widget.open .back:hover {
-    transition-duration: .5s;
-    background-color: rgba(0, 0, 0, 0.36);	
+  transition-duration: .5s;
+  background-color: rgba(0, 0, 0, 0.36);
 }
 
-
-#seznam{height:800px;display:none;overflow:visible;}
-
-#seznam .filtr{margin-bottom:20px;box-shadow:0 0 5px rgba(0,0,0,.1);background-color:#fff;position:relative;}
-#seznam .filtr a{font-size:1.2em;}
-#seznam .filtr a.link_filtr{
-    background-color: rgb(51, 122, 183);
-    color: white;
-    /* 	margin-left: -15px;
-      margin-right: -15px; */
-    padding: 0px 15px;
-    line-height: 40px;
-    height: 40px;
-    display:block;
-    z-index: 31;
-    cursor: pointer;
+#seznam {
+  height: 800px;
+  display: none;
+  overflow: visible;
 }
-#seznam .filtr a.link_struktura{}
-#seznam .filtr a.link_filtr span.status{
-    opacity:.5;
-    font-size: .8em;
-    margin-left: 10px;
+
+#seznam .filtr {
+  margin-bottom: 20px;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  background-color: #fff;
+  position: relative;
 }
+
+#seznam .filtr a {
+  font-size: 1.2em;
+}
+
+#seznam .filtr a.link_filtr {
+  background-color: rgb(51, 122, 183);
+  color: white;
+  /* 	margin-left: -15px;
+    margin-right: -15px; */
+  padding: 0px 15px;
+  line-height: 40px;
+  height: 40px;
+  display: block;
+  z-index: 31;
+  cursor: pointer;
+}
+
+#seznam .filtr a.link_struktura {
+}
+
+#seznam .filtr a.link_filtr span.status {
+  opacity: .5;
+  font-size: .8em;
+  margin-left: 10px;
+}
+
 #seznam .filtr a.link_filtr span.caret {
-    position: absolute;
-    right: 28px;
-    top: 18px;
-    transition-duration:.5s;
+  position: absolute;
+  right: 28px;
+  top: 18px;
+  transition-duration: .5s;
 }
+
 #seznam .filtr a.link_filtr span.caret-up {
-    transform: rotate(180deg);
+  transform: rotate(180deg);
 }
+
 #seznam .filtr_form {
-    padding: 0px;
-    position: absolute;
-    width: 100%;
-    max-height: 0px;
-    transition: max-height 0.5s ease-out;
-    z-index: 30;
-    background-color: white;
-    overflow: hidden;
-    left:0px;
-    transition-duration: .5s;
-    box-shadow:0 0 5px rgba(0,0,0,.1);
-    border-bottom: 3px solid rgb(51, 122, 183);
+  padding: 0px;
+  position: absolute;
+  width: 100%;
+  max-height: 0px;
+  transition: max-height 0.5s ease-out;
+  z-index: 30;
+  background-color: white;
+  overflow: hidden;
+  left: 0px;
+  transition-duration: .5s;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  border-bottom: 3px solid rgb(51, 122, 183);
 }
+
 #seznam .filtr_form.open {
-    min-height:1px;
-    max-height: 500px;
-    transition: max-height 0.5s ease-in;
+  min-height: 1px;
+  max-height: 500px;
+  transition: max-height 0.5s ease-in;
 }
+
 #seznam .filtr_form .polozky {
-    margin-bottom: 15px;
+  margin-bottom: 15px;
 }
+
 #seznam .filtr_form .polozky .polozka {
-    display: block;
-    margin-left: 15px;
-    clear: both;
+  display: block;
+  margin-left: 15px;
+  clear: both;
 }
+
 #seznam .filtr_form .polozky .polozka label {
-    margin-left: 25px;
-    font-size: 95%;
-    display:block;
+  margin-left: 25px;
+  font-size: 95%;
+  display: block;
 }
+
 #seznam .filtr_form .polozky .polozka input {
-    float:left;
+  float: left;
 }
+
 .template {
-    display: none!important;
+  display: none !important;
 }
+
 #seznam .filtr_form fieldset legend {
-    color: rgb(45, 185, 255);
-    border-bottom: 1px solid rgb(45, 185, 255);
-    margin: 10px 0px;
+  color: rgb(45, 185, 255);
+  border-bottom: 1px solid rgb(45, 185, 255);
+  margin: 10px 0px;
 }
 
 #seznam .filtr_form .dateSlider {
-    top: 35px;
-    margin-bottom:15px;
+  top: 35px;
+  margin-bottom: 15px;
 }
 
-#seznam .filtr .submit{text-align:right;padding:10px;}
-#seznam .filtr .submit button{background-color:rgb(51, 122, 183);border:none;border-radius:2px;color:#fff;}
-
-
-#seznam p{margin:0;}
-#seznam a.fksp{display:inline-block;width:16px;background-image:url("../img/question-mark.svg");background-size:12px 12px;background-position:50% 50%;background-repeat:no-repeat;color:transparent;cursor:help;}
-#seznam a.fksp:hover{background-size:14px 14px;}
-#seznam p.info{font-size:.8em;opacity:.8;padding:0;margin:0;}
-
-#seznam .dodavatele{height:740px; padding-left:0px;}
-#seznam .dodavatele .seznam{height:700px;background-color: #fff;box-shadow:0 0 5px rgba(0,0,0,.1);
-                            overflow:visible;}
-
-#seznam .dodavatele .dodavatel{position:relative;border-bottom: 1px solid rgba(0,0,0,0.1);}
-#seznam .dodavatele .dodavatel .radek{height:69px;padding-right:20px;overflow:hidden;}
-#seznam .dodavatele .dodavatel .castka{position:absolute;bottom:5px;right:25px;}
-#seznam .dodavatele .dodavatel h3{font-weight:bold;margin:0;font-size:1em;}
-#seznam .dodavatele .dodavatel .detail{display:none;}
-
-#seznam .dodavatele .strankovac{height: 40px;padding: 5px;background-color: rgb(51, 122, 183);user-select: none;-webkit-user-select: none;}
-#seznam .dodavatele .strankovac .stranka{color: #fff;min-width:24px;text-align:center;font-size: 1.1em;border-radius: 2px;padding: 1px 3px;margin: 4px 2px;display: inline-block;text-decoration: none;}
-#seznam .dodavatele .strankovac .stranka.current,#seznam .strankovac .stranka:hover{background-color: #fff;color: rgb(51, 122, 183);}
-#seznam .dodavatele .strankovac .tecky{display:inline-block;min-width:24px;padding: 1px 3px;margin: 4px 2px;color:#fff;text-align:center;}
-#seznam .dodavatele .strankovac .next, #seznam .dodavatele .strankovac .prev{float:right;font-weight:bold;}
-
-#seznam .detail{ padding-right:0px;}
-#seznam .detail > div{height:740px;overflow:hidden;}
-
-#seznam .detail .click_to_load{position:absolute;top:0;left:0;padding:20px;width:100%;opacity:.6;z-index:-1;text-align:center;font-size: 90%;}
-
-#seznam .detail .faktury{
-    background-color: #fff;box-shadow:0 0 5px rgba(0,0,0,.1);
-
-    max-height: 608px;
-    overflow: auto;
+#seznam .filtr .submit {
+  text-align: right;
+  padding: 10px;
 }
 
-#seznam .detail .faktura:hover{
-    background-color: rgba(45, 185, 255, 0.1);
-}
-#seznam .detail .dodavatel{
-    background-color: rgb(51, 122, 183);
-    overflow: hidden;
-    color:#fff;
-    box-shadow:0 0 5px rgba(0,0,0,.1);
-    margin-bottom: 15px;
+#seznam .filtr .submit button {
+  background-color: rgb(51, 122, 183);
+  border: none;
+  border-radius: 2px;
+  color: #fff;
 }
 
-#seznam .detail .dodavatel > div{
-    padding:10px;
+#seznam p {
+  margin: 0;
 }
 
-#seznam .detail .dodavatel h3{
-    margin: 0;
-    height: 24px;
-    overflow: hidden;
-    white-space: nowrap;
+#seznam a.fksp {
+  display: inline-block;
+  width: 16px;
+  background-image: url("../img/question-mark.svg");
+  background-size: 12px 12px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  color: transparent;
+  cursor: help;
 }
 
-#seznam .detail .dodavatel a{
-    font-size: .8em;
-    color:#fff;
-    opacity:.5;
-    text-decoration:underline;
+#seznam a.fksp:hover {
+  background-size: 14px 14px;
 }
 
-#seznam .detail .dodavatel a:hover{
-    opacity:1;
+#seznam p.info {
+  font-size: .8em;
+  opacity: .8;
+  padding: 0;
+  margin: 0;
 }
 
-#seznam .faktura{
-    position:relative;
-
-    margin-top: 0px;
-    min-height:50px;
-    overflow:hidden;
-    padding:5px;
-    border-bottom: 1px solid rgba(0,0,0,.1);/*rgba(48,185,255,0.5);*/
+#seznam .dodavatele {
+  height: 740px;
+  padding-left: 0px;
 }
 
-#seznam .faktura .castka_detail{float:right;font-weight:600;text-align:right;}
-
-#seznam .radek:hover, #seznam .dodavatel.open > .radek, #seznam .faktura.open > .radek{
-    /*background-color: rgba(144, 41, 41, 0.91);color:#fff;/*rgba(48,185,255,0.1);*/
-    background-color: rgba(45, 185, 255,0.1);
-}
-#seznam .radek:hover a, #seznam .dodavatel.open > .radek a, #seznam .faktura.open > .radek a{
-    color:#fff;/*rgba(48,185,255,0.1);*/
+#seznam .dodavatele .seznam {
+  height: 700px;
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  overflow: visible;
 }
 
-#seznam .dodavatel .radek{
-    display: block;
-    padding:10px;
-    font-weight:400;
-    clear:both;
-    transition-duration: 0.2s;
-    cursor: pointer;
+#seznam .dodavatele .dodavatel {
+  position: relative;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
 }
 
-#seznam .dodavatel .dodavatel_castka{float:right;}
+#seznam .dodavatele .dodavatel .radek {
+  height: 69px;
+  padding-right: 20px;
+  overflow: hidden;
+}
+
+#seznam .dodavatele .dodavatel .castka {
+  position: absolute;
+  bottom: 5px;
+  right: 25px;
+}
+
+#seznam .dodavatele .dodavatel h3 {
+  font-weight: bold;
+  margin: 0;
+  font-size: 1em;
+}
+
+#seznam .dodavatele .dodavatel .detail {
+  display: none;
+}
+
+#seznam .dodavatele .strankovac {
+  height: 40px;
+  padding: 5px;
+  background-color: rgb(51, 122, 183);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+#seznam .dodavatele .strankovac .stranka {
+  color: #fff;
+  min-width: 24px;
+  text-align: center;
+  font-size: 1.1em;
+  border-radius: 2px;
+  padding: 1px 3px;
+  margin: 4px 2px;
+  display: inline-block;
+  text-decoration: none;
+}
+
+#seznam .dodavatele .strankovac .stranka.current, #seznam .strankovac .stranka:hover {
+  background-color: #fff;
+  color: rgb(51, 122, 183);
+}
+
+#seznam .dodavatele .strankovac .tecky {
+  display: inline-block;
+  min-width: 24px;
+  padding: 1px 3px;
+  margin: 4px 2px;
+  color: #fff;
+  text-align: center;
+}
+
+#seznam .dodavatele .strankovac .next, #seznam .dodavatele .strankovac .prev {
+  float: right;
+  font-weight: bold;
+}
+
+#seznam .detail {
+  padding-right: 0px;
+}
+
+#seznam .detail > div {
+  height: 740px;
+  overflow: hidden;
+}
+
+#seznam .detail .click_to_load {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 20px;
+  width: 100%;
+  opacity: .6;
+  z-index: -1;
+  text-align: center;
+  font-size: 90%;
+}
+
+#seznam .detail .faktury {
+  background-color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+
+  max-height: 608px;
+  overflow: auto;
+}
+
+#seznam .detail .faktura:hover {
+  background-color: rgba(45, 185, 255, 0.1);
+}
+
+#seznam .detail .dodavatel {
+  background-color: rgb(51, 122, 183);
+  overflow: hidden;
+  color: #fff;
+  box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  margin-bottom: 15px;
+}
+
+#seznam .detail .dodavatel > div {
+  padding: 10px;
+}
+
+#seznam .detail .dodavatel h3 {
+  margin: 0;
+  height: 24px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+#seznam .detail .dodavatel a {
+  font-size: .8em;
+  color: #fff;
+  opacity: .5;
+  text-decoration: underline;
+}
+
+#seznam .detail .dodavatel a:hover {
+  opacity: 1;
+}
+
+#seznam .faktura {
+  position: relative;
+
+  margin-top: 0px;
+  min-height: 50px;
+  overflow: hidden;
+  padding: 5px;
+  border-bottom: 1px solid rgba(0, 0, 0, .1); /*rgba(48,185,255,0.5);*/
+}
+
+#seznam .faktura .castka_detail {
+  float: right;
+  font-weight: 600;
+  text-align: right;
+}
+
+#seznam .radek:hover, #seznam .dodavatel.open > .radek, #seznam .faktura.open > .radek {
+  /*background-color: rgba(144, 41, 41, 0.91);color:#fff;/*rgba(48,185,255,0.1);*/
+  background-color: rgba(45, 185, 255, 0.1);
+}
+
+#seznam .radek:hover a, #seznam .dodavatel.open > .radek a, #seznam .faktura.open > .radek a {
+  color: #fff; /*rgba(48,185,255,0.1);*/
+}
+
+#seznam .dodavatel .radek {
+  display: block;
+  padding: 10px;
+  font-weight: 400;
+  clear: both;
+  transition-duration: 0.2s;
+  cursor: pointer;
+}
+
+#seznam .dodavatel .dodavatel_castka {
+  float: right;
+}
 
 #seznam .dodavatel .radek:hover:after,
-#seznam .dodavatel.open .radek:after{
-    transition-duration: .2s;
-    left: 100%;
-    top: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
-    border-color: rgba(45, 185, 255,0);
-    border-left-color: rgba(45, 185, 255,0.1);
-    border-width: 35px 12px;
-    margin-top: -35px;
+#seznam .dodavatel.open .radek:after {
+  transition-duration: .2s;
+  left: 100%;
+  top: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+  border-color: rgba(45, 185, 255, 0);
+  border-left-color: rgba(45, 185, 255, 0.1);
+  border-width: 35px 12px;
+  margin-top: -35px;
 }
 
 #seznam .faktura .radek {
-    display: block;
-    padding:10px;
-    font-weight:400;
-    clear:both;
-    transition-duration: 0.2s;
-    cursor: pointer;
+  display: block;
+  padding: 10px;
+  font-weight: 400;
+  clear: both;
+  transition-duration: 0.2s;
+  cursor: pointer;
 }
 
-#seznam .faktura .radek h3{position:relative;padding-right:130px;}
-#seznam .faktura .radek h3 .dodavatel_nazev{float:left;white-space: nowrap;overflow: hidden;width: 100%;}
-
-#seznam .sliders .filtr .castka{margin-top:40px;}
-#seznam .sliders .filtr .datum{margin-top:40px;}			
-
-#seznam .rozpad{
-    border-collapse:collapse;
-    width:100%;
-    font-size: .9em;
+#seznam .faktura .radek h3 {
+  position: relative;
+  padding-right: 130px;
 }
+
+#seznam .faktura .radek h3 .dodavatel_nazev {
+  float: left;
+  white-space: nowrap;
+  overflow: hidden;
+  width: 100%;
+}
+
+#seznam .sliders .filtr .castka {
+  margin-top: 40px;
+}
+
+#seznam .sliders .filtr .datum {
+  margin-top: 40px;
+}
+
+#seznam .rozpad {
+  border-collapse: collapse;
+  width: 100%;
+  font-size: .9em;
+}
+
 #seznam .rozpad tr {
-    height: 1em;
+  height: 1em;
 }
-#seznam .rozpad tbody th{vertical-align:top; padding: 3px;font-weight:normal;}
-#seznam .rozpad td{vertical-align:top; padding: 3px;text-align:right;}
-#seznam .rozpad tr.ve_vyberu{background-color:#acf;}
-#seznam .rozpad .polozka_castka{text-align:right;}
 
-#footer{position:fixed;bottom:0;left:0;width:100%;background-color:#fff;box-shadow:0 1px 5px rgba(0,0,0,.075);background-image: linear-gradient(to bottom,#fff 0,#f8f8f8 100%);color:#999;font-size:.8em;margin-top:0;padding:5px 0 10px 0;}
-#footer > div{margin:0 auto;max-width:1170px;padding:0 20px;}
-#footer #soutez{float:right;}
-#footer #soutez img{float:right;height:39px;margin-left:10px;}
-#footer #soutez p{max-width:300px;}
+#seznam .rozpad tbody th {
+  vertical-align: top;
+  padding: 3px;
+  font-weight: normal;
+}
 
-#footer a{color:#999;}
-#footer a:hover{color:rgb(51, 122, 183);}
+#seznam .rozpad td {
+  vertical-align: top;
+  padding: 3px;
+  text-align: right;
+}
 
-.navbar-brand
-{
-    padding: 8px 15px;
-    
-    img 
-    {
-        width: auto; float: left; margin: -7px 10px;width:40px;
-    }
+#seznam .rozpad tr.ve_vyberu {
+  background-color: #acf;
+}
+
+#seznam .rozpad .polozka_castka {
+  text-align: right;
+}
+
+#footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  background-color: #fff;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, .075);
+  background-image: linear-gradient(to bottom, #fff 0, #f8f8f8 100%);
+  color: #999;
+  font-size: .8em;
+  margin-top: 0;
+  padding: 5px 0 10px 0;
+}
+
+#footer > div {
+  margin: 0 auto;
+  max-width: 1170px;
+  padding: 0 20px;
+}
+
+#footer #soutez {
+  float: right;
+}
+
+#footer #soutez img {
+  float: right;
+  height: 39px;
+  margin-left: 10px;
+}
+
+#footer #soutez p {
+  max-width: 300px;
+}
+
+#footer a {
+  color: #999;
+}
+
+#footer a:hover {
+  color: rgb(51, 122, 183);
+}
+
+.navbar-brand {
+  padding: 8px 15px;
+
+  img {
+    width: auto;
+    float: left;
+    margin: -7px 10px;
+    width: 40px;
+  }
 }
 
 /* CROSS JQUERY UI */
 div.ui-rangeSlider-innerBar {
 
 }
+
 .ui-rangeSlider .ui-rangeSlider-innerBar {
-    height: 1px;
-    margin: 10px 6px;
-    background: #aaa;
+  height: 1px;
+  margin: 10px 6px;
+  background: #aaa;
 }
+
 .ui-rangeSlider .ui-rangeSlider-bar {
-    margin: 2px 0;
-    background: rgb(48,185,255);
-    height: 16px;
-    border-radius: 8px;
-    border: 3px solid white;
+  margin: 2px 0;
+  background: rgb(48, 185, 255);
+  height: 16px;
+  border-radius: 8px;
+  border: 3px solid white;
 }
+
 .ui-rangeSlider .ui-rangeSlider-handle {
-    width: 20px;
-    height: 20px;
-    background: none;
-    cursor: col-resize;
+  width: 20px;
+  height: 20px;
+  background: none;
+  cursor: col-resize;
 }
+
 .ui-rangeSlider-arrow.ui-rangeSlider-leftArrow {
-    background: none;
+  background: none;
 }
+
 .ui-rangeSlider-arrow.ui-rangeSlider-rightArrow {
-    background: none;
+  background: none;
 }
+
 .ui-rangeSlider-label {
-    background: rgb(48,185,255);
-    color: white;
-    white-space: nowrap;
-    border-radius: 5px;
-    bottom: 30px;
-    padding: 3px 6px 5px;
-    cursor: col-resize;
-    font-size: .8em;
+  background: rgb(48, 185, 255);
+  color: white;
+  white-space: nowrap;
+  border-radius: 5px;
+  bottom: 30px;
+  padding: 3px 6px 5px;
+  cursor: col-resize;
+  font-size: .8em;
 }
+
 .ui-rangeSlider-label:after, .ui-rangeSlider-label:before {
-    top: 100%;
-    left: 50%;
-    border: solid transparent;
-    content: " ";
-    height: 0;
-    width: 0;
-    position: absolute;
-    pointer-events: none;
+  top: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
 }
 
 .ui-rangeSlider-label:after {
-    border-color: none;
-    border-top-color: rgb(48,185,255);
-    border-width: 10px;
-    margin-left: -10px;
+  border-color: none;
+  border-top-color: rgb(48, 185, 255);
+  border-width: 10px;
+  margin-left: -10px;
 }
+
 .ui-rangeSlider-label:before {
-    border-color: none;
-    border-top-color: rgb(48,185,255);
-    border-width: 11px;
-    margin-left: -11px;
+  border-color: none;
+  border-top-color: rgb(48, 185, 255);
+  border-width: 11px;
+  margin-left: -11px;
 }
-
-
 
 .form-signin {
-    max-width: 330px;
-    padding: 15px;
-    margin: 0 auto;
-    
-    .form-signin-heading,
-    .checkbox{
-        margin-bottom: 10px;
+  max-width: 330px;
+  padding: 15px;
+  margin: 0 auto;
+
+  .form-signin-heading,
+  .checkbox {
+    margin-bottom: 10px;
+  }
+
+  .checkbox {
+    font-weight: normal;
+  }
+
+  .form-control {
+    position: relative;
+    height: auto;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    padding: 10px;
+    font-size: 16px;
+
+    &:focus {
+      z-index: 2;
     }
-    
-    .checkbox {
-        font-weight: normal;
+  }
+
+  input {
+    &[type="email"] {
+      margin-bottom: -1px;
+      border-bottom-right-radius: 0;
+      border-bottom-left-radius: 0;
     }
-    
-    .form-control {
-        position: relative;
-        height: auto;
-        -webkit-box-sizing: border-box;
-        -moz-box-sizing: border-box;
-        box-sizing: border-box;
-        padding: 10px;
-        font-size: 16px;
-        
-        &:focus {
-            z-index: 2;
+
+    &[type="password"] {
+      margin-bottom: 10px;
+      border-top-left-radius: 0;
+      border-top-right-radius: 0;
+    }
+  }
+}
+
+#invoice {
+
+  #menu_left {
+    padding: 20px;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+
+    h3 {
+      margin-top: 20px;
+    }
+
+    #list_skupiny {
+      margin-left: 25px;
+    }
+  }
+
+  .invoice {
+    position: relative;
+    max-width: 600px;
+    margin: 0px auto;
+    padding: 38px 0 0 0;
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+
+    h1 {
+      font-size: 1.4em;
+      margin: 0;
+      font-weight: bold;
+    }
+    h2 {
+      font-size: 1.2em;
+    }
+    h3 {
+      font-size: 1.1em;
+      margin: 0 0 10px 0;
+      font-weight: bold;
+    }
+    h4 {
+      margin: 0;
+      font-weight: bold;
+    }
+    table {
+      border-collapse: collapse;
+    }
+    p {
+      margin: 0;
+    }
+
+    .clear {
+      display: block;
+      clear: both;
+    }
+
+    .faktura {
+      padding: 40px 40px 80px 40px;
+      overflow: auto;
+      > table {
+        border-collapse: collapse;
+        width: 100%;
+      }
+    }
+
+    td, th {
+      text-align: left;
+      vertical-align: top;
+    }
+
+    tbody td {
+      border: 2px solid #000;
+      padding: 10px;
+    }
+
+    .share {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 38px;
+      background-color: rgb(51, 122, 183);
+      color: #fff;
+
+      th {
+        text-align: left;
+        width: 80px;
+      }
+
+      h2 {
+        display: inline;
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 38px;
+        padding: 8px 10px;
+        margin: 0;
+      }
+
+      .input {
+        margin-left: 80px;
+        padding: 8px 10px;
+        width: 300px;
+
+        input {
+          font-family: inherit;
+          width: 100%;
+          height: 22px;
+          color: #000;
+          padding: 1px 5px;
+          cursor: text;
         }
+      }
+
+      .widgets {
+        position: absolute;
+        top: 0;
+        right: 0;
+        background-color: rgba(255, 255, 255, .2);
+        height: 38px;
+        padding: 9px 10px;
+      }
+
+      .widget {
+        display: inline-block;
+        height: 20px;
+        vertical-align: middle;
+      }
     }
-    
-    input
-    {
-        &[type="email"] {
-            margin-bottom: -1px;
-            border-bottom-right-radius: 0;
-            border-bottom-left-radius: 0;
-        }
-        
-        &[type="password"] {
-            margin-bottom: 10px;
-            border-top-left-radius: 0;
-            border-top-right-radius: 0;
-        }
+
+    #dodavatel {
+      width: 50%;
     }
+    #odberatel {
+      width: 50%;
+    }
+
+    table table th {
+      border: none;
+      padding: 0 2px;
+    }
+
+    table table td {
+      border: none;
+      padding: 0 2px;
+    }
+
+    table.rozpad {
+      width: 100%;
+    }
+    table.rozpad tbody td {
+      border: none;
+      padding: 0;
+    }
+    table.rozpad thead tr {
+      border-bottom: 1px solid #000;
+    }
+    table.rozpad tbody tr {
+      border-bottom: 1px solid #999;
+    }
+
+    table.castky {
+      width: 100%;
+    }
+    table.castky tbody td {
+      border: none;
+      padding: 0;
+    }
+    table.castky thead tr {
+      border-bottom: 1px solid #000;
+    }
+    table.castky tbody tr {
+      border-bottom: 1px solid #999;
+    }
+    table.castky tbody td {
+      border-left: 1px solid #eee;
+    }
+
+    .castka {
+      text-align: right !important;
+    }
+
+    td.celkem h3 {
+      margin: 0;
+    }
+    td.celkem .castka {
+      float: right;
+    }
+
+    .disclaimer {
+      margin-bottom: 15px;
+      text-align: center;
+      color: #f00;
+      font-weight: bold;
+    }
+
+    .disclaimer_op {
+      margin: 10px 0;
+      font-weight: bold;
+    }
+
+    /** IN PAGE
+  #faktura {
+    background-color: #fff;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+  }
+    #menu_left {
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 0 5px rgba(0, 0, 0, .1);
+    }
+
+  */
+
+    /** IN POPUP
+   html {
+    height: 100%;
+    overflow: hidden;
+  }
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+    #main {
+      height: 100%;
+      overflow: hidden;
+    }
+    #faktura {
+      height: 100%;
+      box-sizing: border-box;
+      max-width: none;
+    }
+    #faktura .faktura {
+      padding: 20px 30px;
+      box-sizing: border-box;
+      height: 100%;
+      max-height: 822px;
+      overflow: auto;
+    }
+    #faktura .share .input input {
+      height: 16px;
+    }
+  */
+  }
 }

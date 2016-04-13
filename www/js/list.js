@@ -138,7 +138,7 @@ List.prototype.load = function(options,filter){
 				faktura_dom.addClass("clickable").click(function(){
 					$.fancybox.open({
 						type:"iframe",
-						href:WEB_ROOT + "/faktura.php?popup=1&faktura=" + faktura.id,
+						href: "/invoice?popup=1&invoiceIdentifier=" + faktura.id,
 						"width":"600",
 						"height":"900",
 						"autoSize" : false,
