@@ -33,6 +33,7 @@ For you own data source you will need two things:
        # here you can configure your custom imports
        mf: #Import group key
            title: "Ministerstvo financí" #Import group name
+           default: true # Is default import group ?
            datasets: # List of datasets
                mf2016: # Dataset key
                    title: "Rok 2016" #Data set title
