@@ -23,6 +23,7 @@ interface IImportParser
      * @param Nette\Caching\Cache $cache
      * @param $data
      * @param $target
+     * @param $importId
      */
-    public function __construct(Nette\Caching\Cache $cache, $data, $target);
+    public function __construct(Nette\Caching\Cache $cache, $data, $target, $import);
 }

@@ -21,6 +21,7 @@
 
 namespace App\Model\Entities;
 
+use App\Model\Entities\Import;
 use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -179,8 +180,27 @@ class Invoice extends Nette\Object
      * @param $description
      * @param Supplier|null $supplier
      */
-    public function __construct($identifier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat, $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, $issued, $received, $maturity, $paid, $description, Supplier $supplier = null)
+    public function __construct(
+        Import $import,
+        $identifier,
+        $type,
+        $distinction,
+        $vatRecord,
+        $amount,
+        $amountWithoutVat,
+        $amountOriginal,
+        $amountPaid,
+        $amountPaidOriginal,
+        $currency,
+        $issued,
+        $received,
+        $maturity,
+        $paid,
+        $description,
+        Supplier $supplier = null
+    )
     {
+        $this->import = $import;
         $this->supplier = $supplier;
         $this->identifier = $identifier;
         $this->type = $type;
@@ -217,6 +237,14 @@ class Invoice extends Nette\Object
     public function onPreUpdate()
     {
         $this->updated = new \DateTime();
+    }
+
+    /**
+     * @param Import $import
+     */
+    public function setImport(Import $import)
+    {
+        $this->import = $import;
     }
 
     /**

@@ -21,21 +21,71 @@
 
 namespace App\Model\Repository;
 
-use App\Model\Entities\Invoice;
-use App\Model\Entities\InvoiceItem;
-use App\Model\Entities\BudgetGroup;
-use App\Model\Entities\Supplier;
+use App\Model\Entities\Import;
+use App\Model\Entities\ImportGroup;
 use Kdyby\Doctrine\EntityManager;
 
 class ImportRepository
 {
+    /** @var \Kdyby\Doctrine\EntityRepository */
+    private $importGroupRepository;
+
+    /** @var \Kdyby\Doctrine\EntityRepository */
+    private $importRepository;
+
+    /** @var EntityManager */
+    private $entityManager;
+
     /**
      * ImportRepository constructor.
      * @param EntityManager $entityManager
      */
     public function __construct(EntityManager $entityManager)
     {
-
+        $this->entityManager = $entityManager;
+        $this->importGroupRepository = $entityManager->getRepository(ImportGroup::class);
+        $this->importRepository = $entityManager->getRepository(Import::class);
     }
 
+
+    public function setImportGroup($name, $slug, $isDefault)
+    {
+        /** @var ImportGroup $foundImportGroup */
+        $foundImportGroup = $this->importGroupRepository->findOneBy(['slug' => $slug]);
+        if ($foundImportGroup) {
+            $foundImportGroup->setName($name);
+            $foundImportGroup->setIsDefault($isDefault);
+        } else {
+            $foundImportGroup = new ImportGroup($name, $slug, $isDefault);
+        }
+
+
+        $this->entityManager->persist($foundImportGroup);
+
+        $this->entityManager->flush();
+
+        return $foundImportGroup;
+    }
+
+    public function setImport($importGroup, $name, $slug, $description, $homepage, $isDefault)
+    {
+        /** @var Import $foundImport */
+        $foundImport = $this->importRepository->findOneBy(['slug' => $slug, 'importGroup' => $importGroup]);
+        if ($foundImport) {
+            $foundImport->setImportGroup($importGroup);
+            $foundImport->setName($name);
+            $foundImport->setIsDefault($isDefault);
+            $foundImport->setDescription($description);
+            $foundImport->setHomepage($homepage);
+        } else {
+            $foundImport = new Import($importGroup, $name, $slug, $description, $homepage, $isDefault);
+        }
+
+
+        $this->entityManager->persist($foundImport);
+
+        $this->entityManager->flush();
+
+        return $foundImport;
+    }
 }

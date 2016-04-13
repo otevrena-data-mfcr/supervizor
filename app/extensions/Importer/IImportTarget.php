@@ -40,6 +40,47 @@ interface IImportTarget
      * @param $budgetItemAmount
      * @return mixed
      */
-    public function setInvoice($identifier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat, $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, \DateTime $issued, \DateTime $received, \DateTime $paid, \DateTime $maturity, $description, $supplierIdentifier, $supplierName, $supplierCompanyIdentifier, $budgetItemIdentifier, $budgetItemName, $budgetItemAmount
+    public function setInvoice(
+        $identifier,
+        $type,
+        $distinction,
+        $vatRecord,
+        $amount,
+        $amountWithoutVat,
+        $amountOriginal,
+        $amountPaid,
+        $amountPaidOriginal,
+        $currency,
+        \DateTime $issued,
+        \DateTime $received,
+        \DateTime $paid,
+        \DateTime $maturity,
+        $description,
+        $supplierIdentifier,
+        $supplierName,
+        $supplierCompanyIdentifier,
+        $budgetItemIdentifier,
+        $budgetItemName,
+        $budgetItemAmount,
+        $import
     );
+
+    /**
+     * @param $name
+     * @param $slug
+     * @param $isDefault
+     * @return mixed
+     */
+    public function setImportGroup($name, $slug, $isDefault);
+
+    /**
+     * @param $importGroupId
+     * @param $name
+     * @param $slug
+     * @param $description
+     * @param $homepage
+     * @param $isDefault
+     * @return mixed
+     */
+    public function setImport($importGroup, $name, $slug, $description, $homepage, $isDefault);
 }

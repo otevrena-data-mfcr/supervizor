@@ -24,15 +24,21 @@ class Mmr extends ImportParser implements IImportParser
     private $target;
 
     /**
+     * @var
+     */
+    private $import;
+
+    /**
      * Mmr constructor.
      * @param Nette\Caching\Cache $cache
      * @param $source
      * @param $target
      */
-    public function __construct(Nette\Caching\Cache $cache, $source, $target)
+    public function __construct(Nette\Caching\Cache $cache, $source, $target, $import)
     {
         $this->cache = $cache;
         $this->target = $target;
+        $this->import = $import;
 
         $data = @file_get_contents($source);
         if (!$data)
@@ -159,7 +165,8 @@ class Mmr extends ImportParser implements IImportParser
                 'supplierCompanyId' => $row[5] ? str_pad($row[5], 8, "0", STR_PAD_LEFT) : null,
                 'budgetItemIdentifier' => ((int) $row[11]) ? : null,
                 'budgetItemName' => $row[12] ? : null,
-                'budgetItemAmount' => $row[6] ? $this->cs2float($row[6]) : null
+                'budgetItemAmount' => $row[6] ? $this->cs2float($row[6]) : null,
+                'importId' => $this->import
             ];
         }, $csvArray);
 

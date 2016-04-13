@@ -56,12 +56,16 @@ class Importer extends Nette\Object
      */
     public function doImport()
     {
-        foreach ($this->imports as $import)
+        foreach ($this->imports as $slug => $import)
         {
-            foreach ($import['datasets'] AS $dataset)
+            $importGroup = $this->target->setImportGroup($import['title'], $slug, $import['default']);
+
+            foreach ($import['datasets'] AS $datasetSlug => $dataset)
             {
+                $import = $this->target->setImport($importGroup, $dataset['title'], $datasetSlug,
+                    $dataset['description'], $dataset['homepage'], $dataset['default']);
                 //Parse
-                new $dataset['parser']($this->cache, $dataset['source'], $this->target);
+                new $dataset['parser']($this->cache, $dataset['source'], $this->target, $import);
             }
         }
     }

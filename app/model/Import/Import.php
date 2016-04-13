@@ -46,6 +46,12 @@ class Import extends Nette\Object
     private $importGroup;
 
     /**
+     * @var string
+     * @ORM\Column(type="string",length=255,nullable=false)
+     */
+    private $name;
+
+    /**
      * @var bool
      * @ORM\Column(type="boolean",nullable=false)
      */
@@ -93,20 +99,38 @@ class Import extends Nette\Object
      * @param \App\Model\Entities\BudgetItem $budgetItem
      * @param float $amount
      */
-    public function __construct($name, $slug, $description, $homepage, $isDefault)
+    public function __construct(ImportGroup $importGroup, $name, $slug, $description, $homepage, $isDefault)
     {
+        $this->setImportGroup($importGroup);
         $this->setName($name);
         $this->setSlug($slug);
         $this->setIsDefault($isDefault);
+        $this->setHomepage($homepage);
+        $this->setDescription($description);
+    }
 
-        $this->description = $description;
-        $this->homepage = $homepage;
+    /**
+     * Gets triggered only on insert
+     * @ORM\PrePersist
+     */
+    public function onPrePersist()
+    {
+        $this->created = $this->updated = new \DateTime();
+    }
+
+    /**
+     * Gets triggered every time on update
+     * @ORM\PreUpdate
+     */
+    public function onPreUpdate()
+    {
+        $this->updated = new \DateTime();
     }
 
     /**
      * @param string $name
      */
-    protected function setName($name)
+    public function setName($name)
     {
         $name = Nette\Utils\Strings::trim($name);
         if (!$name) {
@@ -118,7 +142,7 @@ class Import extends Nette\Object
     /**
      * @param string $slug
      */
-    protected function setSlug($slug)
+    public function setSlug($slug)
     {
         $slug = Nette\Utils\Strings::trim($slug);
         if (!$slug) {
@@ -130,12 +154,36 @@ class Import extends Nette\Object
     /**
      * @param bool $isDefault
      */
-    protected function setIsDefault($isDefault)
+    public function setIsDefault($isDefault)
     {
         if (!is_bool($isDefault)) {
             throw new Nette\InvalidArgumentException('Invalid $isDefault value');
         }
         $this->isDefault = $isDefault;
+    }
+
+    /**
+     * @param $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
+
+    /**
+     * @param $homepage
+     */
+    public function setHomepage($homepage)
+    {
+        $this->homepage = $homepage;
+    }
+
+    /**
+     * @param ImportGroup $setImportGroup
+     */
+    public function setImportGroup(ImportGroup $setImportGroup)
+    {
+        $this->setImportGroup = $setImportGroup;
     }
 
 }

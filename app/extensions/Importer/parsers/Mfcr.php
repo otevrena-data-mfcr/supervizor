@@ -24,15 +24,21 @@ class Mfcr extends ImportParser implements IImportParser
     private $target;
 
     /**
+     * @var
+     */
+    private $import;
+
+    /**
      * Mfcr constructor.
      * @param Nette\Caching\Cache $cache
      * @param $source
      * @param $target
      */
-    public function __construct(Nette\Caching\Cache $cache, $source, $target)
+    public function __construct(Nette\Caching\Cache $cache, $source, $target, $import)
     {
         $this->cache = $cache;
         $this->target = $target;
+        $this->import = $import;
 
         $data = @file_get_contents($source);
         if (!$data)
@@ -158,7 +164,8 @@ class Mfcr extends ImportParser implements IImportParser
                 'supplierCompanyIdentifier' => $row[4] ? str_pad($row[4], 8, "0", STR_PAD_LEFT) : null,
                 'budgetItemIdentifier' => ((int) $row[21]) ? : null,
                 'budgetItemName' => $row[22] ? : null,
-                'budgetItemAmount' => $row[23] ? $this->cs2float($row[23]) : null
+                'budgetItemAmount' => $row[23] ? $this->cs2float($row[23]) : null,
+                'importId' => $this->import
             ];
         }, $csvArray);
 

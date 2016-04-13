@@ -3,6 +3,7 @@ importer:
   imports:
     mf:
         title: "Ministerstvo financí"
+        default: true
         datasets:
             mf2016:
                 title: "Rok 2016"

@@ -8,6 +8,7 @@
 
 namespace App\Model;
 
+use App\Model\Repository\ImportRepository;
 use App\Model\Repository\InvoiceRepository;
 use App\Model\Repository\SupplierRepository;
 use App\Model\Entities\Supplier;
@@ -33,6 +34,9 @@ class ImportTarget implements \Extensions\Importer\IImportTarget
 
     /** @var BudgetRepository @inject */
     public $budgetRepository;
+
+    /** @var ImportRepository @inject */
+    public $importRepository;
 
     /** @var EntityManager @inject */
     public $entityManager;
@@ -113,13 +117,36 @@ class ImportTarget implements \Extensions\Importer\IImportTarget
      * @param $budgetItemAmount
      * @throws \Exception
      */
-    public function setInvoice($identifier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat, $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, \DateTime $issued, \DateTime $received, \DateTime $paid, \DateTime $maturity, $description, $supplierIdentifier, $supplierName, $supplierCompanyIdentifier, $budgetItemIdentifier, $budgetItemName, $budgetItemAmount
+    public function setInvoice(
+        $identifier,
+        $type,
+        $distinction,
+        $vatRecord,
+        $amount,
+        $amountWithoutVat,
+        $amountOriginal,
+        $amountPaid,
+        $amountPaidOriginal,
+        $currency,
+        \DateTime $issued,
+        \DateTime $received,
+        \DateTime $paid,
+        \DateTime $maturity,
+        $description,
+        $supplierIdentifier,
+        $supplierName,
+        $supplierCompanyIdentifier,
+        $budgetItemIdentifier,
+        $budgetItemName,
+        $budgetItemAmount,
+        $import
     )
     {
-
+        /** @var Invoice $foundInvoice */
         $foundInvoice = $this->invoiceRepository->findByIdentifier($identifier);
         if ($foundInvoice)
         {
+            $foundInvoice->setImport($import);
             $invoice = $foundInvoice;
         }
         else
@@ -132,7 +159,9 @@ class ImportTarget implements \Extensions\Importer\IImportTarget
             {
                 $supplier = null;
             }
-            $invoice = new Invoice($identifier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat, $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, $issued, $received, $maturity, $paid, $description, $supplier);
+            $invoice = new Invoice($import, $identifier, $type, $distinction, $vatRecord, $amount, $amountWithoutVat,
+                $amountOriginal, $amountPaid, $amountPaidOriginal, $currency, $issued, $received, $maturity, $paid,
+                $description, $supplier);
         }
 
         $this->entityManager->persist($invoice);
@@ -154,6 +183,31 @@ class ImportTarget implements \Extensions\Importer\IImportTarget
         }
 
         $this->entityManager->flush();
+    }
+
+    /**
+     * @param $name
+     * @param $slug
+     * @param $isDefault
+     * @return mixed
+     */
+    public function setImportGroup($name, $slug, $isDefault)
+    {
+        return $this->importRepository->setImportGroup($name, $slug, $isDefault);
+    }
+
+    /**
+     * @param $importGroupId
+     * @param $name
+     * @param $slug
+     * @param $description
+     * @param $homepage
+     * @param $isDefault
+     * @return mixed
+     */
+    public function setImport($importGroup, $name, $slug, $description, $homepage, $isDefault)
+    {
+        return $this->importRepository->setImport($importGroup, $name, $slug, $description, $homepage, $isDefault);
     }
 
 }

@@ -110,7 +110,7 @@ class ImportGroup extends Nette\Object
     /**
      * @param string $name
      */
-    protected function setName($name)
+    public function setName($name)
     {
         $name = Nette\Utils\Strings::trim($name);
         if (!$name) {
@@ -122,7 +122,7 @@ class ImportGroup extends Nette\Object
     /**
      * @param string $slug
      */
-    protected function setSlug($slug)
+    public function setSlug($slug)
     {
         $slug = Nette\Utils\Strings::trim($slug);
         if (!$slug) {
@@ -134,7 +134,7 @@ class ImportGroup extends Nette\Object
     /**
      * @param bool $isDefault
      */
-    protected function setIsDefault($isDefault)
+    public function setIsDefault($isDefault)
     {
         if (!is_bool($isDefault)) {
             throw new Nette\InvalidArgumentException('Invalid $isDefault value');
