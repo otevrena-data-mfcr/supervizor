@@ -98,8 +98,8 @@ List.prototype.load = function(options,filter){
       newOptions['dateFrom'] = options.datum.min;
       newOptions['dateTo'] = options.datum.max;
   }
-  
-	$.getJSON("/ajax/suppliers",newOptions,function(data){
+
+	$.getJSON($('.datastorage').data('suppliersurl'), newOptions, function (data) {
 		
 		var list_dom = list.dom;
 		var detail_dom = list.dom.children(".detail");
@@ -251,8 +251,8 @@ List.prototype.loadFirm = function(dodavatel_id,callback){
 	
 	var target = this.dom.find(".detail .dodavatel").addClass("loading");
 	var list = this;
-	
-	$.getJSON("/ajax/supplier",{supplierIdentifier:dodavatel_id},function(data){
+
+	$.getJSON($('.datastorage').data('supplierurl'), {supplierIdentifier: dodavatel_id}, function (data) {
 		
 		var target = list.dom.find(".detail .dodavatel");
 		

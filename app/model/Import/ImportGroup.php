@@ -141,4 +141,17 @@ class ImportGroup extends Nette\Object
         }
         $this->isDefault = $isDefault;
     }
+
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
+    }
 }

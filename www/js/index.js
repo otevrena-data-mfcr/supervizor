@@ -138,7 +138,7 @@ $(document).ready(function(){
 	createStarIcons(paper);
 
 	/* LOAD DATA */
-	$.getJSON("/ajax/budgetgroups",{},function(data){
+	$.getJSON($('.datastorage').data('budgetgoupsurl'), {}, function (data) {
 
 		souhvezdi.show();
 		

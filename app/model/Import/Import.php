@@ -186,4 +186,35 @@ class Import extends Nette\Object
         $this->setImportGroup = $setImportGroup;
     }
 
+    /**
+     * @return string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * @return string
+     */
+    public function getSlug()
+    {
+        return $this->slug;
+    }
+
+    /**
+     * @return string
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @return \DateTimeInterface
+     */
+    public function getUpdated()
+    {
+        return $this->updated;
+    }
 }

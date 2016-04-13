@@ -47,11 +47,69 @@ class ImportRepository
         $this->importRepository = $entityManager->getRepository(Import::class);
     }
 
+    /**
+     * @param $slug
+     * @return mixed|null|object
+     */
+    public function getImportGroupBySlug($slug)
+    {
+        return $this->importGroupRepository->findOneBy(['slug' => $slug]);
+    }
 
+    /**
+     * @param ImportGroup $importGroup
+     * @param $slug
+     * @return mixed|null|object
+     */
+    public function getImportByGroupAndSlug(ImportGroup $importGroup, $slug)
+    {
+        return $this->importRepository->findOneBy(['slug' => $slug, 'importGroup' => $importGroup]);
+    }
+
+    /**
+     * @return array
+     */
+    public function getImportGroups()
+    {
+        return $this->importGroupRepository->findBy([], ['name' => 'ASC']);
+    }
+
+    /**
+     * @param ImportGroup $importGroup
+     * @return array
+     */
+    public function getImportsByGroup(ImportGroup $importGroup)
+    {
+        return $this->importRepository->findBy(['importGroup' => $importGroup], ['name' => 'ASC']);
+    }
+
+    /**
+     * @return mixed|null|object
+     */
+    public function getDefaultImportGroup()
+    {
+        return $this->importGroupRepository->findOneBy(['isDefault' => true]);
+    }
+
+    /**
+     * @return mixed|null|object
+     */
+    public function getDefaultImport()
+    {
+        return $this->importRepository->findOneBy(['isDefault' => true]);
+    }
+
+    /**
+     * @param $name
+     * @param $slug
+     * @param $isDefault
+     * @return ImportGroup
+     * @throws \Exception
+     */
     public function setImportGroup($name, $slug, $isDefault)
     {
         /** @var ImportGroup $foundImportGroup */
-        $foundImportGroup = $this->importGroupRepository->findOneBy(['slug' => $slug]);
+        $foundImportGroup = $this->getImportGroupBySlug($slug);
         if ($foundImportGroup) {
             $foundImportGroup->setName($name);
             $foundImportGroup->setIsDefault($isDefault);
@@ -67,10 +125,20 @@ class ImportRepository
         return $foundImportGroup;
     }
 
+    /**
+     * @param $importGroup
+     * @param $name
+     * @param $slug
+     * @param $description
+     * @param $homepage
+     * @param $isDefault
+     * @return Import
+     * @throws \Exception
+     */
     public function setImport($importGroup, $name, $slug, $description, $homepage, $isDefault)
     {
         /** @var Import $foundImport */
-        $foundImport = $this->importRepository->findOneBy(['slug' => $slug, 'importGroup' => $importGroup]);
+        $foundImport = $this->getImportByGroupAndSlug($importGroup, $slug);
         if ($foundImport) {
             $foundImport->setImportGroup($importGroup);
             $foundImport->setName($name);
