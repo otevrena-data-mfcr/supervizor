@@ -46,10 +46,17 @@ class Invoice extends Nette\Object
 
     /**
      * @var Supplier
-     * @ORM\ManyToOne(targetEntity="Supplier", inversedBy="Invoice")
+     * @ORM\ManyToOne(targetEntity="Supplier", inversedBy="invoices")
      * @ORM\JoinColumn(name="supplier_id", referencedColumnName="id")
      */
     private $supplier;
+
+    /**
+     * @var Import
+     * @ORM\ManyToOne(targetEntity="Import", inversedBy="invoices")
+     * @ORM\JoinColumn(name="import_id", referencedColumnName="id")
+     */
+    private $import;
 
     /**
      * @var string

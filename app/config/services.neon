@@ -12,6 +12,7 @@ services:
     - App\Model\Repository\SupplierRepository
     - App\Model\Repository\InvoiceRepository
     - App\Model\Repository\BudgetRepository
+    - App\Model\Repository\ImportRepository
 
     # import
     - 

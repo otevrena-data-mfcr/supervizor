@@ -42,3 +42,7 @@ For you own data source you will need two things:
                    parser: Extensions\Importer\Parsers\Mfcr #Parser used to parse this dataset
                    default: true # Is default ? (data from this dataset will be shown as default configuration when landing on homepate)
    ```
+
+
+## Devel
+   * run `php www/index.php orm:validate-schema` to validate doctrine schema

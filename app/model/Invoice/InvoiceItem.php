@@ -39,14 +39,14 @@ class InvoiceItem extends Nette\Object
 
     /**
      * @var Invoice
-     * @ORM\ManyToOne(targetEntity="Invoice", inversedBy="InvoiceItem")
+     * @ORM\ManyToOne(targetEntity="Invoice", inversedBy="invoiceItems")
      * @ORM\JoinColumn(name="invoice_id", referencedColumnName="id")
      */
     private $invoice;
 
     /**
      * @var BudgetItem
-     * @ORM\ManyToOne(targetEntity="BudgetItem", inversedBy="InvoiceItem")
+     * @ORM\ManyToOne(targetEntity="BudgetItem", inversedBy="invoiceItems")
      * @ORM\JoinColumn(name="budgetitem_id", referencedColumnName="id")
      */
     private $budgetItem;

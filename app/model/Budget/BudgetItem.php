@@ -52,7 +52,7 @@ class BudgetItem extends Nette\Object
 
     /**
      * @var BudgetGroup
-     * @ORM\ManyToOne(targetEntity="BudgetGroup", inversedBy="BudgetItem")
+     * @ORM\ManyToOne(targetEntity="BudgetGroup", inversedBy="budgetItems")
      * @ORM\JoinColumn(name="budgetgroup_id", referencedColumnName="id", nullable=true)
      */
     private $budgetGroup;
