@@ -18,4 +18,27 @@ Supervizor je aplikace na vizualizaci výdajů státní správy, kerou vytvořil
   5. run `php www/index.php orm:default-data:load` to load default data. WARNING: this command DROP ALL DATA IN DATABASE!
   6. run `php www/index.php importer:import:all` to import mf2016 data configured in `app/config/importer.neon` (you can configure your imports there)
 
-  
+
+## Your own data source
+
+For you own data source you will need two things:
+
+   1. Create your own data parser in `extensions/Importer/parsers/`, you can use `Mfcr.php` as example
+   2. Configure your data sources in `config/importer.neon` :
+
+   ```neon
+   importer:
+     target: App\Model\ImportTarget
+     imports:
+       # here you can configure your custom imports
+       mf: #Import group key
+           title: "Ministerstvo financí" #Import group name
+           datasets: # List of datasets
+               mf2016: # Dataset key
+                   title: "Rok 2016" #Data set title
+                   description: "Přehled faktur Ministerstva financí" #Data set description
+                   source: "http://data.mfcr.cz/cs/api/3/action/resource_show?id=aec18a6a-0d8f-49a4-a8e7-ae0fbd32125f" #Data set source, it can be file:// http:// ftp://
+                   homepage: "http://data.mfcr.cz/cs/dataset/prehled-faktur-ministerstva-financi-cr" # Homepage of source (if any, used only for info)
+                   parser: Extensions\Importer\Parsers\Mfcr #Parser used to parse this dataset
+                   default: true # Is default ? (data from this dataset will be shown as default configuration when landing on homepate)
+   ```
