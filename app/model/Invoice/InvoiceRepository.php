@@ -119,4 +119,21 @@ class InvoiceRepository
     }
 
 
+    public function search($query)
+    {
+        $qb = $this->invoiceRepository->createQueryBuilder('i')
+            ->select('i')
+            ->join('i.invoiceItems', 'ii')
+            ->join('i.supplier', 'isu')
+            ->join('ii.budgetItem', 'bi')
+            ->where('isu.name LIKE :query')
+            ->orWhere('i.identifier LIKE :query')
+            ->orWhere('bi.name LIKE :query')
+            ->groupBy('i.id')
+            ->setParameters(['query' => '%' . $query . '%']);
+
+        return $qb->getQuery()->getResult();
+    }
+
+
 }

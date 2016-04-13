@@ -29,6 +29,7 @@ extensions:
     sentryLogger: Salamek\RavenNette\DI\SentryLoggerExtension
     recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
     importer: Extensions\Importer\ImporterExtension
+    visualPaginator: IPub\VisualPaginator\DI\VisualPaginatorExtension
 
 recaptcha:
     secretKey: 6LcbKvoSAAAAABfcIS7J3xftn0-NXJOsirB13Sj3
