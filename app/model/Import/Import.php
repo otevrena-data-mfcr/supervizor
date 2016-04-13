@@ -217,4 +217,12 @@ class Import extends Nette\Object
     {
         return $this->updated;
     }
+
+    /**
+     * @return string
+     */
+    public function getHomepage()
+    {
+        return $this->homepage;
+    }
 }
