@@ -1,6 +1,6 @@
 # Compoenents
 services:
-  - App\Components\BaseForm
-  - App\Components\SignInFormFactory
+  - Supervizor\UI\BaseForm
+  - Supervizor\Auth\Controls\SignInFormFactory
 
   - Nextras\Forms\Rendering\Bs3FormRenderer

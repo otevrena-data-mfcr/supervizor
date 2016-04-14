@@ -1,29 +1,28 @@
 
 services:
-
-    - App\Model\Entities\SupervizorSettings
+    - Supervizor\Settings\SupervizorSettings
 
     # security
-    - App\Model\Security\Authenticator
-    - App\Model\Security\PasswordManager
+    - Supervizor\Auth\Authenticator
+    - Supervizor\Auth\PasswordManager
 
     # repository
-    - App\Model\Repository\UserRepository
-    - App\Model\Repository\SupplierRepository
-    - App\Model\Repository\InvoiceRepository
-    - App\Model\Repository\BudgetRepository
-    - App\Model\Repository\ImportRepository
+    - Supervizor\Auth\UserRepository
+    - Supervizor\Supplies\SupplierRepository
+    - Supervizor\Invoice\InvoiceRepository
+    - Supervizor\Budget\BudgetRepository
+    - Supervizor\Import\ImportRepository
 
     # import
     - 
-        class: App\Model\ImportTarget
+        class: Supervizor\Import\ImportTarget
         inject: true
 
     # commands
     -
-        class: App\Model\Fixtures\DefaultData
+        class: Supervizor\Import\Defaults\DefaultData
         tags: [kdyby.console.command]
     
     -
-        class: App\Commands\Import
+        class: Supervizor\Console\Commands\Import
         tags: [kdyby.console.command]

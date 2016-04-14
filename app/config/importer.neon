@@ -1,5 +1,5 @@
 importer:
-  target: App\Model\ImportTarget
+  target: Supervizor\Import\ImportTarget
   imports:
     mf:
         title: "Ministerstvo financí"

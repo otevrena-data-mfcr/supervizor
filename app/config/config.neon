@@ -16,7 +16,7 @@ nette:
         expiration: 14 days
 
 services:
-    routerFactory: RouterFactory
+    routerFactory: Supervizor\UI\RouterFactory
 
     router: @routerFactory::createRouter
 
@@ -28,7 +28,7 @@ extensions:
     doctrine2identity: Majkl578\NetteAddons\Doctrine2Identity\DI\IdentityExtension
     sentryLogger: Salamek\RavenNette\DI\SentryLoggerExtension
     #recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
-    importer: Extensions\Importer\ImporterExtension
+    importer: Supervizor\Utils\Importer\ImporterExtension
     visualPaginator: IPub\VisualPaginator\DI\VisualPaginatorExtension
 
 #recaptcha:
@@ -41,7 +41,7 @@ doctrine:
     password: %database.password%
     dbname: %database.dbname%
     metadata:
-        App: %appDir%
+        Supervizor: %appDir%
 
 
 sentryLogger:
