@@ -1,0 +1,195 @@
+{* Latte template *}
+
+{block content}
+    <div id="invoice" n:class="$popup ? popup">
+        <div id="left" n:if="!$popup">
+            <div id="menu_left">
+                <a href="{$basePath}/">&lArr;Návrat na úvodní stránku</a>
+
+                <h3>Skupina do které patří tato faktura:</h3>
+                <ul id="list_skupiny">
+                    <li><a href="{$basePath}/skupina/{$budgetGroup->getSlug()}">{$budgetGroup->getName()}
+                            ({$budgetGroupSum}
+                            CZK)</a></li>
+                </ul>
+            </div>
+        </div>
+        <div {if !$popup}id="right"{/if}>
+            <div class="invoice">
+                <div class="share">
+                    <h2>Sdílet:</h2>
+                    <div class="input">
+                        <input type="text" value="{link '//this', popup => 0}" readonly id="input_share_link"
+                               onClick="this.select();">
+                    </div>
+                    <div class="widgets">
+                        <div class="widget fb-share-button" data-href="{link '//this', popup => 0}"
+                             data-layout="button_count"></div>
+                        <div class="widget"><a href="https://twitter.com/share" class="twitter-share-button"
+                                               data-via="otevrenadatamf">Tweet</a></div>
+                    </div>
+                </div>
+                <div class="faktura">
+
+                    <p class="disclaimer">TOTO JE VIZUALIZACE DAT, NEJEDNÁ SE O SKUTEČNOU PODOBU DOKLADU.</p>
+
+                    <table>
+                        <thead>
+                        <tr>
+                            <th colspan="2"><h1>{$invoice->getType()} č. {$invoice->getIdentifier()}</h1></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {if $invoice->getType() !== 'Ostatní platba'} <!--!FIXME To constants!!!! -->
+                            <tr>
+                                <td id="dodavatel">
+                                    <h3>Dodavatel</h3>
+                                    <h4>{$invoice->getSupplier()->getName()}</h4>
+                                    <p>
+                                        IČO: {$invoice->getSupplier()->getCompanyIdentifier()}
+                                    </p>
+                                </td>
+
+                                <td id="odberatel">
+                                    <h3>Odběratel</h3>
+                                    <h4>!FIXME Issue #3</h4>
+                                    <p>!FIXME Issue #3</p>
+                                </td>
+                            </tr>
+                        {/if}
+                        <tr>
+                            <td>
+                                <table class="datumy">
+                                    <tr n:if="$invoice->getType()">
+                                        <th>Typ dokladu:</th>
+                                        <td>{$invoice->getType()}</td>
+                                    </tr>
+                                    <tr n:if="$invoice->getDistinction()">
+                                        <th>Rozlišení:</th>
+                                        <td>{$invoice->getDistinction()}</td>
+                                    </tr>
+                                    <tr n:if="$invoice->getVatRecord()">
+                                        <th>Evidence DPH:</th>
+                                        <td>{if $invoice->getVatRecord()} ano {else} ne {/if}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                            <td>
+                                <table class="datumy">
+                                    <tr n:if="$invoice->getIssued()">
+                                        <th>Vystaveno:</th>
+                                        <td>{$invoice->getIssued()|date:"j. n. Y"}</td>
+                                    </tr>
+                                    <tr n:if="$invoice->getReceived()">
+                                        <th>Přijato:</th>
+                                        <td>{$invoice->getReceived()|date:"j. n. Y"}</td>
+                                    </tr>
+                                    <tr n:if="$invoice->getMaturity()">
+                                        <th>Splatnost:</th>
+                                        <td>{$invoice->getMaturity()|date:"j. n. Y"}</td>
+                                    </tr>
+                                    <tr n:if="$invoice->getPaid()">
+                                        <th>Uhrazeno:</th>
+                                        <td>{$invoice->getPaid()|date:"j. n. Y"}</td>
+                                    </tr>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+
+                                <h3>Účel platby</h3>
+                                <p class="ucel">{$invoice->getDescription()}</p>
+
+                                {if $invoice->getType() === "Ostatní platba"} <!--!FIXME invoice types to database-->
+                                    <p class="disclaimer_op">Poznámka: V rámci ostatních plateb mohou být zahrnuty i
+                                        náklady
+                                        proplacené zaměstnancům ve spojení s výkonem práce, například cestovné.</p>
+                                {/if}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h3>Rozpis dle rozpočtových položek</h3>
+                                <table class="rozpad">
+                                    <thead>
+                                    <tr>
+                                        <th colspan="2">Rozpočtová položka</th>
+                                        <th class="castka">Částka v Kč s DPH</th>
+                                    </tr>
+                                    <tbody>
+                                    <tr n:foreach="$invoice->getInvoiceItems() AS $invoiceItem">
+                                        <th>{$invoiceItem->getBudgetItem()->getIdentifier()}</th>
+                                        <th>{$invoiceItem->getBudgetItem()->getName()}</th>
+                                        <td class="castka">{$invoiceItem->getAmount()|formatNumber} CZK</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <h3>Detailní rozpis částek</h3>
+                                <table class="castky">
+                                    <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th class="castka">Částka v původní měně</th>
+                                        <th class="castka">Částka v Kč bez DPH</th>
+                                        <th class="castka">Částka v Kč s DPH</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr>
+                                        <th>Vystavená částka</th>
+                                        <td class="castka">{$invoice->getAmountOriginal() ? $invoice->getAmountOriginal()|formatNumber : 'N/A'} {$invoice->getCurrency()}</td>
+                                        <td class="castka">{$invoice->getAmountWithoutVat() ? $invoice->getAmountWithoutVat()|formatNumber : 'N/A'}
+                                            CZK
+                                        </td>
+                                        <td class="castka">{$invoice->getAmount() ? $invoice->getAmount()|formatNumber : 'N/A'}
+                                            CZK
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <th>Uhrazená částka</th>
+                                        <td class="castka">{$invoice->getAmountPaidOriginal() ? $invoice->getAmountPaidOriginal()|formatNumber : 'N/A'} {$invoice->getCurrency()}</td>
+                                        <td class="castka"><!--!FIXME THIS COL TOTALY MISSING--></td>
+                                        <td class="castka">{$invoice->getAmountPaid() ? $invoice->getAmountPaid()|formatNumber : 'N/A'}
+                                            CZK
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" class="celkem">
+                                <h3>Uhrazeno celkem <span class="castka">{$invoice->getAmountPaid()|formatNumber}
+                                        CZK</span></h3>
+                                <span class="clear"></span>
+                            </td>
+
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{/block}
+
+{block js}
+    <div id="fb-root"></div>
+    <script n:syntax="off">(function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s);
+            js.id = id;
+            js.src = "//connect.facebook.net/cs_CZ/sdk.js#xfbml=1&version=v2.4";
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));</script>
+
+    <script n:syntax="off">!function (d, s, id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>
+
+
+{/block}

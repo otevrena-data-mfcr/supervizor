@@ -1,0 +1,98 @@
+{* Latte template *}
+
+{block css}
+    <style type="text/css" n:syntax=off>
+        #skupiny{margin-bottom:20px;} #skupiny .graf
+
+        {float:left;margin-right:20px;}
+    </style>
+{/block}
+
+{block content}
+    <div id="skupiny" data-url="{link loadData}">
+        <img src="{$basePath}/img/ajax-loader.gif" class="ajax-loader">
+        <div class="graf" id="graf_skupiny_pocet"></div>
+        <div class="graf" id="graf_skupiny_objem"></div>
+        <span class="clear"></span>
+    </div>
+    <div class="graf" id="graf_polozky_objem"></div>
+{/block}
+
+{block js}
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript" n:syntax=off>
+        google.charts.load("current", {packages:["corechart"]});
+        google.charts.setOnLoadCallback(loadData);
+
+
+        function loadData() {
+            $.ajax({
+                url: $('#skupiny').data('url')
+            }).done(function (data) {
+                $('.ajax-loader').hide();
+                drawCharts(data.skupiny_pocet, data.skupiny_objem, data.polozky_objem);
+            });
+        }
+
+        // Callback that creates and populates a data table,
+        // instantiates the pie chart, passes in the data and
+        // draws it.
+        function drawCharts(skupiny_pocet, skupiny_objem, polozky_objem) {
+
+            // Create the data table.
+            var dataSkupinyPocet = new google.visualization.arrayToDataTable(skupiny_pocet);
+            var dataSkupinyObjem = new google.visualization.arrayToDataTable(skupiny_objem);
+            var dataPolozkyObjem = new google.visualization.arrayToDataTable(polozky_objem);
+
+            // Set chart options
+            var optionsSkupiny_pocet = {
+                "title": "Počet faktur dle skupin",
+                'width': 550,
+                'height': 400,
+                pieHole: 0.4,
+                chartArea: {
+                    width: "80%",
+                    height: "80%"
+                },
+                legend: {alignment:"center"}
+            };
+
+            var optionsSkupiny_objem = {
+                "title": "Objem v mil. Kč dle skupin",
+                'width': 550,
+                'height': 400,
+                pieHole: 0.4,
+                chartArea: {
+                    width: "80%",
+                    height: "80%"
+                },
+                legend: {alignment:"center"}
+            };
+
+            var optionsPolozky = {
+                "title": "Objem v mil. Kč dle rozpočtových položek",
+                'width': 1120,
+                'height': 700,
+                chartArea: {
+                    width: "90%",
+                    height: "90%"
+                },
+                pieHole: 0.4,
+                legend: {
+                    position: "labeled"
+                }
+            };
+
+            // Instantiate and draw our chart, passing in some options.
+            var chartSkupinyPocet = new google.visualization.PieChart(document.getElementById('graf_skupiny_pocet'));
+            chartSkupinyPocet.draw(dataSkupinyPocet, optionsSkupiny_pocet);
+
+            var chartSkupinyObjem = new google.visualization.PieChart(document.getElementById('graf_skupiny_objem'));
+            chartSkupinyObjem.draw(dataSkupinyObjem, optionsSkupiny_objem);
+
+            var chartSkupinyObjem = new google.visualization.PieChart(document.getElementById('graf_polozky_objem'));
+            chartSkupinyObjem.draw(dataPolozkyObjem, optionsPolozky);
+        }
+
+    </script>
+{/block}

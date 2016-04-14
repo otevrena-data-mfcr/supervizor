@@ -1,74 +1,49 @@
-# Supervizor
-Supervizor je aplikace na vizualizaci výdajů státní správy, kterou vytvořili pracovníci Ministerstva financí České republiky. Uvítáme další použití i úpravy/opravy zdrojového kódu, proto ho dáváme k dispozici pod licencí GNU GPL v3
+# Supervizor Nette implementace
+Supervizor je aplikace na vizualizaci výdajů státní správy, kerou vytvořili pracovníci Ministerstva financí České republiky. Uvítáme další použití i úpravy/opravy zdrojového kódu, proto ho dáváme k dispozici pod licencí GNU GPL v3
+
 
 ![Header](http://temp.smallhill.cz/supervizor-heading-github.png)
 
-## Obsah repozitáře
+## Requirements
+  * PHP 5.6>
+  * MySQL / MariaDB / PostgreSQL
+  * Nginx / Apache
+  * Linux
 
-**`//mysql` - soubory pro tvorbu databázové struktury**
+## Install
+  1. `composer install`
+  2. `bower install`
+  3. create `/app/config/config.local.neon` with own parameters, from `/app/config/config.local.neon.example` template
+  4. run `php www/index.php orm:s:c` to create default database schema
+  5. run `php www/index.php orm:default-data:load` to load default data. WARNING: this command DROP ALL DATA IN DATABASE!
+  6. run `php www/index.php importer:import:all` to import mf2016 data configured in `app/config/importer.neon` (you can configure your imports there)
 
-`//www` - zdrojové kódy aplikace  
-`//www/app` - jádro aplikace  
-`//www/app/api`  
-**`//www/app/import` - třída FakturyImport a [Mappingové](#mapping) soubory pro import**  
-`//www/app/lib` - PHP knihovny  
-`//www/app/tmp` - dočasné soubory  
-**`//www/config` - statická nastavení aplikace**  
-`//www/include` - šablony pro generování výstupu  
-`//www/static` - statické veřejné soubory
 
-## Nastavení
-- nastavení vizualizace se provádí v souborech ve složce //www/config
-- šablona nastavení je ve složce //www/config-vzor
-- nastavení importu a napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
+## Your own data source
 
-### Základní nastavení - //www/config/constants.php
-- zde se nastavují základní parametry, jako jsou hesla a cesty k vizualizaci
-- v drtivé většině případů by mělo stačit nastavení hesla do databáze a hesla importu
+For you own data source you will need two things:
 
-### Profily - //www/config/profiles.json
-- Pro uložení více organizací a let jsou zvoleny identifikátory profil a dataset
-- Tyto údaje se nastavují v souboru `//www/config/profiles.json` ve formátu JSON
-- Soubor obsahuje JSON objekt kde jednotlivé názvy vlastností jsou identifikátory profilů a obsahem jsou objekty reprezentující profily
-- Objekt profilu má následující vlastnosti:
-  - `(string) title` - název datasetu k zobrazení
-  - `(object) datasets` - objekt kde jednotlivé názvy vlastností jsou identifikátory datasetů (unikátrní v rámci profilu) a obsahem jsou objekty reprezentující datasety
-  - `(string) entity` - Název subjektu, který se zobrazuje jako odběratel
-  - `(string) entity_desc` - Kontaktní údaje subjektu které se zobrazují jako odběratel (lze použít \n pro nový řádek)
-- Objekt datasetu má následující vlastnosti
-  - `(string) title` - název datasetu k zobrazení
-  - `(string) endpoint` - url adresa odkazující na metadata datové sady katalogu (použito pro [Mapping](#mapping))
-  - `(string) database` - název databáze pro uložení dat
-  - `(string) mapping` - identifikátor [Mappingu](#mapping)
-  - `(string) source_name` - název datového zdroje k zobrazení
-  - `(string) source_url` - url datového zdroje jako odkaz pro uživatele 
+   1. Create your own data parser in `extensions/Importer/parsers/`, you can use `Mfcr.php` as example
+   2. Configure your data sources in `config/importer.neon` :
 
-##Import
+   ```neon
+   importer:
+     target: App\Model\ImportTarget
+     imports:
+       # here you can configure your custom imports
+       mf: #Import group key
+           title: "Ministerstvo financí" #Import group name
+           default: true # Is default import group ?
+           datasets: # List of datasets
+               mf2016: # Dataset key
+                   title: "Rok 2016" #Data set title
+                   description: "Přehled faktur Ministerstva financí" #Data set description
+                   source: "http://data.mfcr.cz/cs/api/3/action/resource_show?id=aec18a6a-0d8f-49a4-a8e7-ae0fbd32125f" #Data set source, it can be file:// http:// ftp://
+                   homepage: "http://data.mfcr.cz/cs/dataset/prehled-faktur-ministerstva-financi-cr" # Homepage of source (if any, used only for info)
+                   parser: Extensions\Importer\Parsers\Mfcr #Parser used to parse this dataset
+                   default: true # Is default ? (data from this dataset will be shown as default configuration when landing on homepate)
+   ```
 
-- Součástí aplikace je automatický mechanismus na import faktur z CSV souborů.
-- Proces, jakým probíhá napojení jednotlivých polí je popsán v sekci [Mapping](#mapping)
 
-### Mapping
-- Vytvořením Mappingu pro váš formát faktur definujete napojení polí faktury v CSV zdroji na pole v databázi Supervizoru
-- Který Mapping se použije se nastaví v souboru [profiles.json](#profily)
-- Mapping je PHP soubor ve složce `//www/app/import` s názvem `FakturyMapping_XXXX.php`, kde XXXX je identifikátor Mappingu
-- Soubor obsahuje třídu `FakturyMapping_XXXX` (stejný identifikátor), která implementuje rozhraní `IFakturyMapping`
-- Třída `FakturyMapping_XXXX`:
-  - metoda `getTimestamp()` - vrátí datum a čas poslední aktualizace dat na datovém zdroji ve formátu UNIX time
-  - metoda `setSource( (string) $source )` - nastaví zdroj dat; jako parametr dostane údaj endpoint z [objektu datasetu v profiles.json](#profily)
-  - metoda `import( FakturyImport $fi )` - provede import zápis do databáze provádí pomocí metod insertRow() a insertRows() dodaného objektu třídy `FakturyImport`
-- Třída `FakturyImport`:
-  - metoda `insertRow( (array) $row )`
-    - metoda kterou se vloží jedna faktura do databáze
-    - parametrem je pole, kde klíče jsou názvy položek databáze
-    - array( pole1 => hodnota1, pole2 => hodnota2, ...)   
-  -  metoda `insertRows( (array) $rows )`
-    - metoda kterou se vloží více faktur do databáze v rámci jedné žádosti
-    - parametrem je pole polí, kde klíče jsou názvy položek databáze
-    - array(0 => array( pole1 => hodnota1, pole2 => hodnota2, ...))    
-
-### Uživatelské rozhraní importu
-
-- uživatelské rozhraní se nachází na adrese /...cesta k supervizoru.../import
-- jako heslo se používá heslo jehož otisk je uložen v //www/config/constants.php v hodnotě IMPORT_PASSWORD_MD5
-- zbytek je návodný
+## Devel
+   * run `php www/index.php orm:validate-schema` to validate doctrine schema

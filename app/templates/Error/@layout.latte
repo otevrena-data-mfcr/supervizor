@@ -1,0 +1,46 @@
+{*layout none*}
+<!DOCTYPE html>
+<!--[if IE 8]>         <html class="ie8"> <![endif]-->
+<!--[if IE 9]>         <html class="ie9 gt-ie8"> <![endif]-->
+<!--[if gt IE 9]><!--> <html class="gt-ie8 gt-ie9 not-ie"> <!--<![endif]-->
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Error 404</title>
+        <meta name="robots" content="noindex">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+        {control css}
+    </head>
+
+
+    <!-- 1. $BODY ======================================================================================
+      
+      Body
+    
+      Classes:
+      * 'right-to-left' - Sets text direction to right-to-left
+    -->
+    <body class="page-404">
+
+        <div class="header">
+            <a n:href="Front:Homepage:default" class="logo">
+                <div class="demo-logo"><img src="{$basePath}/images/favicon.ico" alt="Weby.cz" style="margin-top: -4px;"></div>&nbsp;
+                Weby.cz
+            </a> <!-- / .logo -->
+        </div> <!-- / .header -->
+        {include #content}
+        <div class="error-text">
+            <span class="oops">OOPS!</span><br>
+            <span class="hr"></span>
+            <br>
+            {var $text = 'Něco se pokazilo, nebo tato stránka neexistuje... zatím'}
+            {$text|upper}
+        </div> <!-- / .error-text -->
+        <!--form action="" class="search-form">
+          <input type="text" class="search-input" name="s">
+          <input type="submit" value="SEARCH" class="search-btn">
+        </form--> <!-- / .search-form -->
+
+        {control js}
+    </body>
+</html>
