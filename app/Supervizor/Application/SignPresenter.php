@@ -24,6 +24,9 @@
  *
  * @author Adam Schubert <adam.schubert@winternet.cz>
  */
+
+namespace Supervizor\Application;
+
 use Nette\Application\UI\Form;
 use Supervizor\Auth\Controls\SignInFormFactory;
 
@@ -41,7 +44,7 @@ class SignPresenter extends Presenter
 
     /**
      * Sign-in form factory.
-     * @return Nette\Application\UI\Form
+     * @return \Nette\Application\UI\Form
      */
     protected function createComponentSignInForm()
     {

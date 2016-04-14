@@ -19,6 +19,9 @@
  * MA 02110-1301  USA
  */
 
+namespace Supervizor\Application;
+
+use Exception;
 use Kdyby\Doctrine\EntityManager;
 use Supervizor\Auth\User;
 use thomaswelton\GravatarLib\Gravatar;

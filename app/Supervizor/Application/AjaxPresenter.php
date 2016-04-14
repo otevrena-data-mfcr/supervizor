@@ -19,8 +19,13 @@
  * MA 02110-1301  USA
  */
 
+namespace Supervizor\Application;
+
 use Doctrine\Common\Collections\ArrayCollection;
+use Exception;
 use Nette\Caching\Cache;
+use Nette\Caching\IStorage;
+use Nette\Http\Context;
 use Nette\Http\IResponse;
 use Supervizor\Budget\BudgetGroup;
 use Supervizor\Budget\BudgetRepository;
@@ -29,6 +34,7 @@ use Supervizor\Invoice\InvoiceItem;
 use Supervizor\Invoice\InvoiceRepository;
 use Supervizor\Supplies\Supplier;
 use Supervizor\Supplies\SupplierRepository;
+use Throwable;
 
 class AjaxPresenter extends Presenter
 {
@@ -42,10 +48,10 @@ class AjaxPresenter extends Presenter
     /** @var SupplierRepository @inject */
     public $supplierRepository;
     
-    /** @var Nette\Http\Context @inject */
+    /** @var Context @inject */
     public $httpContext;
 
-    /** @var Nette\Caching\IStorage @inject */
+    /** @var IStorage @inject */
     public $cacheStorage;
 
     const DATE_FORMAT = 'Y-m-d H:i:s';

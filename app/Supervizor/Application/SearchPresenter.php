@@ -19,6 +19,8 @@
  * MA 02110-1301  USA
  */
 
+namespace Supervizor\Application;
+
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Form;
 use IPub\VisualPaginator\Components as VisualPaginator;

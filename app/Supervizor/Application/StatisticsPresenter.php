@@ -19,6 +19,8 @@
  * MA 02110-1301  USA
  */
 
+namespace Supervizor\Application;
+
 use Kdyby\Doctrine\EntityManager;
 use Supervizor\Budget\BudgetGroup;
 use Supervizor\Budget\BudgetItem;

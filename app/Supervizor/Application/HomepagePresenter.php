@@ -19,6 +19,7 @@
  * MA 02110-1301  USA
  */
 
+namespace Supervizor\Application;
 
 class HomepagePresenter extends Presenter
 {

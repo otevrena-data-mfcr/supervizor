@@ -11,6 +11,8 @@ php:
 nette:
     application:
         errorPresenter: Error
+        mapping:
+            *: Supervizor\Application\*\*Presenter
 
     session:
         expiration: 14 days
