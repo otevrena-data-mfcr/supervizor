@@ -1,3 +1,4 @@
+
 # Supervizor
 Supervizor je aplikace na vizualizaci výdajů státní správy, kterou vytvořili pracovníci Ministerstva financí České republiky. Uvítáme další použití i úpravy/opravy zdrojového kódu, proto ho dáváme k dispozici pod licencí GNU GPL v3
 
@@ -70,5 +71,4 @@ Supervizor je aplikace na vizualizaci výdajů státní správy, kterou vytvoři
 ### Uživatelské rozhraní importu
 
 - uživatelské rozhraní se nachází na adrese /...cesta k supervizoru.../import
-- jako heslo se používá heslo jehož otisk je uložen v //www/config/constants.php v hodnotě IMPORT_PASSWORD_MD5
-- zbytek je návodný
+- jako heslo se používá heslo jehož otisk je uložen v //www/config/constants.php v konstantě `IMPORT_PASSWORD_HASH`, otisk vyrobíte pomocí volání funkce `password_hash('...', PASSWORD_DEFAULT)` (potřebuje PHP 5.5 a novější nebo PHP 5.3 a knihovnu [https://github.com/ircmaxell/password_compat](ircmaxell/password_compat))

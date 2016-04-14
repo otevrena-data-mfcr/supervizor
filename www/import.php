@@ -29,7 +29,7 @@ if($metadata_timestamp && ($metadata_timestamp === $database_timestamp)) $needs_
 
 if($import){
 
-  if(md5($password) !== IMPORT_PASSWORD_MD5) throw new Exception("Chybné heslo.");
+  if(!password_verify($password, IMPORT_PASSWORD_HASH)) throw new Exception("Chybné heslo.");
 
   $start_time = microtime(true);
   
@@ -190,7 +190,7 @@ $tpl->fetchOutput("styles");
   
 </table>
 <br>
-<form action="<?=$_SERVER["PHP_SELF"]?>" method="POST">
+<form action="<?=htmlspecialchars($_SERVER["PHP_SELF"])?>" method="POST">
   <input type="hidden" name="import" value="1">
   <button type="submit">Spustit import</button>
   Heslo: <input type="password" name="password" required> 
