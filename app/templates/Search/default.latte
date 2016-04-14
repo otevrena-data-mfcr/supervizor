@@ -1,0 +1,60 @@
+{* Latte template *}
+
+{block content}
+    <div id="hledani">
+        <span class="loader"><span></span></span>
+        <div class="filtr">
+            <h3>Filtr</h3>
+
+            <form n:name="filterForm">
+                <div class="form-group">
+                    <label n:name="fromDate">Datum od</label>
+                    <input n:name="fromDate" class="form-control" placeholder="Datum od">
+                </div>
+                <div class="form-group">
+                    <label n:name="toDate">Datum do</label>
+                    <input n:name="toDate" class="form-control" placeholder="Datum do">
+                </div>
+                <div class="form-group">
+                    <label n:name="query">Hledaná fráze</label>
+                    <input n:name="query" class="form-control" placeholder="Hledaná fráze...">
+                    <p class="help-block">Vyhledává se podle: čisla faktury, dodavatele a položky.</p>
+                </div>
+                <button n:name="send" class="btn btn-primary">Vyhledat</button>
+            </form>
+
+            <div class="status">
+                <p><span class="pocet">{$found}</span> nalezených položek.</p>
+            </div>
+        </div>
+
+        <div class="vysledky">
+            <h3>Výsledky hledání: </h3>
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th>Číslo faktury</th>
+                    <th>Dodavatel</th>
+                    <th>Datum vystavení</th>
+                    <th>Částka</th>
+                </thead>
+
+                <tbody>
+                <tr n:foreach="$invoices AS $invoice">
+                    <td>{$invoice->getIdentifier()}</td>
+                    <td>{$invoice->getSupplier()->getName()}</td>
+                    <td>{$invoice->getIssued()|date:'j. n. Y'}</td>
+                    <td>{$invoice->getAmount()|formatNumber} {$invoice->getCurrency()}</td>
+                </tr>
+                </tbody>
+
+            </table>
+            <div class="pager">
+                {control visualPaginator}
+            </div>
+
+        </div>
+
+
+    </div>
+{/block}

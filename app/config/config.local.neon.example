@@ -1,0 +1,15 @@
+development:
+    parameters:
+        database:
+          host: 'localhost'
+          user: 'supervisor'
+          password: ''
+          dbname: 'supervisor'
+
+production:
+    parameters:
+        database:
+          host: 'localhost'
+          user: 'supervisor'
+          password: ''
+          dbname: 'supervisor'

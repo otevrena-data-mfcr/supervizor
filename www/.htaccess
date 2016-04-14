@@ -1,16 +1,25 @@
-RewriteEngine on
+# Apache configuration file (see httpd.apache.org/docs/current/mod/quickreference.html)
 
-RewriteRule ^api\/(.*)$      	                                        ./api.php?endpoint=$1      		                             [L,QSA]
-	
-RewriteRule ^stranka\/([a-zA-Z\-0-9]+)$                               ./stranka.php?stranka=$1         								           [L,QSA]
-RewriteRule ^faktura\/([a-zA-Z\-0-9]+)$                               ./faktura.php?faktura=$1         								           [L,QSA]
+# disable directory listing
+<IfModule mod_autoindex.c>
+	Options -Indexes
+</IfModule>
 
-RewriteRule ^skupina\/([a-z]+)\/?(\d+)?\/?$ 						              ./index.php?view=skupina&skupina=$1&page=$2					       [L,QSA]
-RewriteRule ^skupina\/([a-z]+)\/(\d+)\/dodavatel\/([\d\-]+)\/?$		    ./index.php?view=skupina&skupina=$1&page=$2&dodavatel=$3   [L,QSA]
+# enable cool URL
+<IfModule mod_rewrite.c>
+	RewriteEngine On
+	RewriteBase /
 
-RewriteRule ^import$                                                  ./import.php                                               [L,QSA]
+	# prevents files starting with dot to be viewed by browser
+	RewriteRule /\.|^\. - [F]
 
-#<IfModule mod_php5.c>
-#  php_value error_reporting 30719
-#  php_flag display_errors 1
-#</IfModule>
+	# front controller
+	RewriteCond %{REQUEST_FILENAME} !-f
+	RewriteCond %{REQUEST_FILENAME} !-d
+	RewriteRule !\.(pdf|js|ico|gif|jpg|png|css|rar|zip|tar\.gz)$ index.php [L]
+</IfModule>
+
+# enable gzip compression
+<IfModule mod_deflate.c>
+	AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript text/javascript application/javascript application/json
+</IfModule>

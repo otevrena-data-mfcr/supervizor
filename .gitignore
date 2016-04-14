@@ -1,2 +1,7 @@
-tmp/
-config/
+/composer.lock
+/temp/
+/app/config/config.local.neon
+/vendor/
+/www/bower_components/
+/www/webtemp
+/nbproject/private/
