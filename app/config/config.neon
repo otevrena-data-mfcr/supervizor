@@ -50,6 +50,5 @@ sentryLogger:
     dsn: ''
 
 includes:
-    - components.neon
     - services.neon
     - importer.neon

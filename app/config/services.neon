@@ -1,6 +1,11 @@
 
 services:
+    - Nextras\Forms\Rendering\Bs3FormRenderer
     - Supervizor\Settings\SupervizorSettings
+
+    # Compoenents
+    - Supervizor\UI\BaseForm
+    - Supervizor\Auth\Controls\SignInFormFactory
 
     # security
     - Supervizor\Auth\Authenticator
