@@ -143,7 +143,7 @@ abstract class BasePresenter extends \Nette\Application\UI\Presenter
             'bootstrap/dist/js/bootstrap.min.js',
             'history.js/scripts/bundled/html4+html5/native.history.js',
             $wwwDir . '/js/jquery/jQRangeSlider/jQAllRangeSliders-min.js',
-            'raphael/raphael-min.js',
+            'raphael/raphael.min.js',
             $wwwDir . '/js/raphael-style.js',
             $wwwDir . '/js/global.js'
         ));
