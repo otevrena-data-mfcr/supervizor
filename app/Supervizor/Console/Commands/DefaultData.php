@@ -19,7 +19,7 @@
  * MA 02110-1301  USA
  */
 
-namespace Supervizor\Import\Defaults;
+namespace Supervizor\Console\Commands;
 
 use Doctrine\Common\DataFixtures\Executor\ORMExecutor;
 use Doctrine\Common\DataFixtures\Loader;
@@ -62,7 +62,7 @@ class DefaultData extends Command
         }
         catch (\Exception $exc)
         {
-            $output->writeLn("<error>{$exc->getMessage()}</error>");
+            $output->writeln("<error>{$exc->getMessage()}</error>");
             return 1; // non-zero return code means error
         }
     }

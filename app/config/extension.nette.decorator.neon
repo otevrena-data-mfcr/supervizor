@@ -1,0 +1,3 @@
+decorator:
+  Symfony\Component\Console\Command\Command:
+    tags: [kdyby.console.command]

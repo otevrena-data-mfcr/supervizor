@@ -23,6 +23,8 @@ namespace Supervizor\Application;
 
 use Supervizor\Auth\User;
 use Supervizor\Import\ImportRepository;
+use WebLoader\Nette\CssLoader;
+use WebLoader\Nette\JavaScriptLoader;
 
 /**
  * Base presenter for all application presenters.
@@ -38,7 +40,8 @@ abstract class Presenter extends \Supervizor\UI\BasePresenter
     /** @var string @persistent */
     public $importSlug = null;
 
-
+    /** @var \WebLoader\Nette\LoaderFactory @inject */
+    public $webLoader;
 
     /**
      * @return \Nette\Security\IIdentity|User|NULL
@@ -101,61 +104,18 @@ abstract class Presenter extends \Supervizor\UI\BasePresenter
         return number_format($number, 0, ',', ' '); //!FIXME Locales
     }
 
-    /**
-     * @return \WebLoader\Nette\CssLoader
-     * @throws \WebLoader\InvalidArgumentException
-     */
-    public function createComponentCss()
+    /** @return CssLoader */
+    protected function createComponentCss()
     {
-        $wwwDir = $this->getContext()->parameters['wwwDir'];
-        $files = new \WebLoader\FileCollection($wwwDir . '/bower_components');
-        $files->addRemoteFile('http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext');
-
-        $files->addFiles(array(
-            'jquery-ui/themes/smoothness/jquery-ui.min.css',
-            'bootstrap/dist/css/bootstrap.min.css',
-            'bootstrap/dist/css/bootstrap-theme.min.css',
-            $wwwDir . '/js/jquery/jQRangeSlider/jQAllRangeSliders-classic-min.css',
-            'fancybox/source/jquery.fancybox.css',
-            $wwwDir . '/scss/style-default.scss'
-        ));
-
-        $compiler = \WebLoader\Compiler::createCssCompiler($files, $wwwDir . '/webtemp');
-
-        $compiler->addFileFilter(new \WebLoader\Filter\ScssFilter());
-
-        $root = $wwwDir . '/bower_components';
-        $base = $this->template->basePath . '/bower_components';
-        $compiler->addFileFilter(new \WebLoader\Filter\CssUrlsFilter($root, $base));
-
-        return new \WebLoader\Nette\CssLoader($compiler, $this->template->basePath . '/webtemp');
+        return $this->webLoader->createCssLoader('default');
     }
 
-    /**
-     * @return \WebLoader\Nette\JavaScriptLoader
-     */
-    public function createComponentJs()
+
+
+    /** @return JavaScriptLoader */
+    protected function createComponentJs()
     {
-        $wwwDir = $this->getContext()->parameters['wwwDir'];
-        $files = new \WebLoader\FileCollection($wwwDir . '/bower_components');
-
-        $files->addRemoteFile('https://www.google.com/recaptcha/api.js');
-
-
-        $files->addFiles(array(
-            'jquery/jquery.min.js',
-            'jquery-ui/jquery-ui.min.js',
-            'fancybox/source/jquery.fancybox.pack.js',
-            'bootstrap/dist/js/bootstrap.min.js',
-            'history.js/scripts/bundled/html4+html5/native.history.js',
-            $wwwDir . '/js/jquery/jQRangeSlider/jQAllRangeSliders-min.js',
-            'raphael/raphael.min.js',
-            $wwwDir . '/js/raphael-style.js',
-            $wwwDir . '/js/global.js'
-        ));
-
-        $compiler = \WebLoader\Compiler::createJsCompiler($files, $wwwDir . '/webtemp');
-        return new \WebLoader\Nette\JavaScriptLoader($compiler, $this->template->basePath . '/webtemp');
+        return $this->webLoader->createJavaScriptLoader('default');
     }
 
 }

@@ -19,7 +19,7 @@
  * MA 02110-1301  USA
  */
 
-namespace Supervizor\Import\Defaults\DefaultData;
+namespace Supervizor\Console\Commands;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
