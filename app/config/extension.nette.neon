@@ -16,3 +16,9 @@ nette:
 services:
   routerFactory: Supervizor\UI\RouterFactory
   router: @routerFactory::createRouter(%ssl%)
+  latte.latteFactory:
+    setup:
+      - addFilter('formatNumber', [@Supervizor\UI\Latte\Filters, 'formatNumber'])
+      - addFilter('formatPrice', [@Supervizor\UI\Latte\Filters, 'formatPrice'])
+
+  - Supervizor\UI\Latte\Filters

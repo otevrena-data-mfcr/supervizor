@@ -75,33 +75,6 @@ abstract class Presenter extends \Supervizor\UI\BasePresenter
 
         $this->template->selectedImport = $selectedImport;
         $this->template->selectedImportGroup = $selectedImportGroup;
-
-
-    }
-    
-    /**
-     * @return \Nette\Bridges\ApplicationLatte\Template
-     */
-    public function createTemplate()
-    {
-        /** @var \Nette\Bridges\ApplicationLatte\Template $template */
-        $template = parent::createTemplate();
-
-        $template->registerHelper('formatNumber', $this->formatNumber);
-
-        $template->registerHelper('formatPrice', $this->formatPrice);
-
-        return $template;
-    }
-
-    public function formatPrice($price)
-    {
-        return $this->formatNumber($price) . ' Kč'; //!FIXME Locales
-    }
-
-    public function formatNumber($number)
-    {
-        return number_format($number, 0, ',', ' '); //!FIXME Locales
     }
 
     /** @return CssLoader */
@@ -109,8 +82,6 @@ abstract class Presenter extends \Supervizor\UI\BasePresenter
     {
         return $this->webLoader->createCssLoader('default');
     }
-
-
 
     /** @return JavaScriptLoader */
     protected function createComponentJs()
