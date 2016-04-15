@@ -31,13 +31,7 @@ class HomepagePresenter extends Presenter
 
     /** @var string @persistent */
     public $supplierIdentifier = null;
-
-
-    /**
-     * @param null $budgetGroupIdentifier
-     * @param int $page
-     * @param null $supplierIdentifier
-     */
+    
     public function renderDefault()
     {
         $this->template->budgetGroupIdentifier = $this->budgetGroupIdentifier;
