@@ -16,7 +16,7 @@ use Supervizor\Invoice\InvoiceItem;
 use Supervizor\Invoice\InvoiceRepository;
 use Supervizor\Supplies\Supplier;
 use Supervizor\Supplies\SupplierRepository;
-use Supervizor\Utils\Importer\IImportTarget;
+use Supervizor\DI\Importer\IImportTarget;
 
 /**
  * Description of ImportTarget

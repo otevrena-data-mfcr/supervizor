@@ -19,7 +19,7 @@
  * MA 02110-1301  USA
  */
 
-namespace Supervizor\Auth;
+namespace Supervizor\Security;
 
 use Nette;
 

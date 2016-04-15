@@ -21,7 +21,7 @@
 
 namespace Supervizor\Application;
 
-use Supervizor\Auth\User;
+use Supervizor\Security\User;
 use Supervizor\Import\ImportRepository;
 use WebLoader\Nette\CssLoader;
 use WebLoader\Nette\JavaScriptLoader;

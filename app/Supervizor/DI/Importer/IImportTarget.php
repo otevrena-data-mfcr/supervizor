@@ -6,7 +6,7 @@
  * and open the template in the editor.
  */
 
-namespace Supervizor\Utils\Importer;
+namespace Supervizor\DI\Importer;
 
 /**
  * Description of IImportTarget

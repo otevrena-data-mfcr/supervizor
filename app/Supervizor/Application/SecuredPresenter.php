@@ -23,7 +23,7 @@ namespace Supervizor\Application;
 
 use Exception;
 use Kdyby\Doctrine\EntityManager;
-use Supervizor\Auth\User;
+use Supervizor\Security\User;
 use thomaswelton\GravatarLib\Gravatar;
 
 /**

@@ -32,21 +32,20 @@ class RouterFactory
 {
 
     /**
+     * @param bool $useSsl
      * @return IRouter
      */
-    public function createRouter()
+    public function createRouter($useSsl)
     {
-        $useSsl = (
-                isset($_SERVER['REMOTE_ADDR']) &&
-                !in_array($_SERVER['REMOTE_ADDR'], array('127.0.0.1', '::1')) ? true : false);
-
+        $flag = $useSsl ? Route::SECURED : 0;
+        
         $router = new RouteList();
 
         $router[] = new Route('index.php', 'Homepage:default', Route::ONE_WAY);
-        $router[] = new Route('faktura/<id>', 'Invoice:default', ($useSsl ? Route::SECURED : null));
-        $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]', 'Homepage:default', ($useSsl ? Route::SECURED : null));
-        $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]<supplierIdentifier>', 'Homepage:default', ($useSsl ? Route::SECURED : null));
-        $router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default', ($useSsl ? Route::SECURED : null));
+        $router[] = new Route('faktura/<id>', 'Invoice:default', $flag);
+        $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]', 'Homepage:default', $flag);
+        $router[] = new Route('skupina/<budgetGroupIdentifier>[/<page>]<supplierIdentifier>', 'Homepage:default', $flag);
+        $router[] = new Route('<presenter>/<action>[/<id>]', 'Homepage:default', $flag);
 
         return $router;
     }

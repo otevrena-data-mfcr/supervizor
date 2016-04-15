@@ -1,6 +1,9 @@
 parameters:
-    database:
-        host: 'localhost'
-        user: 'supervizor'
-        password: ''
-        dbname: 'supervisor'
+  database:
+    host: 'localhost'
+    user: 'supervizor'
+    password: ''
+    dbname: 'supervisor'
+
+  # it is recommended to ssl: true on production
+  ssl: true

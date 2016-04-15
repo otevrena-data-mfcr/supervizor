@@ -19,41 +19,27 @@
  * MA 02110-1301  USA
  */
 
-namespace Supervizor\Utils\Importer;
+namespace Supervizor\Security;
 
-use Nette\DI\CompilerExtension;
-use Nette\PhpGenerator\ClassType;
+use Kdyby\Doctrine\EntityManager;
 
-/**
- * Description of EncryptorExtension
- *
- * @author Adam Schubert <adam.schubert@sg1-game.net>
- */
-final class ImporterExtension extends CompilerExtension
+class UserRepository
 {
 
-    /** @var array */
-    private $defaults = [
-        'target' => null,
-        'imports' => []
-    ];
+    /** @var \Kdyby\Doctrine\EntityRepository */
+    private $userRepository;
 
-
-    public function loadConfiguration()
+    public function __construct(EntityManager $entityManager)
     {
-        $config = $this->validateConfig($this->defaults);
-        $builder = $this->getContainerBuilder();
-
-        $builder->addDefinition($this->prefix('importer'))
-                ->setClass(Importer::class, ['@cacheStorage', $config['imports'], '@' . $config['target']]);
+        $this->userRepository = $entityManager->getRepository(User::class);
     }
 
     /**
-     * @param ClassType $class
+     * @return \Kdyby\Doctrine\EntityRepository
      */
-    public function afterCompile(ClassType $class)
+    public function getUserRepository()
     {
-        
+        return $this->userRepository;
     }
 
 }

@@ -24,8 +24,8 @@ namespace Supervizor\Console\Commands;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use Supervizor\Auth\PasswordManager;
-use Supervizor\Auth\User;
+use Supervizor\Security\PasswordManager;
+use Supervizor\Security\User;
 
 class UsersFixtures extends AbstractFixture implements OrderedFixtureInterface
 {

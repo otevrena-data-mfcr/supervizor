@@ -20,18 +20,17 @@ includes:
 
 services:
   - Nextras\Forms\Rendering\Bs3FormRenderer
-  - Supervizor\Settings\SupervizorSettings
 
   # Compoenents
   - Supervizor\UI\BaseForm
-  - Supervizor\Auth\Controls\SignInFormFactory
+  - Supervizor\Security\Controls\SignInFormFactory
 
   # security
-  - Supervizor\Auth\Authenticator
-  - Supervizor\Auth\PasswordManager
+  - Supervizor\Security\Authenticator
+  - Supervizor\Security\PasswordManager
 
   # repository
-  - Supervizor\Auth\UserRepository
+  - Supervizor\Security\UserRepository
   - Supervizor\Supplies\SupplierRepository
   - Supervizor\Invoice\InvoiceRepository
   - Supervizor\Budget\BudgetRepository

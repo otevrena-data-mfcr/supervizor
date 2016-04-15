@@ -25,7 +25,7 @@ use Kdyby\Doctrine\EntityManager;
 use Nette\Utils\Json;
 use Supervizor\Budget\BudgetGroup;
 use Supervizor\Budget\BudgetItem;
-use Supervizor\Utils\Importer\Importer;
+use Supervizor\DI\Importer\Importer;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;

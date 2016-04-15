@@ -1,6 +1,6 @@
 <?php
 
-namespace Supervizor\Utils\Importer\Parsers;
+namespace Supervizor\DI\Importer\Parsers;
 
 use Nette;
 

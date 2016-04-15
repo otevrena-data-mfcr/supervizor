@@ -28,7 +28,7 @@
 namespace Supervizor\Application;
 
 use Nette\Application\UI\Form;
-use Supervizor\Auth\Controls\SignInFormFactory;
+use Supervizor\Security\Controls\SignInFormFactory;
 
 /**
  * Sign in/out presenters.

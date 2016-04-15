@@ -1,3 +1,6 @@
+parameters:
+  ssl: %debugMode% # fallback
+
 php:
   date.timezone: Europe/Prague
 
@@ -12,4 +15,4 @@ nette:
 
 services:
   routerFactory: Supervizor\UI\RouterFactory
-  router: @routerFactory::createRouter
+  router: @routerFactory::createRouter(%ssl%)
