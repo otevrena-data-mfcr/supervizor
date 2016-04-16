@@ -21,7 +21,7 @@
 
 namespace Supervizor\Application;
 
-use Nette\Diagnostics\Debugger;
+use Tracy\Debugger;
 
 /**
  * Error presenter.
