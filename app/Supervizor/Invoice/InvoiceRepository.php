@@ -78,7 +78,7 @@ class InvoiceRepository
     /**
      * @param Supplier $supplier
      * @param BudgetGroup $budgetGroup
-     * @return array
+     * @return Invoice[]
      */
     public function getBySupplierAndGroup(
         Supplier $supplier,

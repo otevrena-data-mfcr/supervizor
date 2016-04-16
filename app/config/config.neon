@@ -20,6 +20,10 @@ includes:
 
 services:
   - Nextras\Forms\Rendering\Bs3FormRenderer
+  - Supervizor\Storage\CacheStorage
+
+  - Supervizor\Budget\BudgetFacade
+  - Supervizor\Supplies\SupplierFacade
 
   # Compoenents
   - Supervizor\UI\BaseForm
