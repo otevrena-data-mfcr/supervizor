@@ -8,8 +8,8 @@
 
 namespace Supervizor\Budget;
 
-use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\ORM\Mapping as ORM;
 use Kdyby\Doctrine\Entities\Attributes\Identifier;
 use Nette;
 
@@ -212,6 +212,22 @@ class BudgetGroup extends Nette\Object
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    /**
+     * @return float
+     */
+    public function getTotalAmount()
+    {
+        $amount = 0;
+
+        foreach ($this->getBudgetItems() as $budgetItem) {
+            foreach ($budgetItem->getinvoiceItems() as $invoiceItem) {
+                $amount += $invoiceItem->getAmount();
+            }
+        }
+        
+        return $amount;
     }
 
 }

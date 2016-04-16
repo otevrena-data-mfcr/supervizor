@@ -24,7 +24,6 @@ namespace Supervizor\Application;
 use Nette\Http\IResponse;
 use Supervizor\Budget\BudgetGroup;
 use Supervizor\Budget\BudgetRepository;
-use Supervizor\Invoice\InvoiceItem;
 use Supervizor\Invoice\InvoiceRepository;
 
 /**
@@ -48,27 +47,18 @@ class InvoicePresenter extends Presenter
         if (!$invoice) {
             $this->error('Invoice not found!', IResponse::S404_NOT_FOUND);
         }
-        $amount = 0;
+
         /** @var BudgetGroup $budgetGroup */
         $budgetGroup = $this->budgetRepository->getGroupByInvoice($invoice);
 
-        foreach ($budgetGroup->getBudgetItems() AS $budgetItem) {
-            /** @var InvoiceItem $invoiceItem */
-            foreach ($budgetItem->getinvoiceItems() AS $invoiceItem) {
-                $amount += $invoiceItem->getAmount();
-            }
-        }
-
         $this->template->budgetGroup = $budgetGroup;
-        $this->template->budgetGroupSum = $amount;
+        $this->template->budgetGroupSum = $budgetGroup->getTotalAmount();
         $this->template->invoice = $invoice;
-
-
+        
         if ($popup) {
             $this->setLayout('popuplayout');
         }
         $this->template->popup = $popup;
-
         $this->template->title = 'O projektu';
     }
 
