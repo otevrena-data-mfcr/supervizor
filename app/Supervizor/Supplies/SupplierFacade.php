@@ -2,6 +2,7 @@
 
 namespace Supervizor\Supplies;
 
+use Nette\Caching\Cache;
 use Supervizor\Budget\BudgetRepository;
 use Supervizor\Invoice\InvoiceRepository;
 use Supervizor\NotFoundException;
@@ -54,7 +55,9 @@ class SupplierFacade
     public function getSupplier($supplierIdentifier)
     {
         $key = 'Supplier' . $supplierIdentifier;
-        $fallback = function () use ($supplierIdentifier) {
+        $fallback = function (& $dependencies) use ($supplierIdentifier) {
+            $dependencies[Cache::EXPIRE] = CacheStorage::EXPIRATION;
+
             $supplier = $this->supplierRepository->findByIdentifier($supplierIdentifier);
 
             if (!$supplier) {
@@ -142,7 +145,9 @@ class SupplierFacade
     {
         $key = 'Suppliers' . md5(json_encode([$budgetGroupSlug, $budgetItems, $dateFrom, $dateTo]));
 
-        $fallback = function () use ($budgetGroupSlug, $budgetItems, $dateFrom, $dateTo) {
+        $fallback = function (& $dependencies) use ($budgetGroupSlug, $budgetItems, $dateFrom, $dateTo) {
+            $dependencies[Cache::EXPIRE] = CacheStorage::EXPIRATION;
+
             $budgetGroup = $this->budgetGroupRepository->findGroupBySlug($budgetGroupSlug);
 
             if (!$budgetGroup) {
