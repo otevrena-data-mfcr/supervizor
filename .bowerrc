@@ -1,3 +1,6 @@
 {
-  "directory": "www/bower_components"
+  "directory": "www/bower_components",
+  "scripts": {
+    "postinstall": "cp -R www/bower_components/bootstrap/fonts/. www/fonts/"
+  }
 }
