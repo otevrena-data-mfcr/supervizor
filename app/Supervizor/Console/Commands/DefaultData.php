@@ -47,7 +47,7 @@ class DefaultData extends Command
         try
         {
             $loader = new Loader();
-            $loader->loadFromDirectory(__DIR__ . '/DefaultData/');
+            $loader->loadFromDirectory(__DIR__ . '/Fixtures/');
             $fixtures = $loader->getFixtures();
 
             $purger = new ORMPurger($this->em);
