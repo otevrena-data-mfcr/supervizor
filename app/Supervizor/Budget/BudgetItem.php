@@ -165,4 +165,18 @@ class BudgetItem extends Nette\Object
         return $this->identifier;
     }
 
+    /**
+     * @return float
+     */
+    public function getTotalAmount()
+    {
+        $amount = 0;
+
+        foreach ($this->getinvoiceItems() as $invoiceItem) {
+            $amount += $invoiceItem->getAmount();
+        }
+
+        return $amount;
+    }
+
 }

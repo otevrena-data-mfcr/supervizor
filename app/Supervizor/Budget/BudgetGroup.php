@@ -222,9 +222,7 @@ class BudgetGroup extends Nette\Object
         $amount = 0;
 
         foreach ($this->getBudgetItems() as $budgetItem) {
-            foreach ($budgetItem->getinvoiceItems() as $invoiceItem) {
-                $amount += $invoiceItem->getAmount();
-            }
+            $amount += $budgetItem->getTotalAmount();
         }
         
         return $amount;

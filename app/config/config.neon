@@ -24,6 +24,7 @@ services:
 
   - Supervizor\Budget\BudgetFacade
   - Supervizor\Supplies\SupplierFacade
+  - Supervizor\Statistics\StatisticsFacade
 
   # Compoenents
   - Supervizor\UI\BaseForm
