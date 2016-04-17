@@ -12,10 +12,10 @@ services:
 
 webloader:
   cssDefaults:
-    sourceDir: %webloaderDir%/css
+    sourceDir: %webloaderDir%
     tempDir: %webloaderDir%/webtemp
   jsDefaults:
-    sourceDir: %webloaderDir%/js
+    sourceDir: %webloaderDir%
     tempDir: %webloaderDir%/webtemp
   css:
     default:

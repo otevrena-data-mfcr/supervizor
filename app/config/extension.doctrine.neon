@@ -9,5 +9,6 @@ doctrine:
   user: %database.user%
   password: %database.password%
   dbname: %database.dbname%
+  driver: %database.driver%
   metadata:
     Supervizor: %appDir%

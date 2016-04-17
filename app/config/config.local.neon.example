@@ -4,6 +4,7 @@ parameters:
     user: 'supervizor'
     password: ''
     dbname: 'supervisor'
+    driver: 'mysql'
 
   # it is recommended to ssl: true on production
   ssl: true
