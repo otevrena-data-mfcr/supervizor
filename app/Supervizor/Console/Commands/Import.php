@@ -52,31 +52,31 @@ class Import extends Command
 
             $output->writeln(sprintf('  <comment>></comment> <info>%s</info>', 'Import was successful'));
 
-            $budgetGroups = Json::decode(file_get_contents(__DIR__ . '/budget.groups.json'));
+            $budgetGroups = Json::decode(file_get_contents(__DIR__ . '/ImportData/budget.groups.json'));
 
             $budgetItemEntityManager = $this->entityManager->getRepository(BudgetItem::class);
             $budgetGroupEntityManager = $this->entityManager->getRepository(BudgetGroup::class);
 
             foreach ($budgetGroups AS $budgetGroupSrc) {
-                $foundGroup = $budgetGroupEntityManager->findBy(['name' => $budgetGroupSrc['name']]);
+                $foundGroup = $budgetGroupEntityManager->findBy(['name' => $budgetGroupSrc->name]);
                 
                 if ($foundGroup) {
                     $budgetGroup = $foundGroup;
                 } else {
                     $budgetGroup = new BudgetGroup(
-                        $budgetGroupSrc['name'],
-                        $budgetGroupSrc['key'],
-                        $budgetGroupSrc['description'],
-                        $budgetGroupSrc['x'],
-                        $budgetGroupSrc['y'],
-                        $budgetGroupSrc['color']
+                        $budgetGroupSrc->name,
+                        $budgetGroupSrc->key,
+                        $budgetGroupSrc->description,
+                        $budgetGroupSrc->x,
+                        $budgetGroupSrc->y,
+                        $budgetGroupSrc->color
                     );
 
                     $this->entityManager->persist($budgetGroup);
                 }
 
                 /** @var BudgetItem $budgetItem */
-                foreach ($budgetItemEntityManager->findBy(['identifier' => $budgetGroupSrc['items']]) AS $budgetItem) {
+                foreach ($budgetItemEntityManager->findBy(['identifier' => $budgetGroupSrc->items]) AS $budgetItem) {
                     $budgetItem->setBudgetGroup($budgetGroup);
                 }
             }

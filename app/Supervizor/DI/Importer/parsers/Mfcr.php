@@ -84,9 +84,9 @@ class Mfcr extends ImportParser implements IImportParser
             });
         }
 
-        foreach ($parsedData AS $inovice)
+        foreach ($parsedData AS $invoice)
         {
-            call_user_func_array(array($this->target, 'setInvoice'), $inovice);
+            call_user_func_array(array($this->target, 'setInvoice'), $invoice);
         }
     }
 
