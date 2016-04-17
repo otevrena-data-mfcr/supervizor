@@ -117,7 +117,46 @@ class InvoiceRepository
     }
 
 
-    public function search($query)
+
+    /**
+     * @param $query
+     * @param null $limit
+     * @param null $offset
+     * @return Invoice[]
+     */
+    public function search($query, $limit = null, $offset = null)
+    {
+        $qb = $this->createSearchQuery($query);
+        if ($limit) {
+            $qb->setMaxResults($limit);
+        }
+        if ($offset) {
+            $qb->setFirstResult($offset);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+
+
+    /**
+     * @param $query
+     * @return int
+     */
+    public function searchResultTotalCount($query)
+    {
+        $qb = $this->createSearchQuery($query);
+        $paginator = new \Doctrine\ORM\Tools\Pagination\Paginator($qb);
+        return $paginator->count();
+    }
+
+
+
+    /**
+     * @param $query
+     * @return \Doctrine\ORM\QueryBuilder
+     */
+    private function createSearchQuery($query)
     {
         $qb = $this->invoiceRepository->createQueryBuilder('i')
             ->select('i')
@@ -129,9 +168,7 @@ class InvoiceRepository
             ->orWhere('bi.name LIKE :query')
             ->groupBy('i.id')
             ->setParameters(['query' => '%' . $query . '%']);
-
-        return $qb->getQuery()->getResult();
+        return $qb;
     }
-
 
 }

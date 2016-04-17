@@ -24,7 +24,7 @@ namespace Supervizor\Application;
 use Kdyby\Doctrine\EntityManager;
 use Nette\Application\UI\Form;
 use IPub\VisualPaginator\Components as VisualPaginator;
-use Doctrine\Common\Collections\ArrayCollection;
+use Nette\Utils\Paginator;
 use Supervizor\Budget\BudgetRepository;
 use Supervizor\Invoice\InvoiceRepository;
 
@@ -90,33 +90,21 @@ class SearchPresenter extends Presenter
     {
         $this['visualPaginator']->onShowPage[] = (function ($component, $page) {
             if ($this->isAjax()) {
-                $this->invalidateControl();
+                $this->redrawControl();
             }
         });
 
-        /** @var ArrayCollection $invoices */
-        $invoices = $this->invoiceRepository->search($this->query);
-        $invoicesTotal = count($invoices);
-
         $visualPaginator = $this['visualPaginator'];
-        // Get paginator form visual paginator
+        /** @var Paginator $paginator Get paginator form visual paginator */
         $paginator = $visualPaginator->getPaginator();
         // Define items count per one page
         $paginator->itemsPerPage = 20;
         // Define total items in list
-        $paginator->itemCount = $invoicesTotal;
-        // Apply limits to list
-
-        $chunks = array_chunk($invoices, $paginator->itemsPerPage);
-
-        $invoicesPage = $chunks[$this->page - 1];
-
+        $paginator->itemCount = $this->invoiceRepository->searchResultTotalCount($this->query);
 
         $this->template->title = 'Vyhledávání';
-
-        $this->template->found = $invoicesTotal;
-
-        $this->template->invoices = $invoicesPage;
+        $this->template->found = $paginator->itemCount;
+        $this->template->invoices = $this->invoiceRepository->search($this->query, $paginator->itemsPerPage, $paginator->offset);
         $this['filterForm']->setDefaults(['query' => $this->query]);
     }
 }
