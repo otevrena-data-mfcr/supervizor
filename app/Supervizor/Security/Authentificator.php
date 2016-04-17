@@ -72,7 +72,7 @@ class Authenticator extends Nette\Object implements Nette\Security\IAuthenticato
         if ($this->namespace)
             $criteria['namespace'] = $this->namespace;
 
-        /** @var Entities\User|null $user */
+        /** @var User|null $user */
         $user = $this->userRepository->getUserRepository()->findOneBy($criteria);
 
         if (!$user)

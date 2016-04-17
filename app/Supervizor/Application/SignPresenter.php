@@ -78,7 +78,7 @@ class SignPresenter extends Presenter
         }
         catch (\Nette\Security\AuthenticationException $e)
         {
-            $form->addError($e->getMessage());
+            $form->addError('Invalid credentials');
         }
     }
 
