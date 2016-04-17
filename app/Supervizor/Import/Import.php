@@ -29,7 +29,6 @@ use Supervizor\Invoice\Invoice;
 
 /**
  * Class Import
- * @package Supervizor
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="import")
@@ -41,7 +40,7 @@ class Import extends Nette\Object
 
     /**
      * @var ImportGroup
-     * @ORM\ManyToOne(targetEntity="ImportGroup", inversedBy="imports")
+     * @ORM\ManyToOne(targetEntity="\Supervizor\Import\ImportGroup", inversedBy="imports", cascade={"persist"})
      * @ORM\JoinColumn(name="importgroup_id", referencedColumnName="id")
      */
     private $importGroup;
@@ -78,7 +77,7 @@ class Import extends Nette\Object
 
     /**
      * @var ArrayCollection|Invoice[]
-     * @ORM\OneToMany(targetEntity="\Supervizor\Invoice\Invoice", mappedBy="import",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\Supervizor\Invoice\Invoice", mappedBy="import", cascade={"persist"})
      */
     private $invoices;
 

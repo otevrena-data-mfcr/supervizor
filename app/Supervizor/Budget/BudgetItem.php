@@ -29,7 +29,6 @@ use Supervizor\Invoice\InvoiceItem;
 
 /**
  * Class BudgetItem
- * @package Supervizor
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="budget_item")
@@ -53,7 +52,7 @@ class BudgetItem extends Nette\Object
 
     /**
      * @var BudgetGroup
-     * @ORM\ManyToOne(targetEntity="BudgetGroup", inversedBy="budgetItems")
+     * @ORM\ManyToOne(targetEntity="\Supervizor\Budget\BudgetGroup", inversedBy="budgetItems")
      * @ORM\JoinColumn(name="budgetgroup_id", referencedColumnName="id", nullable=true)
      */
     private $budgetGroup;

@@ -28,7 +28,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 
 /**
  * Class Import
- * @package Supervizor
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="import_group")
@@ -40,7 +39,7 @@ class ImportGroup extends Nette\Object
 
     /**
      * @var ArrayCollection|Import[]
-     * @ORM\OneToMany(targetEntity="Import", mappedBy="importGroup",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\Supervizor\Import\Import", mappedBy="importGroup", cascade={"persist"})
      */
     private $imports;
 

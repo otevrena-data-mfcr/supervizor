@@ -30,7 +30,6 @@ use Supervizor\Supplies\Supplier;
 
 /**
  * Class Invoice
- * @package Supervizor
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="invoice")
@@ -55,7 +54,7 @@ class Invoice extends Nette\Object
 
     /**
      * @var Import
-     * @ORM\ManyToOne(targetEntity="\Supervizor\Import\Import", inversedBy="invoices")
+     * @ORM\ManyToOne(targetEntity="\Supervizor\Import\Import", inversedBy="invoices", cascade={"persist"})
      * @ORM\JoinColumn(name="import_id", referencedColumnName="id")
      */
     private $import;
@@ -158,7 +157,7 @@ class Invoice extends Nette\Object
 
     /**
      * @var ArrayCollection|InvoiceItem[]
-     * @ORM\OneToMany(targetEntity="InvoiceItem", mappedBy="invoice",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\Supervizor\Invoice\InvoiceItem", mappedBy="invoice",cascade={"persist"})
      */
     private $invoiceItems;
 

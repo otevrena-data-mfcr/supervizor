@@ -15,7 +15,6 @@ use Nette;
 
 /**
  * Class BudgetGroup
- * @package Supervizor
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="budget_group")
@@ -63,7 +62,7 @@ class BudgetGroup extends Nette\Object
 
     /**
      * @var ArrayCollection|BudgetItem[]
-     * @ORM\OneToMany(targetEntity="BudgetItem", mappedBy="budgetGroup",cascade={"persist"})
+     * @ORM\OneToMany(targetEntity="\Supervizor\Budget\BudgetItem", mappedBy="budgetGroup",cascade={"persist"})
      */
     private $budgetItems;
 

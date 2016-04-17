@@ -29,7 +29,6 @@ use Supervizor\Invoice\Invoice;
 
 /**
  * Class Supplier
- * @package Supervizor
  * @ORM\Entity
  * @ORM\HasLifecycleCallbacks
  * @ORM\Table(name="supplier")
