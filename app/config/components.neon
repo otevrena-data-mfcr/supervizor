@@ -1,6 +1,0 @@
-# Compoenents
-services:
-  - App\Components\BaseForm
-  - App\Components\SignInFormFactory
-
-  - Nextras\Forms\Rendering\Bs3FormRenderer

@@ -1,0 +1,138 @@
+[
+    {
+        "name": "Poradenské služby",
+        "key": "consulting",
+        "description": "Konzultační služby a školení",
+        "x": 250,
+        "y": 150,
+        "color": "2db9ff",
+        "items": [
+            5166,
+            5167
+        ]
+    },
+    {
+        "name": "Doprava",
+        "key": "doprava",
+        "description": "Výdaje na cestování a nákup a provoz vozidel",
+        "x": 550,
+        "y": 300,
+        "color": "fe8f3c",
+        "items": [
+            5156,
+            5173
+        ]
+    },
+    {
+        "name": "Informační technologie",
+        "key": "it",
+        "description": "Hardware, software a telekomunikace",
+        "x": 700,
+        "y": 120,
+        "color": "66a22a",
+        "items": [
+            5041,
+            5042,
+            5162,
+            5168,
+            5172,
+            6111,
+            6125
+        ]
+    },
+    {
+        "name": "Nákup majetku",
+        "key": "nakup",
+        "description": "",
+        "x": 300,
+        "y": 700,
+        "color": "093d93",
+        "items": [
+            5137,
+            5139,
+            5177,
+            5179,
+            5199,
+            6122,
+            6123
+        ]
+    },
+    {
+        "name": "Ostatní",
+        "key": "ostatni",
+        "description": "Vše nezahrnuté v ostatních kategoriích",
+        "x": 1000,
+        "y": 700,
+        "color": "5a5a5a",
+        "items": [
+            1014,
+            2132,
+            2328,
+            5169,
+            5182,
+            5192,
+            5221,
+            5319,
+            5362,
+            5363,
+            5429,
+            5511,
+            5532,
+            5909
+        ]
+    },
+    {
+        "name": "Výdaje na zaměstnance",
+        "key": "platy",
+        "description": "Platy, odměny, závodní stravování a další výdaje na zaměstnance",
+        "x": 200,
+        "y": 450,
+        "color": "eedc00",
+        "items": [
+            1012,
+            1013,
+            1017,
+            1018,
+            5011,
+            5013,
+            5021,
+            5024,
+            5031,
+            5032,
+            5342,
+            5422,
+            5424
+        ]
+    },
+    {
+        "name": "Provozní náklady",
+        "key": "provoz",
+        "description": "Náklady na provoz ministerstva financí",
+        "x": 800,
+        "y": 500,
+        "color": "c00000",
+        "items": [
+            1016,
+            1022,
+            1361,
+            2324,
+            5131,
+            5134,
+            5136,
+            5142,
+            5151,
+            5152,
+            5153,
+            5154,
+            5157,
+            5161,
+            5163,
+            5164,
+            5171,
+            5175,
+            5176,
+            5194,
+            6121
+        ]
+    }
+]

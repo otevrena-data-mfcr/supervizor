@@ -1,0 +1,54 @@
+extensions:
+  webloader: WebLoader\Nette\Extension
+
+parameters:
+  webloaderDir: %appDir%/../www
+
+services:
+  wlCssFilter: WebLoader\Filter\CssUrlsFilter(%wwwDir%)
+  sassFilter: WebLoader\Filter\ScssFilter
+  cssMin: Joseki\Webloader\CssMinFilter
+  jsMin: Joseki\Webloader\JsMinFilter
+
+webloader:
+  cssDefaults:
+    sourceDir: %webloaderDir%
+    tempDir: %webloaderDir%/webtemp
+  jsDefaults:
+    sourceDir: %webloaderDir%
+    tempDir: %webloaderDir%/webtemp
+  css:
+    default:
+      remoteFiles:
+        - 'http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext'
+      files:
+        - bower_components/jquery-ui/themes/smoothness/jquery-ui.min.css
+        - bower_components/bootstrap/dist/css/bootstrap.min.css
+        - bower_components/bootstrap/dist/css/bootstrap-theme.min.css
+        - js/jquery/jQRangeSlider/jQAllRangeSliders-classic-min.css
+        - bower_components/fancybox/source/jquery.fancybox.css
+        - scss/style-default.scss
+
+      filters:
+        - @wlCssFilter
+      fileFilters:
+        - @sassFilter
+        - @cssMin
+
+  js:
+    default:
+      remoteFiles:
+        - 'https://www.google.com/recaptcha/api.js'
+      files:
+        - bower_components/jquery/jquery.min.js
+        - bower_components/jquery-ui/jquery-ui.min.js
+        - bower_components/fancybox/source/jquery.fancybox.pack.js
+        - bower_components/bootstrap/dist/js/bootstrap.min.js
+        - bower_components/history.js/scripts/bundled/html4+html5/native.history.js
+        - js/jquery/jQRangeSlider/jQAllRangeSliders-min.js
+        - bower_components/raphael/raphael.min.js
+        - js/raphael-style.js
+        - js/global.js
+      fileFilters:
+        - @jsMin
+

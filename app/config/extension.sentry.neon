@@ -1,0 +1,5 @@
+extensions:
+  sentryLogger: Salamek\RavenNette\DI\SentryLoggerExtension
+
+sentryLogger:
+  dsn: ''

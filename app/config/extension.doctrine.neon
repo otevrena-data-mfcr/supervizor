@@ -1,0 +1,14 @@
+extensions:
+  events: Kdyby\Events\DI\EventsExtension
+  annotations: Kdyby\Annotations\DI\AnnotationsExtension
+  doctrine: Kdyby\Doctrine\DI\OrmExtension
+  doctrine2identity: Majkl578\NetteAddons\Doctrine2Identity\DI\IdentityExtension
+
+doctrine:
+  host: %database.host%
+  user: %database.user%
+  password: %database.password%
+  dbname: %database.dbname%
+  driver: %database.driver%
+  metadata:
+    Supervizor: %appDir%

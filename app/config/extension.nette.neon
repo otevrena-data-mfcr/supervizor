@@ -1,0 +1,24 @@
+parameters:
+  ssl: %debugMode% # fallback
+
+php:
+  date.timezone: Europe/Prague
+
+nette:
+  application:
+    errorPresenter: Error
+    mapping:
+      *: Supervizor\Application\*\*Presenter
+
+  session:
+    expiration: 14 days
+
+services:
+  routerFactory: Supervizor\UI\RouterFactory
+  router: @routerFactory::createRouter(%ssl%)
+  latte.latteFactory:
+    setup:
+      - addFilter('formatNumber', [@Supervizor\UI\Latte\Filters, 'formatNumber'])
+      - addFilter('formatPrice', [@Supervizor\UI\Latte\Filters, 'formatPrice'])
+
+  - Supervizor\UI\Latte\Filters

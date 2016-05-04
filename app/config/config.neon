@@ -5,49 +5,46 @@
 # http://nette.org/security-warning
 #
 
-php:
-    date.timezone: Europe/Prague
-
-nette:
-    application:
-        errorPresenter: Error
-
-    session:
-        expiration: 14 days
-
-services:
-    routerFactory: RouterFactory
-
-    router: @routerFactory::createRouter
-
 extensions:
-    console: Kdyby\Console\DI\ConsoleExtension
-    events: Kdyby\Events\DI\EventsExtension
-    annotations: Kdyby\Annotations\DI\AnnotationsExtension
-    doctrine: Kdyby\Doctrine\DI\OrmExtension
-    doctrine2identity: Majkl578\NetteAddons\Doctrine2Identity\DI\IdentityExtension
-    sentryLogger: Salamek\RavenNette\DI\SentryLoggerExtension
-    #recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
-    importer: Extensions\Importer\ImporterExtension
-    visualPaginator: IPub\VisualPaginator\DI\VisualPaginatorExtension
-
-#recaptcha:
-#    secretKey:
-#    siteKey:
-
-doctrine:
-    host: %database.host%
-    user: %database.user%
-    password: %database.password%
-    dbname: %database.dbname%
-    metadata:
-        App: %appDir%
-
-
-sentryLogger:
-    dsn: ''
+  console: Kdyby\Console\DI\ConsoleExtension
+  visualPaginator: IPub\VisualPaginator\DI\VisualPaginatorExtension
 
 includes:
-    - components.neon
-    - services.neon
-    - importer.neon
+  - extension.doctrine.neon
+  - extension.importer.neon
+  - extension.nette.decorator.neon
+  - extension.nette.neon
+#  - extension.recaptcha.neon
+  - extension.sentry.neon
+  - extension.webloader.neon
+
+services:
+  - Nextras\Forms\Rendering\Bs3FormRenderer
+  - Supervizor\Storage\CacheStorage
+
+  - Supervizor\Budget\BudgetFacade
+  - Supervizor\Supplies\SupplierFacade
+  - Supervizor\Statistics\StatisticsFacade
+
+  # Compoenents
+  - Supervizor\UI\BaseForm
+  - Supervizor\Security\Controls\SignInFormFactory
+
+  # security
+  - Supervizor\Security\Authenticator
+  - Supervizor\Security\PasswordManager
+
+  # repository
+  - Supervizor\Security\UserRepository
+  - Supervizor\Supplies\SupplierRepository
+  - Supervizor\Invoice\InvoiceRepository
+  - Supervizor\Budget\BudgetRepository
+  - Supervizor\Import\ImportRepository
+
+  # import
+  - class: Supervizor\Import\ImportTarget
+    inject: true
+
+  # commands
+  - Supervizor\Console\Commands\DefaultData
+  - Supervizor\Console\Commands\Import

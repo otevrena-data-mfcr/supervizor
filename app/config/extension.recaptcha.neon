@@ -1,0 +1,6 @@
+extensions:
+  recaptcha: Minetro\Forms\reCAPTCHA\ReCaptchaExtension
+
+recaptcha:
+  secretKey:
+  siteKey:
