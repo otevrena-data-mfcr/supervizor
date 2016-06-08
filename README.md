@@ -1,5 +1,7 @@
 # Supervizor Nette implementace
-Supervizor je aplikace na vizualizaci výdajů státní správy, kerou vytvořili pracovníci Ministerstva financí České republiky. Uvítáme další použití i úpravy/opravy zdrojového kódu, proto ho dáváme k dispozici pod licencí GNU GPL v3
+Supervizor je aplikace na vizualizaci výdajů, kerou vytvořili pracovníci Ministerstva financí České republiky. Samotné ministerstvo zveřejňuje své výdaje na [http://data.mfcr.cz/supervizor/](http://data.mfcr.cz/supervizor/) 
+
+Uvítáme další použití i úpravy/opravy zdrojového kódu, proto ho dáváme k dispozici pod licencí GNU GPL v3
 
 
 ![Header](http://temp.smallhill.cz/supervizor-heading-github.png)
