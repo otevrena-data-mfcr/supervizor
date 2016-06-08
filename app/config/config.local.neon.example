@@ -4,7 +4,7 @@ parameters:
     user: 'supervizor'
     password: ''
     dbname: 'supervisor'
-    driver: 'mysql'
+    driver: 'pdo_mysql' # See http://doctrine-orm.readthedocs.io/projects/doctrine-dbal/en/latest/reference/configuration.html#connection-details for other options
 
   # it is recommended to ssl: true on production
   ssl: true
