@@ -207,9 +207,9 @@ List.prototype.turnPage = function(pageNum){
 	
 	var options = this.options;
 	options.page = pageNum;
-	//this.load(options);
+	this.load(options);
 	
-	this.changeHistory({page:pageNum,dodavatel:null});
+	//this.changeHistory({page:pageNum,dodavatel:null});
 
 };
 
@@ -338,6 +338,7 @@ List.prototype.setFilterValues = function(options){
 
 		});
 		this.options.polozka = options.polozka;
+		this.options.page = 1;
 	}
 	
 	if(options.datum){
