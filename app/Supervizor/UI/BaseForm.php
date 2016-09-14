@@ -63,7 +63,7 @@ class BaseForm extends BaseControl implements BaseFormFactory
     {
         $recaptcha = $this[$name] = new ReCaptchaField(ReCaptchaHolder::getSiteKey(), $label);
 
-        $validator = $this->reCaptchaValidatorFactory->create();
+        $validator = $this->validatorFactory->create();
         $recaptcha->addRule([$validator, 'validateControl'], 'You`re bot!');
 
         return $recaptcha;
