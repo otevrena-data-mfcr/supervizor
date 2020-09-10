@@ -1,0 +1,9 @@
+version: "3.8"
+
+services:
+  supervizor:
+    image: nginx:alpine
+    ports:
+      - 3000:80
+    volumes:
+      - ./:/usr/share/nginx/html

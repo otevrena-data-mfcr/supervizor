@@ -1,13 +1,3 @@
-<?php
-
-  $profiles = $GLOBALS["profiles"];
-
-  function create_profile_url($profile,$dataset = null){
-    $url = explode("?",$_SERVER["REQUEST_URI"]);
-    //return $url[0]."?profil=$profile&dataset=$dataset";
-    return "?profil=$profile&dataset=$dataset";
-  }  
-?>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -21,12 +11,12 @@
     <link rel="license" hreflang="en" href="http://www.gnu.org/licenses/gpl-3.0.txt">
     <link rel="author" href="https://cz.linkedin.com/in/martinkopecek">
     
-		<?php if(@$share_url): ?><meta property="og:url" content="<?=$share_url?>"><?php endif; ?>
+		<meta property="og:url" content="<?=$share_url?>">
 		<meta property="og:image" content="">
 		<meta property="og:title" content="<?=@$title ? "$title :: " : ""?><?=TITLE?>">
 		<meta property="og:description" content="">
 
-		<title><?=@$title ? "$title :: " : ""?><?=TITLE?></title>
+		<title>Supervizor Ministerstva financí</title>
 
 		<!-- STYLES -->
 		

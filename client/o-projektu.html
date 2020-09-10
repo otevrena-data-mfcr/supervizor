@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <meta name="author" content="Martin Kopeček">
+
+  <title>Faktury MF</title>
+
+  <!-- STYLES -->
+
+  <link href='http://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,400,300,600&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+
+  <!-- jQuery -->
+  <link rel="stylesheet" href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/themes/smoothness/jquery-ui.css">
+  <link rel="stylesheet" href="<?=STATIC_ROOT?>/lib/jquery/jQRangeSlider/jQAllRangeSliders-classic-min.css">
+
+  <!-- fancyBox -->
+  <link rel="stylesheet" href="<?=STATIC_ROOT?>/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" type="text/css" media="screen" />
+
+  <style type="text/css">
+    body {
+      margin: 0;
+    }
+
+    #footer {
+      border-top: 1px solid #999;
+      color: #aaa;
+      text-align: center;
+      font-size: .8em;
+      margin-top: 50px;
+      padding-top: 5px;
+    }
+
+    #footer a {
+      color: #aaa;
+    }
+
+    #footer a:hover {
+      color: rgb(51, 122, 183);
+    }
+  </style>
+  <style type="text/css">
+    html,
+    body {
+      font-family: "Open Sans", Verdana, sans-serif;
+      font-size: 10pt;
+    }
+
+    h1 {
+      font-size: 1.4em;
+      margin: 0;
+      font-weight: bold;
+    }
+
+    h2 {
+      font-size: 1.2em;
+    }
+
+    h3 {
+      font-size: 1.1em;
+      margin: 0 0 10px 0;
+      font-weight: bold;
+    }
+
+    h4 {
+      margin: 0;
+      font-weight: bold;
+    }
+
+    table {
+      border-collapse: collapse;
+    }
+
+    p {
+      margin: 10px 0;
+      text-align: justify;
+    }
+
+    ul {
+      margin-left: 30px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    .clear {
+      display: block;
+      clear: both;
+    }
+
+    html {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    body {
+      height: 100%;
+      overflow: hidden;
+    }
+
+    #main {
+      height: 100%;
+      overflow: hidden;
+    }
+  </style>
+
+  <!-- SCRIPTS -->
+
+  <!-- jQuery -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+  <!-- fancyBox -->
+  <script type="text/javascript" src="<?=STATIC_ROOT?>/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+  <script src="<?=STATIC_ROOT?>/lib/jquery/jQRangeSlider/jQAllRangeSliders-min.js"></script>
+  <script src="<?=STATIC_ROOT?>/lib/raphael-min.js"></script>
+  <script src="<?=STATIC_ROOT?>/lib/raphael-style.js"></script>
+
+</head>
+
+<body>
+  <div id="main">
+    <h1>O projektu</h1>
+    <p>Projekt supervizor vizualizuje dataset Přehled faktur Ministerstva financí ČR, který je volně dostupný na adrese <a href="http://data.mfcr.cz/cs/dataset/prehled-faktur-ministerstva-financi-cr">http://data.mfcr.cz/cs/dataset/prehled-faktur-ministerstva-financi-cr</a>.</p>
+
+    <p>Cíl této aplikace je dvojí</p>
+    <ul>
+      <li>
+        Aktivně zpřístupnit hospodaření resortu ministerstva financí a v budoucnosti i jakýchkoliv dalších organizací, které projeví ochotu se do aplikace napojit.
+        <ul>
+          <li>Pod pojmem „zveřejňování informací“ je potřeba vnímat vícero situací. Je možné informace například připíchnout na nástěnku v chodbě ministerstva nebo je poskytovat pouze na vyžádání. Je také možné publikovat informace jako scany v rámci internetových stránek v pododdíle oddílu odboru sekce XX, v lepším případě je možné na tomto místě publikovat strojově čitelná data, například v .xls formátu. Jako lepší možnost se jeví publikace dat v plně otevřeném formátu (http://goo.gl/iMikpt) v katalogu otevřených dat využitelná bez jakýchkoliv omezení. I tento způsob zveřejňování informací však znamená v mnohých případech omezení, protože je potřeba určité znalosti IT, aby se uživatel dostal ke konkrétním informacím. Cílem této aplikace je doplnit snahu projektu otevřených dat MF o zpřístupňování informací, tak abychom mohli říct, že jsme udělali maximum pro to, aby se tyto informace dostaly k občanům co nejblíže a v nejpřehlednější možné podobě. Podle kategorií lze dohledat jednotlivá data z faktur, kde je ihned vidět částka, dodavatel, předmět faktury a další informace. Pokud bude mít někdo zájem data hlouběji analyzovat, může si stáhnout zdrojový soubor z katalogu otevřených dat ministerstva financí. </li>
+        </ul>
+      </li>
+      <li>Na praktickém a jednoduchém příkladu ukázat jeden z nejdůležitějších smyslů publikace dat v otevřeném formátu. Díky tomu, že tato data jsou již přístupná katalogu otevřených dat ministerstva financí, může podobnou aplikaci vyvinout absolutně kdokoliv. Instituce veřejné správy nemají v mnoha případech potřebné zdroje, zkušenosti a nadšení pro vývoj podobných aplikací a ani občas nemusí tušit, co přesně by bylo nejvhodnější vyvinout, ale nic nebrání tomu, aby jednoduše publikovaly data v otevřeném formátu a samotný vývoj nechali na veřejnosti.</li>
+    </ul>
+    <p>Aplikace byla vyvinuta pracovníky ministerstva financí a vývoj trval celkem 10 člověkodnů. Aplikace není napojena na informační systém ministerstva financí, je napojena na <a href="http://data.mfcr.cz/">katalog otevřených dat ministerstva financí</a>, z kterého si data stahuje.</p>
+
+  </div>
+  <!-- Facebook Share -->
+  <div id="fb-root"></div>
+  <script>(function (d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_GB/sdk.js#xfbml=1&version=v2.3&appId=200297620132275";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  </script>
+</body>
+
+</html>
