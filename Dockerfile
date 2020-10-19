@@ -1,5 +1,5 @@
 FROM nginx:alpine
 
-COPY . .
+COPY ./src .
 
 EXPOSE 3000

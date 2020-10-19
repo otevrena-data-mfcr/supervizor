@@ -63,9 +63,32 @@
 
     // History.replaceState(data, "");
 
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    const INSTITUTION = urlParams.get('instituce') ? urlParams.get('instituce').toUpperCase() : "MF";
+    const YEAR = urlParams.get('rok') || 2020;
+    const API_ROOT = "https://opendata.mfcr.cz/api/supervizor";
+    const WEB_ROOT = "";
+    const TITLE = "Supervizor Ministerstva financí";
+
+    var institutions = {
+      "MF": {
+        name: "Ministerstvo financí",
+        title: "Ministerstva financí",
+      },
+      "UZSVM": {
+        name: "Úřad pro zastupování státu ve věcech majetkových",
+        title: "Úřadu pro zastupování státu ve věcech majetkových",
+      }
+    };
+
     $(document).ready(function () {
 
-      $.get("https://opendata.mfcr.cz/exports/faktury/json").then(console.log);
+      $("#institutionsMenu .title").text(institutions[INSTITUTION].title);
+      Object.keys(institutions).forEach(function (key) {
+        $("#institutionsMenu ul").append($("<li/>").append($("<a />").attr("href", "?institution=" + key).text(institutions[key].name)));
+      });
 
       $("#about,#about2").fancybox({
         type: "iframe",
@@ -79,10 +102,10 @@
 
   </script>
 
-  <script src="/js/bubbles.js"></script>
-  <script src="/js/starsigns.js"></script>
-  <script src="/js/list.js"></script>
-  <script src="/js/index.js"></script>
+  <script src="/assets/js/bubbles.js"></script>
+  <script src="/assets/js/starsigns.js"></script>
+  <script src="/assets/js/list.js"></script>
+  <script src="/assets/js/index.js"></script>
 </head>
 
 <body>
@@ -117,12 +140,12 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
         <ul class="nav navbar-nav">
-          <li><a class="navbar-brand" href="/">Supervizor Ministerstva financí</a></li>
-          <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:18px;"><?=$profiles[PROFILE_ID]["datasets"][PROFILE_DATASET]["title"]?> <span class="caret"></span></a>
+          <li><a class="navbar-brand" href="/">Supervizor</a></li>
+          <li class="dropdown" id="institutionsMenu">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false" style="font-size:18px;"><span class="title"></span>&nbsp;<span class="caret"></span></a>
 
             <ul class="dropdown-menu">
-              <li><a href="<?=create_profile_url(PROFILE_ID,$dataset_id)?>"><?=$dataset["title"]?></a></li>
+
             </ul>
 
           </li>
@@ -170,10 +193,78 @@
       </div>
     </div>
     <div id="right">
-      <?=@$body?>
-    </div>
+      <div id="seznam">
+        <div class="filtr">
+          <a class="link_filtr">Filtr <span class="status"></span><span class="caret"></span></a>
+          <div class="filtr_form">
+            <form>
+              <div class="col-xs-12 col-sm-12">
+                <fieldset class="datum col-xs-12 col-sm-6">
+                  <legend>Časové rozpětí</legend>
+                  <input type="date" style="display:none;">
+                  <input type="date" style="display:none;">
+                </fieldset>
+                <fieldset class="polozky col-xs-12 col-sm-6">
+                  <legend>Rozpočtové položky</legend>
+                  <span class="polozka template"><input type="checkbox" name="polozka"><label></label></span>
+                </fieldset>
+              </div>
+              <span class="clear"></span>
 
-    <?php endif; ?>
+              <fieldset class="submit">
+                <button type="submit">Zobrazit</button>
+              </fieldset>
+            </form>
+          </div>
+        </div>
+
+        <div class="dodavatele col-xs-12 col-sm-6">
+          <span class="loader"><span></span></span>
+          <div class="seznam">
+            <div class="dodavatel template">
+              <div class="radek">
+                <h3><span class="nazev"></span></h3>
+
+                <span class="castka"></span>
+              </div>
+              <div class="faktury">
+                <div>
+                  <div class="faktura template">
+
+                    <span class="castka_detail"></span>
+                    <span class="datum_uhrazeno" title="Datum přijetí faktury"></span>
+                    <p class="info"><span class="ucel"></span></p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="strankovac">
+          </div>
+        </div>
+
+        <div class="detail col-xs-12 col-sm-6">
+          <div>
+            <p class="click_to_load"><span class="glyphicon glyphicon-arrow-left"></span> Pro zobrazení faktur klikněte na dodavatele vlevo.</p>
+            <div class="dodavatel">
+              <span class="loader"><span></span></span>
+              <div>
+                <h3 class="nazev pole"></h3>
+                <p class="info">
+                  <strong>IČO:</strong> <span class="ico pole">-</span>, <span class="dph pole">-</span><br>
+                  <strong>Sídlo:</strong> <span class="adresa pole">-</span><br>
+                  <strong>Země vlastníka:</strong> <span class="zeme pole">-</span>
+                </p>
+                <a class="or">Otevřít dodavatele v obchodním rejstříku</a>
+
+              </div>
+            </div>
+            <div class="faktury">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </div>
 
@@ -183,7 +274,7 @@
         <p><a href="http://www.otevrenadata.cz/soutez/rocnik-2015/"><img src="/img/fom.png"> Aplikace Supervizor získala 1. místo v soutěži Společně otevíráme data 2015.</a></p>
 
       </div>
-      <span class="copy">Zdroj dat: <a href="https://data.mfcr.cz/"><?=PROFILE_SOURCE_NAME?></a> (poslední aktualizace: <?=$posledni_aktualizace?>)</span>
+      <span class="copy">Zdroj dat: <a href="https://opendata.mfcr.cz/topics/hospodareni-mf.html">Otevřená data MFČR</a></span>
 
       <br>
 

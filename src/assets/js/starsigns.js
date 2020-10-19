@@ -146,6 +146,7 @@ function createStarIcons(paper){
 
 function setStars(souhvezdi_id,callback,immediate){
 	
+	
 	var scale = 1;
 	var moveY = window.innerHeight >= 1000 ? 0 : -90;
 	
@@ -153,8 +154,8 @@ function setStars(souhvezdi_id,callback,immediate){
 
 	var stars_coordinates = scale === 1 ? souhvezdi_coordinates[souhvezdi_id].stars : scaleXY(souhvezdi_coordinates[souhvezdi_id].stars,scale,scale,570,400);
 	var i = 0;
+	
 	$.each(skupiny,function(skupina_id,skupina){
-		
 		var callback_f;
 		
 		if(i === 0) callback_f = function(){souhvezdi.show();if(callback) callback();};
